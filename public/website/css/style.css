@@ -271,11 +271,11 @@ span.number {
 form.formContact::after {
     content: " ";
     position: absolute;
-    left: -83px;
+    left: -106px;
     top: -1px;
     bottom: 0;
-    border-top: 349px solid transparent;
-    border-right: 85px solid #ffffff;
+    border-top: 350px solid transparent;
+    border-right: 106px solid #ffffff;
     border-left: -9px solid transparent;
     border-bottom: 0px solid transparent;
 }
@@ -913,10 +913,15 @@ input:-webkit-autofill:active  {
     word-break: break-word;
     line-height: 1.5 !important;
 }
-.welcome-msg{
+.welcome-msg {
     font-weight: 500;
     font-size: 50px;
-    color: white; 
+    color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 150px 0;
 }
 
 .active{
@@ -977,4 +982,17 @@ form .text.medium{
 form .text.strong{
     background-color: #23ad5c;
 }
+.chang {
+    height: 100px;
+    width: 150px;
+    display: flex;
+}
+.w-12 {
+    width: 150px !important;
+}
+.h-12 {
+    height: 100px;
+}
+
+
  
