@@ -1,0 +1,980 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    color: var(--lightblack);
+    font-weight: 300;
+}
+h1,h2,h3,h4,h5,h6,li,a{
+    font-weight: 400;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+:root{
+    --darkblack: #000000;
+    --lightblack:#474747;
+    --black:#151515;
+    --green:#0DA700;
+    --white:#ffffff;
+    --blue:#0D55C0;
+    --yellow:#C18B01;
+    --white1:#e2e2e2;
+    --black2:#d0cfcf;
+    --gray:#F5F5F5;
+}
+a:hover{
+    text-decoration: none;
+}
+.navbar li.nav-item {
+    position: relative;
+    margin-right: 25px;
+    display: inline-block;
+}
+.navbar-light .navbar-nav .nav-link {
+    color:var(--darkblack);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--darkblack);
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: 0.4s all;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: var(--green);
+}
+.navbar li.nav-item.last {
+    margin-right: 0;
+    background-color: var(--green);
+    border-radius: 3px;
+    text-align: center;
+}
+a.nav-item.nav-link.last {
+    color: white;
+    text-transform: capitalize;
+}
+a.nav-item.nav-link.last:hover{
+    color: var(--white);
+}
+footer#footer {
+    position: relative;
+    text-align: center;
+    background-color: var(--gray);
+    padding: 30px 0;
+}
+.footerLink {
+    position: relative;
+    margin-top: 20px;
+}
+.footerLink li {
+    display: inline-block;
+    margin-right: 30px;
+}
+.footerLink li a{
+    padding: 10px;
+    color: var(--darkblack);
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 16px;
+
+}
+.footerSocialIcon {
+    position: relative;
+}
+.footerSocialIcon li{
+    display: inline-block;
+    margin-right: 5px;
+}
+.footerSocialIcon i {
+    height: 30px;
+    width: 30px;
+    background-color: var(--blue);
+    text-align: center;
+    border-radius: 50px;
+    padding-top: 6px;
+    color:var(--white);
+}
+a.phoneControl {
+    color: var(--darkblack);
+    text-decoration: none;
+}
+span.footerContact {
+    position: relative;
+    color: var(--blue);
+    margin-right: 5px;
+}
+.cptext {
+    position: relative;
+    text-align: center;
+    margin-top: 45px;
+}
+.cptext li {
+    display: inline-block;
+    padding-right: 30px;
+    color: var(--darkblack);
+}
+section#aboutUs {
+    position: relative;
+    padding: 60px 0;
+}
+.aboutPara li {
+    position: relative;
+    line-height: 45px;
+}
+span.checkImage {
+    position: relative;
+    margin-right: 10px;
+}
+.aboutPara {
+    position: relative;
+    padding-right: 60px;
+}
+.aboutPara hr {
+    border: 1px solid var(--darkblack);
+    margin-top: 35px;
+}
+section#questionPage {
+    position: relative;
+}
+.card h5.cardHeading {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--darkblack);
+    position: relative;
+    padding-left: 10px;
+}
+.card h5.cardHeading:hover{
+    text-decoration: none;
+}
+.card i{
+    float: right;
+}
+.pycustom{
+    padding:50px;
+}
+.card-header{
+    background-color: var(--white);
+
+}
+.card{
+    border: none;
+}
+.feedbackPara {
+    position: relative;
+    padding-left: 40px;
+}
+.feedbackPara li {
+    display: inline-block;
+    padding: 0 20px;
+    margin-bottom: 30px;
+
+
+}
+button.submit1.btn {
+    background-color: var(--blue);
+    color:var(--white);
+    margin-top: 20px;
+}
+.feedbackPara i {
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    padding-top: 7px;
+    font-size: 35px;
+    color: var(--yellow);
+    border: 1px solid var(--white1);
+}
+.feedbackPara textarea {
+    padding: 10px;
+    border: 1px solid var(--white1);
+    box-shadow: none;
+}
+section#bannerInner {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+  height: auto;
+    width: 100%;
+    background-position: center center;
+}
+form.formContact {
+    position: relative;
+    background-color: white;
+    margin-top: 35px;
+    padding: 15px 30px 30px 15px;
+    margin-right: 64px;
+    margin-bottom: 40px;
+}
+h4.sefeHeading {
+    font-size: 20px;
+    color: var(--darkblack);
+}
+h4.sefeHeading::after {
+    position: absolute;
+    content: "";
+    border-left: 3px solid var(--blue);
+    height: 60px;
+    width: 2px;
+    left: -15px;
+    top: 0;
+}
+h2.customHeading {
+    text-transform: capitalize;
+    color: var(--darkblack);
+    font-size: 30px;
+    margin-bottom: 25px;
+
+}
+.md-accordion .card .card-header a:not(.collapsed) .rotate-icon {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.feedbackPara:after {
+    content: " ";
+    position: absolute;
+    left: -172px;
+    top: -1px;
+    bottom: 0;
+    border-top: 450px solid transparent;
+    border-right: 145px solid #ffffff;
+    border-left: -9px solid transparent;
+    border-bottom: 0px solid transparent;
+    clear: both;
+}
+span.number {
+    position: absolute;
+    left: 0px;
+ background-color: var(--green);
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    text-align: center;
+    color: var(--white);
+}
+form.formContact::after {
+    content: " ";
+    position: absolute;
+    left: -83px;
+    top: -1px;
+    bottom: 0;
+    border-top: 349px solid transparent;
+    border-right: 85px solid #ffffff;
+    border-left: -9px solid transparent;
+    border-bottom: 0px solid transparent;
+}
+
+form.formContact input.form-control {
+    border: none;
+    border-bottom: 1px solid #D0CFCF;
+    border-radius: 0;
+}
+span.forgotpassword {
+    position: relative;
+    color: var(--darkblack);
+}
+span.anaccount {
+    position: relative;
+    color: var(--lightblack);
+}
+button.Loginbtn {
+    background-color: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 3px;
+    padding: 8px 30px;
+    margin-top: 35px;
+    margin-left: 0px;
+
+}
+.cptext p {
+    margin-top: 20px;
+}
+.formContact h3 {
+    color: var(--darkblack);
+}
+.questionimage img {
+    max-width: 626px;
+    width: 100%;
+    padding-top: 70px;
+}
+section#contactFeedback {
+    position: relative;
+    padding: 70px 0;
+}
+/*----------------------------------Registration Page css----------------------*/
+.regiFormImage {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.regiText {
+    position: relative;
+    color:var(--white);
+    padding-left: 40px;
+    padding-top: 230px;
+    padding-bottom: 230px;
+}
+section#registrationPage .col-md-7{
+    padding-right: 0;
+}
+.regiText h5 {
+    font-size: 18px;
+    letter-spacing: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 16px;
+    margin-bottom: 0;
+
+}
+.regiText h3 {
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 47px;
+}
+.regiText p {
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 35px;
+}
+.helpAny {
+    color: var(--white);
+    font-size: 14px !important;
+    font-weight: 300 !important;
+    padding-top: 9px;
+    margin-bottom: 0px !important;
+}
+.contacthelp {
+    color: white;
+    border: 1px solid;
+    border-radius: 3px;
+    margin-left: 20px;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+.contacthelp:hover {
+    color: white;
+    border: 1px solid white;
+}
+form.formContactregi {
+    position: relative;
+    background-color: white;
+    padding: 40px 30px 30px 50px;
+}
+form.formContactregi input[type="date"] {
+    padding-right: 0;
+}
+
+form.formContactregi input.form-control {
+    border: none;
+    border-bottom: 1px solid #D0CFCF;
+    border-radius: 0;
+    box-shadow: none;
+}
+.registForm img.img-fluid {
+    padding-left: 55px;
+    position: relative;
+    padding-top: 30px;
+}
+button.signUp1.btn {
+    background-color: var(--blue);
+    color: white;
+    padding: 5px 20px;
+}
+a.memberSign {
+    position: relative;
+    color: var(--lightblack);
+    font-weight: 400;
+}
+span.checkright {
+    position: relative;
+}
+.checkright i {
+    position: absolute;
+    bottom: 5px;
+    left: -14px;
+    right: 0;
+    color: var(--green);
+    font-size: 12px;
+
+}
+span.checkright2 {
+    position: relative;
+}
+.checkright2 i {
+    position: absolute;
+    bottom: 5px;
+    left: -14px;
+    right: 0;
+    color: var(--lightblack);
+    font-size: 16px;
+}
+/*[type="date"]::-webkit-inner-spin-button {*/
+/*    display: none;*/
+/*  }*/
+  [type="date"]::-webkit-calendar-picker-indicator {
+      color: rgba(0, 0, 0, 0);
+      opacity: 1;
+      display: block;
+      background: url(../images/calendaricon.png) no-repeat;
+      background-size: contain;
+      width: 16px;
+      height: 16px;
+      border-width: thin;
+  }
+/*-----------------------Add/Create/Post css-------------------------------*/
+h3.addHeading {
+    position: relative;
+    font-size: 20px;
+    padding-top: 20px;
+}
+.col-md-6.register2 {
+    padding-top: 54px;
+}
+span.checkrightlocation {
+    position: relative;
+}
+.checkrightlocation i {
+    position: absolute;
+    bottom: 5px;
+    left: -14px;
+    right: 0;
+    color: var(--lightblack);
+    font-size: 16px;
+}
+button.createpost.btn {
+    background-color: var(--blue);
+    color: var(--white);
+    margin-top: 30px;
+    padding: 10px 20px;
+}
+
+/*---------------Forgot Password----------------------*/
+section#forgotPassword {
+    position: relative;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.forgotPage {
+    position: relative;
+/*    max-width: 600px;*/
+/*    box-shadow: 0px 0px 3px 3px #ccc;*/
+/*    margin: 40px auto;*/
+/*    padding: 40px;*/
+}
+button.close1 {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: none;
+    background-color:transparent;
+    color: var(--black1);
+    font-size: 20px;
+    outline: none;
+    border: none;
+
+}
+form.formForgot {
+    position: relative;
+    padding-top: 30px;
+}
+form.formForgot input.form-control {
+    border: none;
+    border-bottom: 1px solid var(--black2);
+    border-radius: 0;
+    box-shadow: none;
+}
+/*----------------------Verify Otp--------------------*/
+section#verifyOtp {
+    position: relative;
+}
+p.otpNumber {
+    position: relative;
+    font-size: 22px;
+}
+a.byCall {
+    color: var(--green);
+}
+/*------------------Reset Password css---------------------------*/
+p.changeP {
+    position: relative;
+    max-width: 300px;
+}
+/*-----------------------Change Password--------------------------*/
+section#changePassword {
+    position: relative;
+}
+/*-------------------------Edit Profile css------------------------*/
+
+section#editProfile {
+    position: relative;
+}
+select#exampleFormControlSelect1 {
+    border: none;
+    border-bottom: 1px solid var(--black2);
+    border-radius: 0;
+    box-shadow: none;
+}
+/*------------------------------Post Wall Css----------------------------*/
+section#postWall {
+    position: relative;
+    background-size: cover;
+    padding: 40px 0;
+}
+.flowerss::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/fram(1).png') center no-repeat;
+    background-size: contain;
+    z-index: 9;
+}
+.flowersss::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 215px;
+    background: url('../images/mala1.png') center no-repeat;
+    background-size: contain;
+    z-index: 9;
+}
+.whiteflowersss::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 215px;
+    background: url('../images/white.png') center no-repeat;
+    background-size: contain;
+    z-index: 9;
+}
+.pinkflowersss::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 215px;
+    background: url('../images/pink.png') center no-repeat;
+    background-size: contain;
+    z-index: 9;
+}
+.sandeshBox {
+    position: relative;
+}
+.sandeshBox img.img-fluid {
+   display: inline-block;
+}
+.sandeshBox2 {
+    padding: 15px;
+    border: 1px solid var(--black2);
+    height: 100%;
+}
+.sandeshpara {
+    display: inline-block;
+    padding-left: 20px;
+}
+p.text-bold {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.sandeshBox p {
+    text-align: justify;
+}
+a.sandeshone {
+    color: var(--darkblack);
+}
+.sandeshone {
+    color: var(--darkblack);
+    font-weight: 400;
+}
+.nofocus:focus{
+    box-shadow: none;
+}
+.sandeshBox {
+    position: relative;
+    background-repeat: no-repeat;
+    padding: 15px 30px 15px 15px;
+    border: 1px solid var(--black2);
+    margin-bottom: 60px;
+}
+.paginationPage {
+    position: relative;
+    padding-bottom: 40px;
+}
+.paginationPara {
+    position: relative;
+}
+li.page-item{
+    margin-left: 15px;
+}
+.page-item:first-child .page-link {
+    border-radius: 0;
+}
+.page-item:last-child .page-link{
+    border-radius: 0;
+}
+.page-link{
+    color: var(--lightblack);
+}
+.page-link:hover {
+    z-index: 2;
+    color: var(--green);
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+.paginationPage {
+    position: relative;
+    padding: 55px;
+}
+/*----------------------------Location Filter css------------------------------*/
+
+.locateMeicon {
+    box-shadow: none;
+    font-size: 14px;
+    color: var(--lightblack);
+}
+.locateMeicon:hover,.locateMeicon:focus{
+    box-shadow: none;
+}
+.locateMeicon i{
+    text-align: center;
+    color: var(--blue);
+    padding-right: 5px;
+}
+.searchlocate {
+    position: relative;
+    padding: 45px 0;
+}
+input.locateMe.btn.btn-primary {
+    background-color: transparent;
+    color: var(--lightblack);
+    border: none;
+}
+form.searchLocationForm {
+    position: relative;
+    border: 1px solid var(--black2);
+    border-radius: 0px 5px 5px 0;
+}
+.searchLocationForm input.form-control {
+    border: none;
+    padding: 25px 20px;
+    box-shadow: none;
+}
+button.filter.btn.btn-primary {
+    height: 50px;
+    border: 1px solid var(--blue);
+    border-radius: 0;
+    padding: 15px 40px;
+    box-shadow: none;
+    border-radius: 0px 5px 5px 0px;
+}
+.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus
+{
+    box-shadow: none;
+}
+input.locateMe.btn.btn-primary:focus,input.locateMe.btn.btn-primary:hover{
+    box-shadow: none;
+    background-color: transparent;
+}
+
+
+.star-rating {
+    font-family: 'FontAwesome';
+}
+.star-rating > fieldset {
+    border: none;
+    display: inline-block;
+}
+.star-rating > fieldset:not(:checked) > input {
+    position: absolute;
+    /* top: -9999px; */
+    clip: rect(0, 0, 0, 0);
+}
+.star-rating > fieldset:not(:checked) > label {
+    float: right;
+    width: 1em;
+    padding: 0 0.05em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    color: #16a085;
+}
+.star-rating > fieldset:not(:checked) > label:before {
+    content: '\f006  ';
+}
+.star-rating > fieldset:not(:checked) > label:hover,
+.star-rating > fieldset:not(:checked) > label:hover ~ label {
+    color: #1abc9c;
+    text-shadow: 0 0 3px #1abc9c;
+}
+.star-rating > fieldset:not(:checked) > label:hover:before,
+.star-rating > fieldset:not(:checked) > label:hover ~ label:before {
+    content: '\f005  ';
+}
+.star-rating > fieldset > input:checked ~ label:before {
+    content: '\f005  ';
+}
+.star-rating > fieldset > label:active {
+    position: relative;
+    top: 2px;
+}
+
+
+
+.navbar-nav li.navbar-dropdown {
+    position: relative;
+    display: block;
+  }
+
+  .navbar-nav li.navbar-dropdown:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  .navbar-nav li.navbar-dropdown .dropdown {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    padding: 10px 0;
+    top: 100%;
+    transform: translateY(50px);
+    left: -34px;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 10px 10px 3px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    z-index: 111;
+    transition: 0.4s all;
+    text-align: center;
+  }
+  .navbar-nav li.navbar-dropdown .dropdown a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 400;
+    display: block;
+    color: var(--lightblack);
+    border-bottom: 1px solid var(--gray);
+    transition: ease-in-out 0.3s;
+  }
+    .navbar-nav li.navbar-dropdown .dropdown a:nth-last-child(2) {
+        border-bottom: 0px;
+    }
+  .navbar-dropdown .dropdown a:hover {
+    padding-left: 15px;
+    color: var(--green);
+  }
+  .navbar-nav li a:hover {
+    color: var(--green);
+  }
+.dropdown:before {
+    position: absolute;
+    content: " ";
+    width: 0px;
+    height: 0;
+    border-right: 11px solid transparent;
+    border-left: 11px solid transparent;
+    border-bottom: 12px solid #fff;
+    top: -12px;
+    right: 90px;
+}
+.down-caretmen {
+    width: 0px;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0px 8px;
+    border-color: #0ca700 transparent transparent transparent;
+    display: inline-block;
+    margin-left: 12px;
+    top: 0px;
+    position: relative;
+}
+
+/*Custom CSS Now*/
+.rederror{
+    color: #ff0000f2;
+    font-size: 15px;
+}
+.redborder {
+    border-bottom: 1px solid #ff000075 !important;
+}
+.field-icon {
+    right: 20px;
+    top: 8px;
+    position: absolute;
+    z-index: 2;
+    color: #2296f3;
+}
+.hintinput{
+    font-size: 13px;
+    color: #333;
+}
+.btn i {
+    margin-right: 0px;
+}
+.tcenter td {
+    text-align: left;
+    padding: 5px 0;
+    min-width: 150px;
+    vertical-align: top;
+}
+.error {
+    border-color: #ff0000;
+}
+.error-message {
+    color: red;
+    font-style: italic;
+}
+.error-message {
+    color: red;
+    font-style: normal;
+    color: #ff0000f2;
+    font-size: 15px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+.showind {
+    position: relative;
+}
+.showind .infoicos:focus{
+    outline: none;
+}
+.showind .infoicos {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    padding: 0 7px;
+    font-size: 18px;
+    color: var(--green);
+}
+.showind .form-control {
+    padding-right: 40px;
+}
+.showind .field-icon {
+    top: 13px;
+    color: var(--green);
+}
+.customfileinput {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.session-alert{
+    max-width: 1140px;
+    margin: auto;
+  }
+  .sub-add{
+    word-break: break-word;
+    line-height: 1.5 !important;
+}
+.welcome-msg{
+    font-weight: 500;
+    font-size: 50px;
+    color: white; 
+}
+
+.active{
+    background-color: var(--green);
+    color: white !important; 
+} 
+
+form .indicator{
+    height:10px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    margin: 10px 0;
+    display: none;
+}
+
+form .indicator span{
+    height:100%;
+    width:100%;
+    background:lightgrey; 
+    border-radius: 5px;
+}
+
+form .indicator span.medium{
+    margin: 0 3px;
+}
+form .indicator span:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    /* background:red; */
+    border-radius: 5px;
+}
+form .indicator span.active.week:before{
+    background-color: #ff4757;
+}
+form .indicator span.active.medium:before{
+    background-color: orange;
+}
+form .indicator span.active.strong:before{
+    background-color: #23ad5c;
+}
+form .text{
+    font-size:  20px;
+    font-weight: 500;
+    margin-bottom: -10px;
+    display: none;
+}
+form .text.week{
+    background-color: #ff4757;
+}
+form .text.medium{
+    background-color: orange;
+}
+form .text.strong{
+    background-color: #23ad5c;
+}
+ 
