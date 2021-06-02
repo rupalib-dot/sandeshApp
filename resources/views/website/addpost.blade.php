@@ -502,8 +502,7 @@ function autoDetectPickup() {
                 map: map,
                 position: myLatlng,
                 draggable: true,
-                icon: '{{ asset('
-                website / images / marker.png ') }}'
+                icon: '{{ asset("website / images / marker.png") }}'
             });
 
             geocoder.geocode({

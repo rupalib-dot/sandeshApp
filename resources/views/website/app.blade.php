@@ -136,8 +136,8 @@
 
                     <div class="footerSocialIcon mt-4">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                            <li><a href="connect@hmaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                            <li><a href="connect@hmaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
                             <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li>
                         </ul>
                     </div>
@@ -146,10 +146,7 @@
                         <div class="cptext">
                             <ul>
                                 <li><span class="footerContact"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                    15, Usol'skaya Str., 614064, Perm, Russia
-                                </</li>
-                                <li><span class="footerContact"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></span>
-                                    <a class="phoneControl" href="tel: +7 (342) 249-5509">+7 (342) 249-5509</a>
+                                21st A Main Rd Vanganahalli; Banglore; Karnataka; India
                                 </li>
                                 <li><span class="footerContact"><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                     <a class="phoneControl" href="mailto: td_dami@Mail.Ru">td_dami@Mail.Ru</a>

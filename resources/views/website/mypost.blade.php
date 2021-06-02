@@ -38,7 +38,7 @@
                                     <div class="sandeshpara">
                                         <h6>{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6>
                                         <p class="text-bold">{{ $post->person_name }}</p>
-                                        <p> {{ $post->description }} </p>
+                                        <p class="sub-add"> {{ $post->description }} </p>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
