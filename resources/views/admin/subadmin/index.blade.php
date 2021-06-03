@@ -28,12 +28,12 @@
                     <thead>
                     <tr>
                         <!-- <th> ID </th> -->
-                        <th> Acc-Id </th>
+                        <th  style="width:70px;"> Acc-Id </th>
                         <th> Name </th>
                         <th> Email ID </th>
                         <th> Mobile </th>
                         <th> Location </th>
-                        <th> Created On </th>
+                        <th style="width:170px;"> Created On </th>
                         <th> Actions </th>
                     </tr>
                     </thead>

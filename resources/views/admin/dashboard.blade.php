@@ -72,7 +72,7 @@
         <div class="col-md-4 grid-margin">
             <div class="card">
                 <div class="card-head">
-                    <h4>Last one Month Post Count</h4>
+                    <h4>Last One Month Post Count</h4>
                 </div>
                 <div class="card-body">
                     <h4><b>{{count($lastOneMonthPosts)}}</b></h4>

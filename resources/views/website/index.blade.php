@@ -491,11 +491,11 @@
                             @csrf
                             <div class="star-rating">
                                 <fieldset>
-                                    <input type="radio" required id="star5" name="rating" value="5" /><label for="star5" title="Outstanding" class="bstar"></label>
-                                    <input type="radio" required id="star4" name="rating" value="4" /><label for="star4" title="Very Good" class="bstar"></label>
-                                    <input type="radio" required id="star3" name="rating" value="3" /><label for="star3" title="Good" class="bstar"></label>
-                                    <input type="radio" required id="star2" name="rating" value="2" /><label for="star2" title="Poor" class="bstar"></label>
-                                    <input type="radio" required  id="star1" name="rating" value="1" /><label for="star1" title="Very Poor" class="bstar"></label>
+                                    <input type="radio"  @if(old('rating') == 5 || old('rating') == 4 || old('rating') == 3 || old('rating') == 2 || old('rating') == 1) checked @endif class="@error('rating') redborder @enderror" id="star5" name="rating" value="5" /><label for="star5" title="Outstanding" class="bstar"></label>
+                                    <input type="radio"   @if(old('rating') == 5 || old('rating') == 4 || old('rating') == 3 || old('rating') == 2) checked @endif class="@error('rating') redborder @enderror" id="star4" name="rating" value="4" /><label for="star4" title="Very Good" class="bstar"></label>
+                                    <input type="radio"  @if(old('rating') == 5 || old('rating') == 4 || old('rating') == 3) checked @endif class="@error('rating') redborder @enderror" id="star3" name="rating" value="3" /><label for="star3" title="Good" class="bstar"></label>
+                                    <input type="radio"  @if(old('rating') == 5 || old('rating') == 4 ) checked @endif class="@error('rating') redborder @enderror" id="star2" name="rating" value="2" /><label for="star2" title="Poor" class="bstar"></label>
+                                    <input type="radio"  @if(old('rating') == 5 ) checked @endif class="@error('rating') redborder @enderror" id="star1" name="rating" value="1" /><label for="star1" title="Very Poor" class="bstar"></label>
                                 </fieldset>
                                 @error('rating')
                                 <div class="rederror">{{ $message }}</div>
@@ -503,7 +503,7 @@
                             </div>
                             <input type="text" class="form-control @error('name') redborder @enderror"
                                     onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
-                                    placeholder="Name * " name="name" minlength="3" maxlength="50" required
+                                    placeholder="Name * " name="name" minlength="3" maxlength="50" 
                                     value="{{old('name') }}">
                             @error('name')
                                 <div class="rederror">{{ $message }}</div>
@@ -527,7 +527,7 @@
                             @enderror
                                 
                             <textarea type="text" class="form-control @error('name') redborder @enderror"
-                            style="margin-top:35px" rows="3" placeholder="Message*" name="message" required 
+                            style="margin-top:35px" rows="3" placeholder="Message*" name="message" 
                                     onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
                                     > {{Request::old('message') }} </textarea>
                             @error('message')
@@ -541,4 +541,5 @@
             </div>
         </div>
     </section>
+    <script src="{{ asset('website/js/main.js') }}"></script>
 @endsection

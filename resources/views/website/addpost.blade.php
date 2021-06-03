@@ -7,6 +7,23 @@
 @section('title', 'Home Page')
 
 @section('content')
+<style>
+    .items-center {
+        flex:1;
+    }
+    .w-12 {
+        width: 8rem !important;;
+    }
+    .h-12 {
+        height: 8rem !important;
+    }
+
+    .h-12.rounded-full {
+        border-radius: 50%;
+    }
+
+</style>
+
 <section id="registrationPage" class="registrationPage" role="registration">
     <div class="container">
         <div class="row">
@@ -174,7 +191,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('pocontact') redborder @enderror"
-                            placeholder="Contact First Name *" name="pocontact" minlength="3" maxlength="50" required
+                            placeholder="First Name *" name="pocontact" minlength="3" maxlength="50" required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->pocontact) ? $post->pocontact : Request::old('pocontact')}}">
                         @error('pocontact')
@@ -189,7 +206,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('lname') redborder @enderror"
-                            placeholder="Contact Last Name *" name="lname" minlength="3" maxlength="50" required
+                            placeholder="Last Name *" name="lname" minlength="3" maxlength="50" required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->lname) ? $post->lname : Request::old('lname')}}">
                         @error('lname')
@@ -332,7 +349,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <!-- File Input -->
-                                    <div class="ml-3 rounded-md shadow-sm">
+                                    <div class="ml-2 rounded-md shadow-sm">
                                         <!-- Replace the file input styles with our own via the label -->
                                         <input @change="updatePreview($refs)" x-ref="input" type="file"
                                             accept="image/*,capture=camera" name="death_certificate" id="photo"
@@ -389,7 +406,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <!-- File Input -->
-                                    <div class="ml-3 rounded-md shadow-sm">
+                                    <div class="ml-2 rounded-md shadow-sm">
                                         <!-- Replace the file input styles with our own via the label -->
                                         <input @change="updatePreview($refs)" x-ref="input" type="file"
                                             accept="image/*,capture=camera" name="person_pic" id="person_pic"

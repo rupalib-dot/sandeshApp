@@ -19,28 +19,22 @@
             @endif
             <form action="{{route('showpublicpost')}}" method="get">
                 <div class="row">
-                    <div class="col-md-5 col-sm-5 col-12">
+                    <div class="col-md-8 col-sm-8 col-12">
                         <div class="form-group mb-4 showind">
                             <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
                                     onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
-                                    placeholder="Location *" name="address" required value="{{old('address',$request->address)}}" >
+                                    placeholder="Location *" name="address" value="{{old('address',$request->address)}}" >
                             <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow" aria-hidden="true"></i></span> 
                             <div id="map" style="height:600px;display:none;"> </div> 
                         </div> 
-                    </div>
-                    <div class="col-md-1 col-sm-1 col-12 pl-0"> 
-                        <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button>  
-                    </div>
-                    <div class="col-md-5 col-sm-5 col-12">
+                    </div> 
+                    <div class="col-md-2 col-sm-2 col-12 pr-0">
                         <div class="form-group mb-4 showind">
-                            <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
-                                    onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
-                                    placeholder="Date *" name="address" required value="{{old('address',$request->address)}}" >
-                            <span class="infoicos" onclick="autoDetectPickup()"></span> 
-                            <div id="map" style="height:600px;display:none;"> </div> 
+                            <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="date" class="form-control @error('address') redborder @enderror"
+                                    placeholder="Date *" name="date" value="{{old('date',$request->date)}}" > 
                         </div> 
                     </div>
-                    <div class="col-md-1 col-sm-1 col-12 pl-0"> 
+                    <div class="col-md-2 col-sm-2 col-12 pl-0"> 
                         <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button>  
                     </div>
                 </div> 

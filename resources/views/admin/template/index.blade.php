@@ -38,7 +38,7 @@
                             @foreach($templates as $index => $template)
                                 <tr>
                                     <td> {{ $index + 1 }} </td>
-                                    <td class="sub-add"> {{ $template->message }} </td> 
+                                    <td id="message_{{ $template->id }}" class="sub-add"> {{ $template->message }} </td> 
                                     <td> {{ date('d-m-Y, H:i a', strtotime($template->created_at)) }} </td>
                                     <td> 
                                         @if($template->block_status == config('constant.STATUS.UNBLOCK'))
@@ -58,7 +58,7 @@
                                             <button type="submit" class="btn btn-danger mr-3 mb-1"> <i class="fas fa-trash-alt"></i></button>
                                         </form> 
 
-                                        <a onclick="editTemplate('{{$template->id}}','<?php echo htmlspecialchars($template->message);?>')" class="btn btn-success mr-3 mb-1">
+                                        <a onclick="editTemplate('{{$template->id}}')" class="btn btn-success mr-3 mb-1">
                                             <i style="color: white;" class="fas fa-edit"></i>
                                         </a>
  
@@ -94,7 +94,7 @@
                       method="POST" data-validate>
                     @csrf
                     <input type="hidden" name="id" class="modalinput" value="">
-                    <div class="row">
+                    <div class="row" style="margin-bottom:30px">
                         <div class="col-12">
                             <textarea  class="form-control @error('fname') redborder @enderror message" placeholder="Write a Template" name="message" minlength="4" maxlength="250" required
                               value="{{Request::old('fname')}}" style="height: 150px;" required></textarea>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary button">Add Template</button>
+                    <button type="submit" class="btn btn-primary button">Submit</button>
                 </form>
             </div>
         </div>
@@ -117,9 +117,10 @@
             $('#templateModal').modal('show');
         });
     });
-    function editTemplate(id,msg){
+    function editTemplate(id){
+        var msg = $("#message_"+id).text(); 
         $('#templateModal #exampleModalLongTitle').text('Edit Template');
-        $('#templateModal .button').text('Edit Template');
+        $('#templateModal .button').text('Update');
         $('#templateModal .message').val(msg);
         $('#templateModal .modalinput').val(id);
         $('#templateModal').modal('show');

@@ -79,40 +79,44 @@ class SubAdminController extends Controller
             'mobile'        => 'required|numeric|digits_between:8,10|unique:users,mobile',
             'address'       => 'required|min:8|max:255',
         ]);
-
-        $user = User::create([
-            'fname'         => $request['fname'],
-            'email' 		=> $request['email'],
-            'mobile'        => $request['mobile'],
-            'address'       => $request['address'],
-            'lat'           => $request['lat'],
-            'change_status_date'=> date('Y-m-d'),
-            'long'          => $request['long'],
-            'password'      => Hash::make($request['password']),
-            'block_status'  => config('constant.STATUS.UNBLOCK'),
-            'acc_id'        => strtoupper(substr($request['fname'], 0, 2)."-".rand(11111,99999)),
-        ]);
-
-        if($user['id']){
-            UserRole::create([
-                'user_id'       => $user['id'],
-                'role_id' 		=> 3,
+        $addressExist = Controller::getLatLong($request->address); 
+        if($addressExist != ""){
+            $user = User::create([
+                'fname'         => $request['fname'],
+                'email' 		=> $request['email'],
+                'mobile'        => $request['mobile'],
+                'address'       => $request['address'],
+                'lat'           => $request['lat'],
+                'change_status_date'=> date('Y-m-d'),
+                'long'          => $request['long'],
+                'password'      => Hash::make($request['password']),
+                'block_status'  => config('constant.STATUS.UNBLOCK'),
+                'acc_id'        => strtoupper(substr($request['fname'], 0, 2)."-".rand(11111,99999)),
             ]);
+
+            if($user['id']){
+                UserRole::create([
+                    'user_id'       => $user['id'],
+                    'role_id' 		=> 3,
+                ]);
+            }
+
+            //mail to new subadmin
+            $details = [
+                'userName'      => $request['fname'],
+                'password'      => $request['password'],
+                'email' 		=> $request['email'],
+            ];  
+            event(new Registered($user));
+
+            \Mail::to($request['email'])->send(new \App\Mail\SubAdminCreatedMail($details));
+
+            Controller::writeFile($request->fname.' Account Created Successfully as SubAdmin');
+
+            return redirect()->route('admin.subadmin.index')->with('Success','Subadmin has been added successfully');
+        }else{
+            return redirect()->back()->withInput($request->all())->with('Failed', 'Please select proper address from suggestion list or pick current location');
         }
-
-        //mail to new subadmin
-         $details = [
-            'userName'      => $request['fname'],
-            'password'      => $request['password'],
-            'email' 		=> $request['email'],
-        ];  
-        event(new Registered($user));
-
-        \Mail::to($request['email'])->send(new \App\Mail\SubAdminCreatedMail($details));
-
-        Controller::writeFile($request->fname.' Account Created Successfully as SubAdmin');
-
-        return redirect()->route('admin.subadmin.index')->with('Success','Subadmin has been added successfully');
     }
 
     /**
@@ -155,18 +159,23 @@ class SubAdminController extends Controller
             'address'       => 'required|min:8|max:255',
         ]);
 
-        User::where('id',$id)->update([
-            'fname'         => $request['fname'],
-            'email' 		=> $request['email'],
-            'mobile'        => $request['mobile'],
-            'address'       => $request['address'],
-            'lat'           => $request['lat'],
-            'long'          => $request['long'], 
-        ]);
+        $addressExist = Controller::getLatLong($request->address); 
+        if($addressExist != ""){
+            User::where('id',$id)->update([
+                'fname'         => $request['fname'],
+                'email' 		=> $request['email'],
+                'mobile'        => $request['mobile'],
+                'address'       => $request['address'],
+                'lat'           => $request['lat'],
+                'long'          => $request['long'], 
+            ]);
 
-        Controller::writeFile($request->fname.' Account Updated Successfully');
+            Controller::writeFile($request->fname.' Account Updated Successfully');
 
-        return redirect()->route('admin.subadmin.index')->with('Success', 'Subadmin Updated Successfully');
+            return redirect()->route('admin.subadmin.index')->with('Success', 'Subadmin Updated Successfully');
+        }else{
+            return redirect()->back()->withInput($request->all())->with('Failed', 'Please select proper address from suggestion list or pick current location');
+        }
     }
 
     /**

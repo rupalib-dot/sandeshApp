@@ -43,10 +43,12 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('assets/css/demo_1/style.css') }}">
+
     <!-- End Layout styles -->
 </head>
 
 <body>
+
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -69,25 +71,25 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas pt-5" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
+                    <li class="nav-item  {{Request::is('admin/dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admindashboard') }}">
                             <i class="menu-icon typcn typcn-document-text"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item  {{Request::is('admin/users') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('admin/users')}}">
                             <i class="menu-icon typcn typcn-user-outline"></i>
                             <span class="menu-title">Users</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::is('admin/subadmin') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('admin/subadmin')}}">
                             <i class="menu-icon typcn typcn-user-outline"></i>
                             <span class="menu-title">SubAdmin</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::is('admin/logfiles') ? 'active' : '' }}">
                         <a class="nav-link" href="{{url('admin/logfiles')}}">
                             <i class="menu-icon typcn typcn-user-outline"></i>
                             <span class="menu-title">Log Files</span>

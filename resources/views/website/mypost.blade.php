@@ -1,12 +1,21 @@
 @extends('website.app')
 
-@section('title', 'Home Page')
+@section('title', 'My Post')
 
 @section('content')
     <section id="postWall" class="postWall" role="post wall"
              style="background: url({{ asset('website/images/backimg2.png') }}) no-repeat center;
                     background-size: cover;">
-        <div class="container">
+        <div class="container"> 
+            <div class="row" style="margin-bottom:20px">
+                <div class="col-md-12">
+                    @if($current_url == 'mydraft')
+                    <h2 class="addHeading">My Draft</h2>
+                    @else
+                    <h2 class="addHeading">My Post</h2>
+                    @endif
+                </div>
+            </div>
             @if(Session::has('Success'))
                 <div class="alert alert-success hide500">
                     <strong>Success ! </strong> {{Session::get('Success')}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 use App\Models\Template;
 
 class TemplateController extends Controller
@@ -45,7 +46,7 @@ class TemplateController extends Controller
         ]); 
 
         if(isset($request['id']) && $request['id'] != ""){
-            $template = Template::where('id',$request['id'])->update([
+            $template = DB::table('templates')->where('id',$request['id'])->update([
                 'message'         => $request['message'], 
                 'updated_at'  => date('Y-m-d H:i:s'), 
             ]);
@@ -54,8 +55,7 @@ class TemplateController extends Controller
                 'message'         => $request['message'], 
                 'block_status'  => config('constant.STATUS.UNBLOCK'), 
             ]);
-        }
-
+        } 
         if(!empty($template)){ 
             if(isset($request['id']) && $request['id'] != ""){
                 return redirect()->route('admin.template.index')->with('Success','Template has been updated successfully');

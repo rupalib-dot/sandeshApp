@@ -24,13 +24,13 @@
                 <table class="table table-striped table-responsive mt-3 ctable datatableinit">
                     <thead>
                     <tr>
-                        <th> Acc ID </th>
+                        <th style="width:70px;"> Acc ID </th>
                         <th> Name </th>
                         <th> Mobile </th>
                         <th> Date of Birth </th>
                         <th> Adhaar </th>
                         <th> Location </th>
-                        <th> Created On </th>
+                        <th  style="width:170px;"> Created On </th>
                         <th> Actions </th>
                     </tr>
                     </thead>

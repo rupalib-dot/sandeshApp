@@ -27,20 +27,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-item nav-link" href="{{ route('sitehome') }}">Home</a>
+                    <li class="nav-item  {{Request::is('/') ? 'active' : '' }}">
+                        <a class="nav-item nav-link {{Request::is('/') ? 'active' : '' }}" href="{{ route('sitehome') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-item nav-link" href="{{ route('sitehome') }}#aboutUs">About</a>
+                    <li class="nav-item {{Request::is('/#aboutUs') ? 'active' : '' }}">
+                        <a class="nav-item nav-link {{Request::is('/#aboutUs') ? 'active' : '' }}" href="{{ route('sitehome') }}#aboutUs">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-item nav-link" href="{{ route('sitehome') }}#questionPage">Faq</a>
+                    <li class="nav-item {{Request::is('/#questionPage') ? 'active' : '' }}">
+                        <a class="nav-item nav-link {{Request::is('/#questionPage') ? 'active' : '' }}" href="{{ route('sitehome') }}#questionPage">Faq</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-item nav-link" href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
+                    <li class="nav-item {{Request::is('/#contactFeedback') ? 'active' : '' }}">
+                        <a class="nav-item nav-link {{Request::is('/#contactFeedback') ? 'active' : '' }}" href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-item nav-link" href="{{ route('showpublicpost') }}">Posts</a>
+                    <li class="nav-item {{Request::is('posts') ? 'active' : '' }}">
+                        <a class="nav-item nav-link {{Request::is('posts') ? 'active' : '' }}" href="{{ route('showpublicpost') }}">Posts</a>
                     </li>
 
                     @auth
@@ -98,12 +98,7 @@
             <div class="alert alert-success hide500">
                 <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
             </div>
-        @endif
-        @if(Session::has('Failedpassword'))
-            <div class="alert alert-danger hide500">
-                <strong>Failed ! </strong> {{Session::get('Failedpassword')}}
-            </div>
-        @endif
+        @endif 
     </div>
     @yield('content')
     <footer id="footer" class="footer" role="footer">
@@ -315,12 +310,12 @@
                                                 <div class="alert alert-success hide500">
                                                     <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
                                                 </div>
-                                            @endif
+                                            @endif-->
                                             @if(Session::has('Failedpassword'))
                                                 <div class="alert alert-danger hide500">
                                                     <strong>Failed ! </strong> {{Session::get('Failedpassword')}}
                                                 </div>
-                                            @endif -->
+                                            @endif 
                                             <div class="forgotPage">
                                                 <button type="submit" onClick="window.location.reload();" class="close1" data-dismiss="modal" aria-label="Close"><i class="flaticon-cancel"></i></button>
                                                 <h4>Change Password</h4>
@@ -367,7 +362,7 @@
                                                     </div>
                                                     <div class="form-group showind mb-2" style="position: relative;">
                                                         <input id="password-field3" type="password"
-                                                               onkeydown="limit(this, 16);" onkeyup="limit(this, 16);" value="{{old('u')}}"
+                                                               onkeydown="limit(this, 16);" onkeyup="limit(this, 16);" value="{{old('password_confirmation')}}"
                                                                class="form-control pr30px @error('password_confirmation') redborder @enderror"
                                                                placeholder="Confirm Password"  name="password_confirmation"
                                                                minlength="8" maxlength="16" required autocomplete="off">

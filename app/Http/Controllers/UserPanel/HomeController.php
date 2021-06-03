@@ -193,7 +193,7 @@ class HomeController extends Controller
         $user = Auth::user();
       
         if( $request->current_password == $request->password ) {
-            return redirect()->back()->with(['openpasswordmodal' => 'true',
+            return redirect()->back()->withInput($request->all())->with(['openpasswordmodal' => 'true',
                 'Failedpassword' => 'Current Password cannot be same as New Password !']);
         }
         $validatedData = Validator::make($request->all(), [
@@ -255,13 +255,13 @@ class HomeController extends Controller
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
             'number'                => 'required|numeric|digits_between:8,11|unique:users,mobile',
-            'age'                   => 'date_format:Y-m-d|required|before:date_of_death',
-            'date_of_death'         => 'date_format:Y-m-d|required|before:' . Carbon::tomorrow()->toDateString(),
+            'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
+            'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
             'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
             'person_pic'            => 'required|mimes:jpg,png|max:5120',
             'swd'                   => "required|min:1|max:10", 
-            'swdperson'                   => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         $validationmessages = array(
@@ -335,7 +335,7 @@ class HomeController extends Controller
             $draft = 1;
         }
         $myposts = Post::where('user_id', Auth::user()->id)->where('is_draft',$draft)->latest()->paginate(10);
-        return view('website.mypost', compact('myposts'));
+        return view('website.mypost', compact('myposts','current_url'));
     }
 
     public function showpublicpost(Request $request) {
@@ -343,6 +343,10 @@ class HomeController extends Controller
         ->Where(function($query) use ($request) {
             if (isset($request['address']) && !empty($request['address'])) { 
                 $query->where('address',$request['address']);
+            }  
+            if (isset($request['date']) && !empty($request['date'])) { 
+                $query->whereDate('created_at',$request['date']);
+                $query->orWhere('date_of_death',$request['date']);
             }  
         })->where('is_draft',0)->latest()->paginate(10);
         return view('website.publicpost', compact('publicpost','request'));
@@ -588,7 +592,7 @@ class HomeController extends Controller
         // 'openpasswordmodal' => 'true'
         if(!empty($inquiry)){
                 return redirect()->back()
-                    ->with(['SuccessContct'=> 'inquiry created Successfully',]);
+                    ->with(['SuccessContct'=> 'Inquiry created Successfully',]);
         }else{
             return redirect()->back()
                     ->with(['FailedContct'=> 'Something went wrong',]);
