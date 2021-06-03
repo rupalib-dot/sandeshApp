@@ -7,6 +7,22 @@
     <section id="bannerInner" class="bannerInner" role="banner" style="background-image:url({{ asset('website/images/bannerimage.png') }}); min-height: 400px">
         <div class="container-fluid">
             <div class="row">
+                @if (Auth::check())
+                    <div class="col-md-7"> 
+                    </div>
+                    <div class="col-md-5">
+                        @if(Session::has('SuccessContct'))
+                            <div class="alert alert-success hide500">
+                                <strong>Success ! </strong> {{Session::get('SuccessContct')}}
+                            </div>
+                        @endif
+                        @if(Session::has('FailedContct'))
+                            <div class="alert alert-danger hide500">
+                                <strong>Failed ! </strong> {{Session::get('FailedContct')}}
+                            </div>
+                        @endif
+                    </div>
+                @endif
                 @if (!Auth::check())
                     <div class="col-md-7"> 
                     </div>
@@ -285,51 +301,45 @@
                         <!-- Accordion card -->
 
                         <!-- Accordion card -->
-
                         <div class="card">
 
                             <!-- Card header -->
-                            <div class="card-header" role="tab" id="headingTwo2">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
-                                   aria-expanded="false" aria-controls="collapseTwo2">
+                            <div class="card-header" role="tab" id="headingOne2">
+                                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne2"
+                                aria-expanded="true" aria-controls="collapseOne2">
                                     <span class="number">2</span>
-                                    <h5 class="cardHeading mb-0">How to sign up?<i class="fa fa-angle-down rotate-icon"></i></h5>
+                                    <h5 class="cardHeading mb-0">How to sign up?<i class="fa fa-angle-down rotate-icon"></i> </h5>
                                 </a>
                             </div>
 
                             <!-- Card body -->
-                            <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2"
-                                 data-parent="#accordionEx">
+                            <div id="collapseOne2" class="collapse" role="tabpanel" aria-labelledby="headingOne2"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
-                                    Signing up to Sandesh requires an OTP validation of your mobile number and an Aadhar copy.
+                                Signing up to Sandesh requires an OTP validation of your mobile number and an Aadhar copy.
                                 </div>
                             </div>
 
                         </div>
 
-                        <!-- Accordion card -->
-
-                        <!-- Accordion card -->
-
-                        <div class="card">
-
+                        <div class="card"> 
                             <!-- Card header -->
-                            <div class="card-header" role="tab" id="headingThree3">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx"
-                                   href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                            <div class="card-header" role="tab" id="headingOne3">
+                                <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne3"
+                                aria-expanded="true" aria-controls="collapseOne3">
                                     <span class="number">3</span>
                                     <h5 class="cardHeading mb-0"> How does Sandesh validate/approve an obituary? <i class="fa fa-angle-down rotate-icon"></i> </h5>
                                 </a>
                             </div>
+
                             <!-- Card body -->
-                            <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
-                                 data-parent="#accordionEx">
+                            <div id="collapseOne3" class="collapse" role="tabpanel" aria-labelledby="headingOne3"
+                                data-parent="#accordionEx">
                                 <div class="card-body">
-                                    Sandesh requires a copy of the death certificate or doctor’s note to be uploaded to the platform. Following which we wait for manual approval from the point of contact.
+                                Sandesh requires a copy of the death certificate or doctor’s note to be uploaded to the platform. Following which we wait for manual approval from the point of contact.
                                 </div>
                             </div>
-
-                        </div>
+                        </div> 
 
                         <!-- Accordion card -->
 
@@ -470,6 +480,7 @@
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.606112739776!2d72.52113961403036!3d23.03823028494509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84b45f72b935%3A0x8701ed08268cf6a7!2sSandesh%20Press%20Rd%2C%20Vastrapur%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1617195035975!5m2!1sen!2sin"
                             width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
+                    <!-- 21st A Main Rd Vanganahalli; Banglore; Karnataka; India -->
                 </div>
                 <div class="col-md-6">
                     <div class="feedbackPara">
@@ -498,20 +509,20 @@
                                 <div class="rederror">{{ $message }}</div>
                             @enderror
 
-                            <input type="email" class="form-control @error('email') redborder @enderror"
-                                    onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required
-                                    placeholder="Email Address" name="email" minlength="4" maxlength="50"
-                                    value="{{old('email') }}" autocomplete="off">
-                            @error('email')
+                            <input type="email" class="form-control @error('useremail') redborder @enderror"
+                                    onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
+                                    placeholder="Email Address" name="useremail" minlength="4" maxlength="50"
+                                    value="{{old('useremail') }}" autocomplete="off">
+                            @error('useremail')
                                 <div class="rederror">{{ $message }}</div>
                             @enderror
 
-                            <input type="text" class="form-control onlydigits @error('mobile') redborder @enderror"
-                                    placeholder="Mobile Number *" name="mobile" required
+                            <input type="text" class="form-control onlydigits @error('usermobile') redborder @enderror"
+                                    placeholder="Mobile Number *" name="usermobile"
                                     onkeydown="limit(this, 10);" onkeyup="limit(this, 10);"
-                                    value="{{Request::old('mobile') }}"
+                                    value="{{Request::old('usermobile') }}"
                                     pattern="^[0-9]\d{9}$">
-                            @error('mobile')
+                            @error('usermobile')
                                 <div class="rederror">{{ $message }}</div>
                             @enderror
                                 

@@ -136,9 +136,9 @@
 
                     <div class="footerSocialIcon mt-4">
                         <ul>
-                            <li><a href="connect@hmaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                            <li><a href="connect@hmaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li>
+                            <li><a href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                            <li><a href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                            <!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li> -->
                         </ul>
                     </div>
                     <hr>
@@ -149,7 +149,7 @@
                                 21st A Main Rd Vanganahalli; Banglore; Karnataka; India
                                 </li>
                                 <li><span class="footerContact"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <a class="phoneControl" href="mailto: td_dami@Mail.Ru">td_dami@Mail.Ru</a>
+                                    <a class="phoneControl" href="mailto: connect@hmaresandesh.com">connect@hmaresandesh.com</a>
 
                                 </li>
                             </ul>

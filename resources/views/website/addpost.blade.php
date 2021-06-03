@@ -96,8 +96,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4">
-                        <select name="swd" class="form-control @error('swd') redborder @enderror" required>
-                            <option value="">S/O W/O D/O M/O F/O H/O</option>
+                        <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" required>
+                            <option value="">Select Relation</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'S/O' ? 'selected' : '' }}
                                 value="S/O">S/O</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'W/O' ? 'selected' : '' }}
@@ -118,6 +118,23 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
+                        <input type="text" class="form-control @error('swdperson') redborder @enderror"
+                            placeholder="Name of person" name="swdperson" minlength="4" maxlength="50"
+                            onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required id="swdperson"
+                            value="{{isset($post->swdperson) ? $post->swdperson : Request::old('swdperson')}}">
+                        @error('swdperson')
+                        <div class="rederror">{{ $message }}</div>
+                        @enderror
+                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
+                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-12">
+                    <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('institute') redborder @enderror"
                             placeholder="Known for position (Optional)" name="institute" minlength="4" maxlength="50"
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
@@ -131,8 +148,6 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4 showind">
                         <input id="searchTextField" type="text"
@@ -428,6 +443,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.6.0/alpine.js"></script>
 
 <script>
+
+function getplaceholder(val){ 
+    if(val == 'S/O'){
+        $("#swdperson").attr('placeholder','Name of Father/Mother')
+    }else if(val == 'W/O'){
+        $("#swdperson").attr('placeholder','Name of Husband')
+    }else if(val == 'D/O'){
+        $("#swdperson").attr('placeholder','Name of Father/Mother')
+    }else if(val == 'M/O'){
+        $("#swdperson").attr('placeholder','Name of Son/Daughter')
+    }else if(val == 'F/O'){
+        $("#swdperson").attr('placeholder','Name of Son/Daughter')
+    }else if(val == 'H/O'){
+        $("#swdperson").attr('placeholder','Name of Wife')
+    } 
+}
+
 $(".draft").click(function() {
     $("#is_draft").val(1);
 });
@@ -450,9 +482,11 @@ function getMessage(val) {
 function flowerSelect() {
     if ($("#checkgarland").prop('checked') == true) {
         $("#flowerTypeSelect").attr('required', true);
+        $('#flowerTypeSelect').val("");
         $("#flower_type").show();
     } else {
         $("#flowerTypeSelect").attr('required', false);
+        $('#flowerTypeSelect').val("");
         $("#flower_type").hide();
     }
 }

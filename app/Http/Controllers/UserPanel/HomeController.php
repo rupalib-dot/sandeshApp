@@ -241,7 +241,8 @@ class HomeController extends Controller
             'address'           => "Location",
             'death_certificate' => "Death Certificate",
             'person_pic'        => "Person Photo",
-            'swd'               => "S/O W/O D/O", 
+            'swd'               => "S/O W/O D/O M/O F/O H/O", 
+            'swdperson'         => "Relative Name",
             'flower_type'       => "Garland Type",
         );
 
@@ -260,6 +261,7 @@ class HomeController extends Controller
             'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
             'person_pic'            => 'required|mimes:jpg,png|max:5120',
             'swd'                   => "required|min:1|max:10", 
+            'swdperson'                   => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         $validationmessages = array(
@@ -384,6 +386,7 @@ class HomeController extends Controller
             'death_certificate' => "Death Certificate",
             'swd'                   => "required|min:1|max:10",
             'flower_type'       => "Garland Type",
+            'swdperson'         => "Relative Name",
         ); 
  
         $requiredvalidation = [
@@ -400,6 +403,7 @@ class HomeController extends Controller
             'address'               => "required|min:4|max:250",
             'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
             'swd'                   => "required|min:1|max:10", 
+            'swdperson'                   => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         isset($post->person_pic) ? '' : $requiredvalidation['person_pic'] = 'required|mimes:jpg,png|max:5120';
@@ -467,6 +471,7 @@ class HomeController extends Controller
                 'date_of_death'        => date('Y-m-d',strtotime($request->date_of_death)),
                 'address'              => $request->address,
                 'swd'                  => $request->swd, 
+                'swdperson'            => $request->swdperson,
                 'death_certificate'    => $death_certificate,
                 'person_pic'           => $person_pic,
                 'flowers'              => $flowers,
@@ -550,8 +555,8 @@ class HomeController extends Controller
     public function contactsubmit(Request $request) { 
         $niceNames = array(
             'name'         => "Name", 
-            'email' 		=> "Email address", 
-            'mobile'        => "Mobile Number",
+            // 'email' 		=> "Email address", 
+            // 'mobile'        => "Mobile Number",
             'message'   => "Message", 
             'rating' =>"Rating",
         );
@@ -559,8 +564,8 @@ class HomeController extends Controller
         $request['adhaar'] = str_replace(' ', '', $request->adhaar);
         $requiredvalidation = [
             'name'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u", 
-            'email' => 'required|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^',
-            'mobile'        => 'required|numeric|digits_between:8,11',
+            // 'email' => 'required|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^',
+            // 'mobile'        => 'required|numeric|digits_between:8,11',
             'message'   => 'required|max:250|min:5', 
             'rating'   => 'required',
         ];
@@ -575,18 +580,18 @@ class HomeController extends Controller
 
         $inquiry = ContactInqiry::create([
             'name'         => $request->name,
-            'mobile' 		=> $request->mobile,
-            'email' 		=> $request->email, 
+            'mobile' 		=> $request->usermobile,
+            'email' 		=> $request->useremail, 
             'message'           => $request->message,
             'rating'          => $request->rating,
         ]); 
         // 'openpasswordmodal' => 'true'
         if(!empty($inquiry)){
                 return redirect()->back()
-                    ->with(['Success'=> 'inquiry created Successfully',]);
+                    ->with(['SuccessContct'=> 'inquiry created Successfully',]);
         }else{
             return redirect()->back()
-                    ->with(['Failed'=> 'Something went wrong',]);
+                    ->with(['FailedContct'=> 'Something went wrong',]);
         }
        
     }
