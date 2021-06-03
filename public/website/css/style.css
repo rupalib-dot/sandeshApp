@@ -714,6 +714,7 @@ input.locateMe.btn.btn-primary:focus,input.locateMe.btn.btn-primary:hover{
 
 .star-rating {
     font-family: 'FontAwesome';
+    margin-left: 20px;
 }
 .star-rating > fieldset {
     border: none;
@@ -726,21 +727,31 @@ input.locateMe.btn.btn-primary:focus,input.locateMe.btn.btn-primary:hover{
 }
 .star-rating > fieldset:not(:checked) > label {
     float: right;
-    width: 1em;
     padding: 0 0.05em;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
     font-size: 200%;
-    color: #16a085;
+    color: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+label.bstar {
+    height: 50px width;
+    height: 50px;
+    width: 50px;
+    border: 1px solid var(--white1);
+    margin-right: 43px;
+
 }
 .star-rating > fieldset:not(:checked) > label:before {
     content: '\f006  ';
 }
 .star-rating > fieldset:not(:checked) > label:hover,
 .star-rating > fieldset:not(:checked) > label:hover ~ label {
-    color: #1abc9c;
-    text-shadow: 0 0 3px #1abc9c;
+    color: var(--yellow);
+    text-shadow: 0 0 3px var(--yellow);
 }
 .star-rating > fieldset:not(:checked) > label:hover:before,
 .star-rating > fieldset:not(:checked) > label:hover ~ label:before {
@@ -922,6 +933,8 @@ input:-webkit-autofill:active  {
     text-align: center;
     justify-content: center;
     padding: 150px 0;
+    text-transform: capitalize;
+
 }
 
 .active{
@@ -993,6 +1006,7 @@ form .text.strong{
 .h-12 {
     height: 100px;
 }
+
 
 
  

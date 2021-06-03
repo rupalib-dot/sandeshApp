@@ -19,7 +19,7 @@
             @endif
             <form action="{{route('showpublicpost')}}" method="get">
                 <div class="row">
-                    <div class="col-md-11 col-sm-11 col-12">
+                    <div class="col-md-5 col-sm-5 col-12">
                         <div class="form-group mb-4 showind">
                             <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
                                     onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
@@ -28,7 +28,19 @@
                             <div id="map" style="height:600px;display:none;"> </div> 
                         </div> 
                     </div>
-                    <div class="col-md-1 col-sm-1 col-12"> 
+                    <div class="col-md-1 col-sm-1 col-12 pl-0"> 
+                        <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button>  
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-12">
+                        <div class="form-group mb-4 showind">
+                            <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
+                                    onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
+                                    placeholder="Date *" name="address" required value="{{old('address',$request->address)}}" >
+                            <span class="infoicos" onclick="autoDetectPickup()"></span> 
+                            <div id="map" style="height:600px;display:none;"> </div> 
+                        </div> 
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-12 pl-0"> 
                         <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button>  
                     </div>
                 </div> 
@@ -54,7 +66,7 @@
                                     <div class="sandeshpara">
                                         <h6>{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6>
                                         <p class="text-bold">{{ $post->person_name }}</p>
-                                        <p> {{ $post->description }} </p>
+                                        <p class="sub-add"> {{ $post->description }} </p>
                                     </div>
                                 </div>
                             </div>

@@ -238,10 +238,6 @@
                         <p>Following the approval and due validation of an obituary; Sandesh ensures that the concerned people are informed of the loss. Sandesh allows people to join in sorrow and provide strength to the grieving souls through their personalized texts and tributes.</p>
                         <hr>
                     </div>
-
-                    <div class="signImage">
-                        <img src="{{ asset('website/images/signimg.png') }}" alt="">
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="aboutImage">
@@ -277,7 +273,7 @@
                             </div>
 
                             <!-- Card body -->
-                            <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                            <div id="collapseOne1" class="collapse " role="tabpanel" aria-labelledby="headingOne1"
                                  data-parent="#accordionEx">
                                 <div class="card-body"> 
                                     It is an effort to create an online platform where users can create and post an obituary digitally.
@@ -484,23 +480,16 @@
                             @csrf
                             <div class="star-rating">
                                 <fieldset>
-                                    <input type="radio" required id="star5" name="rating" value="5" /><label for="star5" title="Outstanding">5 stars</label>
-                                    <input type="radio" required id="star4" name="rating" value="4" /><label for="star4" title="Very Good">4 stars</label>
-                                    <input type="radio" required id="star3" name="rating" value="3" /><label for="star3" title="Good">3 stars</label>
-                                    <input type="radio" required id="star2" name="rating" value="2" /><label for="star2" title="Poor">2 stars</label>
-                                    <input type="radio" required  id="star1" name="rating" value="1" /><label for="star1" title="Very Poor">1 star</label>
+                                    <input type="radio" required id="star5" name="rating" value="5" /><label for="star5" title="Outstanding" class="bstar"></label>
+                                    <input type="radio" required id="star4" name="rating" value="4" /><label for="star4" title="Very Good" class="bstar"></label>
+                                    <input type="radio" required id="star3" name="rating" value="3" /><label for="star3" title="Good" class="bstar"></label>
+                                    <input type="radio" required id="star2" name="rating" value="2" /><label for="star2" title="Poor" class="bstar"></label>
+                                    <input type="radio" required  id="star1" name="rating" value="1" /><label for="star1" title="Very Poor" class="bstar"></label>
                                 </fieldset>
                                 @error('rating')
                                 <div class="rederror">{{ $message }}</div>
                             @enderror
                             </div>
-                            <ul>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                            </ul>
                             <input type="text" class="form-control @error('name') redborder @enderror"
                                     onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                     placeholder="Name * " name="name" minlength="3" maxlength="50" required
