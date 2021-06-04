@@ -83,6 +83,9 @@
                                                         <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                     </button>
                                                 </form>
+                                                <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                </a>
                                             </span>
                                         @elseif($post->approval_status == 411)
                                             <span style="margin-top: 24px;">

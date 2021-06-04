@@ -17,9 +17,24 @@
                     <strong>Failed ! </strong> {{Session::get('Failed')}}
                 </div>
             @endif
+            @if(Session::has('Succcessprofile'))
+                <div class="alert alert-success hide500">
+                    <strong>Success ! </strong> {{Session::get('Succcessprofile')}}
+                </div>
+            @endif
+            @if(Session::has('Failedprofile'))
+                <div class="alert alert-danger hide500">
+                    <strong>Failed ! </strong> {{Session::get('Failedprofile')}}
+                </div>
+            @endif
+            @if(Session::has('Succcesspassword'))
+                <div class="alert alert-success hide500">
+                    <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
+                </div>
+            @endif 
             <form action="{{route('showpublicpost')}}" method="get">
                 <div class="row">
-                    <div class="col-md-8 col-sm-8 col-12">
+                    <div class="col-md-7 col-sm-8 col-12">
                         <div class="form-group mb-4 showind">
                             <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
                                     onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
@@ -30,12 +45,13 @@
                     </div> 
                     <div class="col-md-2 col-sm-2 col-12 pr-0">
                         <div class="form-group mb-4 showind">
-                            <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="date" class="form-control @error('address') redborder @enderror"
+                            <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="date" max="{{date('Y-m-d')}}" class="form-control @error('address') redborder @enderror"
                                     placeholder="Date *" name="date" value="{{old('date',$request->date)}}" > 
                         </div> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-12 pl-0"> 
-                        <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button>  
+                    <div class="col-md-3 col-sm-2 col-12 pl-0"> 
+                        <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button> 
+                        <a href="{{route('showpublicpost')}}"><button style="margin-top:0px" class="signUp1 btn createpost btn">Clear Filter</button></a>
                     </div>
                 </div> 
             </form>
@@ -77,7 +93,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="paginationPara">
-                        {{ $publicpost->links('website.defaultpagination') }}
+                        {{ $publicpost->appends($request->all())->links('website.defaultpagination')->render() }}
+                        <!-- ->links('website.defaultpagination') -->
                     </div>
                 </div>
             </div>

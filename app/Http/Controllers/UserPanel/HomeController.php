@@ -342,7 +342,7 @@ class HomeController extends Controller
         $publicpost = Post::where('approval_status', 410)
         ->Where(function($query) use ($request) {
             if (isset($request['address']) && !empty($request['address'])) { 
-                $query->where('address',$request['address']);
+                $query->where('address','LIKE','%{$request["address"]}%');
             }  
             if (isset($request['date']) && !empty($request['date'])) { 
                 $query->whereDate('created_at',$request['date']);
@@ -592,7 +592,7 @@ class HomeController extends Controller
         // 'openpasswordmodal' => 'true'
         if(!empty($inquiry)){
                 return redirect()->back()
-                    ->with(['SuccessContct'=> 'Inquiry created Successfully',]);
+                    ->with(['SuccessContct'=> ' Inquiry sent successfully',]);
         }else{
             return redirect()->back()
                     ->with(['FailedContct'=> 'Something went wrong',]);

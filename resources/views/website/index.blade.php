@@ -21,6 +21,21 @@
                                 <strong>Failed ! </strong> {{Session::get('FailedContct')}}
                             </div>
                         @endif
+                        @if(Session::has('Succcessprofile'))
+                            <div class="alert alert-success hide500">
+                                <strong>Success ! </strong> {{Session::get('Succcessprofile')}}
+                            </div>
+                        @endif
+                        @if(Session::has('Failedprofile'))
+                            <div class="alert alert-danger hide500">
+                                <strong>Failed ! </strong> {{Session::get('Failedprofile')}}
+                            </div>
+                        @endif
+                        @if(Session::has('Succcesspassword'))
+                            <div class="alert alert-success hide500">
+                                <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
+                            </div>
+                        @endif 
                     </div>
                 @endif
                 @if (!Auth::check())
@@ -476,8 +491,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="googlemap">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.606112739776!2d72.52113961403036!3d23.03823028494509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84b45f72b935%3A0x8701ed08268cf6a7!2sSandesh%20Press%20Rd%2C%20Vastrapur%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1617195035975!5m2!1sen!2sin"
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.852528546875!2d77.64406621464464!3d12.917198290891495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae148440ff34fd%3A0xd6bed09c5399614e!2s21st%20A%20Main%20Rd%2C%201st%20Sector%2C%20HSR%20Layout%2C%20Bengaluru%2C%20Karnataka%20560102!5e0!3m2!1sen!2sin!4v1622781850498!5m2!1sen!2sin"
                             width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                     <!-- 21st A Main Rd Vanganahalli; Banglore; Karnataka; India -->

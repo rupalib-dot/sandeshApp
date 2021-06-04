@@ -82,24 +82,8 @@
                 </ul>
             </div>
         </div>
-    </nav> 
-    <div class="session-alert">
-        @if(Session::has('Succcessprofile'))
-            <div class="alert alert-success hide500">
-                <strong>Success ! </strong> {{Session::get('Succcessprofile')}}
-            </div>
-        @endif
-        @if(Session::has('Failedprofile'))
-            <div class="alert alert-danger hide500">
-                <strong>Failed ! </strong> {{Session::get('Failedprofile')}}
-            </div>
-        @endif
-        @if(Session::has('Succcesspassword'))
-            <div class="alert alert-success hide500">
-                <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
-            </div>
-        @endif 
-    </div>
+    </nav>  
+         
     @yield('content')
     <footer id="footer" class="footer" role="footer">
         <div class="container">
