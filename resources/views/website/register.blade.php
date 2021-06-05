@@ -36,7 +36,7 @@
                                 @error('fname')
                                     <div class="rederror">{{ $message }}</div>
                                 @enderror
-                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Do not use #?!@$%^&*- and numbers">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid first name">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                             </div>
@@ -46,7 +46,7 @@
                                        placeholder="Last Name *" name="lname" minlength="3" maxlength="50" required
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('lname')}}">
-                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Do not use #?!@$%^&*- and numbers">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid last name">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                                 @error('lname')
@@ -54,11 +54,14 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-2">
+                            <div class="form-group  showind mb-2">
                                 <input type="email" class="form-control @error('email') redborder @enderror"
                                        placeholder="Email Address" name="email" minlength="4" maxlength="50"
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('email')}}" autocomplete="off">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide a valid email address for verification">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                 @error('email')
                                     <div class="rederror">{{ $message }}</div>
                                 @enderror
@@ -69,7 +72,7 @@
                                        placeholder="Password *"  name="password" minlength="8" maxlength="16" required autocomplete="off"
                                        onkeydown="limit(this, 16);" onkeyup="limit(this, 16);">
                                 <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
-                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint :8 to 16 characters which contain numeric digit, alphabet and special character">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                                 @error('password')
@@ -91,7 +94,7 @@
                                        placeholder="Mobile Number *" name="mobile" required
                                        onkeydown="limit(this, 10);" onkeyup="limit(this, 10);"
                                        value="{{Request::old('mobile')}}" pattern="^[0-9]\d{9}$">
-                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Do not use +91 or 0 before number">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Do not use (+91) or (0)">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                                 @error('mobile')
@@ -103,7 +106,10 @@
                                 <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
                                        placeholder="Location *" name="address" required value="{{Request::old('address')}}"
                                        onkeydown="limit(this, 250);" onkeyup="limit(this, 250);">
-                                <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+                                <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                 <input type="hidden" id="ulocationlat" name="lat" value="{{Request::old('lat')}}"
                                        onkeydown="limit(this, 30);" onkeyup="limit(this, 30);">
                                 <input type="hidden" id="ulocationlong" name="long" value="{{Request::old('long')}}"
@@ -119,7 +125,7 @@
                                        placeholder="Aadhaar Number" name="adhaar" required
                                        value="{{Request::old('adhaar')}}"
                                        onkeydown="limit(this, 14);" onkeyup="limit(this, 14);">
-                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Only Numbers Allowed, Minimum 12 Digits">
+                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                                 @error('adhaar')
@@ -158,7 +164,7 @@
                                                        leading-4 font-medium text-gray-700 hover:text-indigo-500 hover:border-indigo-300
                                                        focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50
                                                        active:text-indigo-800 transition duration-150 ease-in-out">
-                                                    Upload Adhaar Pic (Max : 5MB File size)
+                                                       We do not disclose your Aadhar to anyone (Max : 5MB File size)
                                                 </label>
                                             </div>
                                             <div class="flex items-center text-sm text-gray-500 mx-2">

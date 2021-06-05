@@ -51,7 +51,6 @@
                             <form method="POST" action="{{ route('login') }}" class="formContact" data-validate>
                                 @csrf
                                 @if ($errors->any())
-                                    <div class="font-medium text-red-600 rederror hide500">{{ __('Whoops! Something went wrong.') }}</div>
                                     <ul class="mt-1 mb-2 list-disc list-inside text-sm text-red-600 hide500">
                                         @foreach ($errors->all() as $error)
                                             <li class="rederror">{{ $error }}</li>
@@ -69,13 +68,13 @@
                                     </div>
                                 @endif
                                 <h3>Welcome Sandesh </h3>
-                                <p>Lorem ipsum dolor sit amet, labores nostrum eam te.</p>
+                                <p>Please provide your login details to access account.</p>
                                 <div class="form-group showind ">
                                     <input type="text" class="form-control @error('otp') redborder @enderror"
                                         placeholder="Phone or Email address *"  onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                         name="email" required value="{{Request::old('email')}}"
                                         minlength="4" maxlength="50">
-                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Minimum 4 Characters">
+                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide your verified email address or the 10 digit mobile number">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                     </span>
                                     @error('otp')
@@ -87,7 +86,7 @@
                                         onkeydown="limit(this, 16);" onkeyup="limit(this, 16);"
                                         placeholder="Password *"  name="password" minlength="8" maxlength="16" required autocomplete="off">
                                     <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
-                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : 8 to 16 characters which contain numeric digit, alphabet and special character">
+                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please put a valid alphanumeric password with at least one special">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                     </span>
                                     @error('password')

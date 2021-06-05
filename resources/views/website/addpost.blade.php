@@ -65,7 +65,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="First name of deceased person">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="Surname of deceased person">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -113,8 +113,8 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4">
-                        <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" required>
-                            <option value="">Select Relation</option>
+                        <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" required style="border: none; border-bottom: 1px solid #ced4da;">
+                            <option value="">Please choose relation option</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'S/O' ? 'selected' : '' }}
                                 value="S/O">S/O</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'W/O' ? 'selected' : '' }}
@@ -143,7 +143,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="Pelase enter full name of person">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -160,7 +160,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="Please enter details of designation/organisation/business etc with whom the deceased person was associated">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -171,8 +171,10 @@
                             class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
                             onkeyup="limit(this, 250);" placeholder="Location *" name="address" required
                             value="{{isset($post->address) ? $post->address : Request::old('address')}}">
-                        <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow"
-                                aria-hidden="true"></i></span>
+                        <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
+                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </span>
                         <input type="hidden" id="ulocationlat" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
                             name="lat" value="{{isset($post->lat) ? $post->lat : Request::old('lat')}}">
                         <input type="hidden" id="ulocationlong" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
@@ -184,7 +186,6 @@
                     </div>
                 </div>
             </div>
-            <hr>
             <h5> Point Of Contact</h5>
 
             <div class="row" style="margin-top:20px">
@@ -198,7 +199,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="People will use POC details for any further cordinatetion/communication">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -213,7 +214,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
+                            title="People will use POC details for any further cordinatetion/communication">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -228,7 +229,7 @@
                             value="{{isset($post->number) ? $post->number : Request::old('number')}}"
                             pattern="^[0-9]\d{9}$">
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use +91 or 0 before number">
+                            title="People will use POC details for any further cordinatetion/communication, Do not use +91 or 0 before number">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                         @error('number')
@@ -238,14 +239,37 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
-                        <input type="text" class="form-control @error('relation') redborder @enderror"
-                            placeholder="Relation With Deceased *" name="relation" minlength="3" maxlength="50" required
-                            onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
-                            value="{{isset($post->relation) ? $post->relation : Request::old('relation')}}">
-                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Hint : Do not use #?!@$%^&*- and numbers">
-                            <i class="fa fa-info" aria-hidden="true"></i>
-                        </span>
+                        <select name="relation" class="form-control @error('relation') redborder @enderror" required style="border: none; border-bottom: 1px solid #ced4da;">
+                            <option value="">Please choose relation</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Father' ? 'selected' : '' }}
+                                value="Father">Father</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Mother' ? 'selected' : '' }}
+                                value="Mother">Mother</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Brother' ? 'selected' : '' }}
+                                value="Brother">Brother</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Sister' ? 'selected' : '' }}
+                            value="Sister">Sister</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Son' ? 'selected' : '' }}
+                            value="Son">Son</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Daughter' ? 'selected' : '' }}
+                            value="Daughter">Daughter</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Husband' ? 'selected' : '' }}
+                            value="Husband">Husband</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Wife' ? 'selected' : '' }}
+                            value="Wife">Wife</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Grandparent' ? 'selected' : '' }}
+                            value="Grandparent">Grandparent</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Grandchidl' ? 'selected' : '' }}
+                            value="Grandchidl">Grandchidl</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Uncle' ? 'selected' : '' }}
+                            value="Uncle">Uncle</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Aunt' ? 'selected' : '' }}
+                            value="Aunt">Aunt</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Cousin' ? 'selected' : '' }}
+                            value="Cousin">Cousin</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Friend' ? 'selected' : '' }}
+                            value="Friend">Friend</option>
+                        </select>
                         @error('relation')
                         <div class="rederror">{{ $message }}</div>
                         @enderror
@@ -263,6 +287,10 @@
                     value="1">
                     <label class="form-check-label" for="checkgarland">Do You Want to Customise Image With Garland
                         ?</label>
+                    <span class="infoicos" data-toggle="tooltip" data-placement="top"
+                        title="Leave empty to proceed without customization">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </span>
                     @error('flowers')
                     <div class="rederror">{{ $message }}</div>
                     @enderror
@@ -274,8 +302,8 @@
                 <div class="form-group mb-4">
                     <select name="flower_type" id="flowerTypeSelect"
                         class="form-control @error('flower_type') redborder @enderror" @if(isset($post->flowers) &&
-                        $post->flowers == 1 || Request::old('flowers')) required @endif>
-                        <option value="">Select Garland</option>
+                        $post->flowers == 1 || Request::old('flowers')) required @endif  style="border: none; border-bottom: 1px solid #ced4da;">
+                        <option value="">Select anyone Garland</option>
                         <option
                             {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'y' ? 'selected' : '' }}
                             value="y">Yellow Garland</option>
@@ -305,7 +333,7 @@
                     <div class="rederror">{{ $message }}</div>
                     @enderror
                     <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                        title="Hint : Do not use #?!@$%^&*- and numbers">
+                        title="Please enter a custom message or choose from available templates.">
                         <i class="fa fa-info" aria-hidden="true"></i>
                     </span>
                 </div>
@@ -358,7 +386,7 @@
                                                        leading-4 font-medium text-gray-700 hover:text-indigo-500 hover:border-indigo-300
                                                        focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50
                                                        active:text-indigo-800 transition duration-150 ease-in-out">
-                                            Upload Death Certificate/Doctor's Note (Max : 5MB File size)
+                                                       Please upload a Death Certificate/Doctor's Note in JPG;JPEG;PNG format [Max-size: 5MB]
                                         </label>
                                     </div>
                                     <div class="flex items-center text-sm text-gray-500 mx-2">
@@ -415,7 +443,7 @@
                                                        leading-4 font-medium text-gray-700 hover:text-indigo-500 hover:border-indigo-300
                                                        focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50
                                                        active:text-indigo-800 transition duration-150 ease-in-out">
-                                            Upload Photo (Max : 5MB File size) (Recommended : 6:8 Height:Width)
+                                                       Please upload an image in JPG;JPEG;PNG format [Max-size: 5MB]
                                         </label>
                                     </div>
                                     <div class="flex items-center text-sm text-gray-500 mx-2">
