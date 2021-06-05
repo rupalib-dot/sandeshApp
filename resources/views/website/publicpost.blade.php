@@ -39,8 +39,7 @@
                             <input id="searchTextField filter" style="width: 104%;padding: 22px;margin-top: .5px;" type="text" class="form-control @error('address') redborder @enderror"
                                     onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
                                     placeholder="Location *" name="address" value="{{old('address',$request->address)}}" >
-                            <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow" aria-hidden="true"></i></span> 
-                            <div id="map" style="height:600px;display:none;"> </div> 
+                            <span class="infoicos" onclick="autoDetectPickup()"></span>  
                         </div> 
                     </div> 
                     <div class="col-md-2 col-sm-2 col-12 pr-0">
@@ -51,7 +50,7 @@
                     </div>
                     <div class="col-md-3 col-sm-2 col-12 pl-0"> 
                         <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button> 
-                        <a href="{{route('showpublicpost')}}"><button style="margin-top:0px" class="signUp1 btn createpost btn">Clear Filter</button></a>
+                        <a href="{{url('/posts')}}"><button style="margin-top:0px" type="button" class="signUp1 btn createpost btn">Clear Filter</button></a>
                     </div>
                 </div> 
             </form>
@@ -128,7 +127,7 @@
                     this.previewPhoto = originalUrl;
                     this.fileName = false;
                 }
-            };
+            }
         }
 
         function autoDetectPickup(){
@@ -149,7 +148,7 @@
                         map: map,
                         position: myLatlng,
                         draggable: true,
-                        icon:'{{ asset('website/images/marker.png') }}'
+                        icon:'{{asset("website/images/marker.png")}}'
                     });
 
                     geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
@@ -229,9 +228,7 @@
                         (place.address_components[2] && place.address_components[2].short_name || '')
                     ].join(' ');
 
-                }
-                ;
-
+                } 
                 var lat= place.geometry.location.lat();
                 var lng= place.geometry.location.lng();
                 $('#ulocationlat').val(lat);

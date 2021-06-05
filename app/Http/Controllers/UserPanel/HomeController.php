@@ -222,7 +222,7 @@ class HomeController extends Controller
     }
 
     public function viewaddmypost() {
-        $templates = Template::where('deleted_at',NULL)->where('block_status',config('constant.STATUS.UNBLOCK'))->get();
+        $templates = Template::where('block_status',config('constant.STATUS.UNBLOCK'))->get();
 
         return view('website.addpost',compact('templates'));
     }
@@ -342,7 +342,7 @@ class HomeController extends Controller
         $publicpost = Post::where('approval_status', 410)
         ->Where(function($query) use ($request) {
             if (isset($request['address']) && !empty($request['address'])) { 
-                $query->where('address','LIKE','%{$request["address"]}%');
+                $query->where('address','LIKE', "%".$request["address"]."%");
             }  
             if (isset($request['date']) && !empty($request['date'])) { 
                 $query->whereDate('created_at',$request['date']);

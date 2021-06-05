@@ -2,7 +2,7 @@
 <div class="row page-title-header">
     <div class="col-12">
         <div class="page-header">
-            <h4 class="page-title">SubAdmin</h4>
+            <h4 class="page-title">Manage SubAdmin</h4>
         </div>
     </div>
 </div>

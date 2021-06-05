@@ -2,7 +2,7 @@
 <div class="row page-title-header">
     <div class="col-12">
         <div class="page-header">
-            <h4 class="page-title">View User</h4>
+            <h4 class="page-title">Post Details</h4>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
                             <tbody>
                                 <tr>
                                     <td>Person Name</td>
-                                    <td class="text-right">  {{ $post->person_name }}</td>
+                                    <td class="text-right">  {{ $post->person_name .' '. $post->surname }}</td>
                                 </tr>
                                 <tr>
                                     <td>Age</td>
@@ -59,11 +59,11 @@
                             <tbody>
                             <tr>
                                 <td>Death Certificate</td>
-                                <td class="text-right">  <a href="{{ asset('storage/uploads/'.$post->death_certificate) }}"> Download </a> </td>
+                                <td class="text-right">  <a target="_blank" href="{{ asset('storage/uploads/'.$post->death_certificate) }}"> Download </a> </td>
                             </tr>
                             <tr>
                                 <td>Person Pic</td>
-                                <td class="text-right"> <a href="{{ asset('storage/uploads/'.$post->person_pic) }}"> Download </a> </td>
+                                <td class="text-right"> <a target="_blank" href="{{ asset('storage/uploads/'.$post->person_pic) }}"> Download </a> </td>
                             </tr>
                             <tr>
                                 <td>Garland Flowers on Pic</td>
@@ -71,7 +71,7 @@
                             </tr>
                             <tr>
                                 <td>Point Of Contact</td>
-                                <td class="text-right"> {{ $post->pocontact }} </td>
+                                <td class="text-right"> {{ $post->pocontact .' '. $post->lname}} </td>
                             </tr>
                             <tr>
                                 <td> Institute </td>
