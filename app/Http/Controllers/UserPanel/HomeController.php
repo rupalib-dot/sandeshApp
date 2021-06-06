@@ -40,8 +40,8 @@ class HomeController extends Controller
 
         $request['adhaar'] = str_replace(' ', '', $request->adhaar);
         $requiredvalidation = [
-            'fname'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u",
-            'lname'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u",
+            'fname'         => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+            'lname'         => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'password'		=> 'required|min:8|max:16|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'mobile'        => 'required|numeric|digits_between:8,11|unique:users,mobile',
             'adhaar_file'   => 'required|nullable|mimes:jpg,png,pdf|max:5120',

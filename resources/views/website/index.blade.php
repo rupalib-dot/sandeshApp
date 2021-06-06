@@ -147,6 +147,8 @@
                                                               title="Hint :Do not use +91 or 0 before number">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
                                                         </span>
+                                                        <div class="rederror" style="margin-bottom:10px;"> Please enter 10 digit mobile number without using (+91) or (0) </div>
+
                                                         @error('mobile')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
@@ -164,6 +166,7 @@
                 </div>
             </div>
     <script>
+     
         (function ($) { 
             $('#showforgotpasswordmodal').on('click', function(){ 
                 $('#forgotpasswordmodal').modal({backdrop: 'static', keyboard: false});
