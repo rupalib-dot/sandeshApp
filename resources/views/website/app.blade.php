@@ -202,7 +202,7 @@
                                                         @enderror
                                                     </div>
 
-                                                    <div class="form-group mb-2">
+                                                    <div class="form-group showind mb-2">
                                                         <input type="email" class="form-control @error('email') redborder @enderror"
                                                                onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required
                                                                placeholder="Email Address" name="email" minlength="4" maxlength="50"
