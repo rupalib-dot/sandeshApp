@@ -119,7 +119,7 @@ class HomeController extends Controller
             return redirect()->route('sitehome')->with('Success', 'User Registered Successfully');
         }
 
-        return redirect()->back()->with('FailedModal', 'Wrong OTP Entered ');
+        return redirect()->back()->with('FailedModal', 'OTP is no longer valid');
     }
 
     public function resetuserform(Request $request) {
@@ -553,7 +553,7 @@ class HomeController extends Controller
             return redirect()->back()->with('Success', 'User password reset Successfully');
         }
 
-        return redirect()->back()->with('FailedModal', 'Wrong OTP Entered ');
+        return redirect()->back()->with('FailedModal', 'OTP is no longer valid');
     }
 
     public function contactsubmit(Request $request) { 

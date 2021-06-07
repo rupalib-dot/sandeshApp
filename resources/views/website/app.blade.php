@@ -184,9 +184,9 @@
                                                         @error('fname')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
-                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Do not use #?!@$%^&*- and numbers">
-                                                            <i class="fa fa-info" aria-hidden="true"></i>
-                                                        </span>
+                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid first name">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                                     </div>
 
                                                     <div class="form-group showind mb-2">
@@ -194,9 +194,9 @@
                                                                onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                                                placeholder="Last Name *" name="lname" minlength="4" maxlength="50" required
                                                                value="{{ empty(Request::old('lname')) ? Auth::user()->lname : Request::old('lname') }}">
-                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Do not use #?!@$%^&*- and numbers">
-                                                            <i class="fa fa-info" aria-hidden="true"></i>
-                                                        </span>
+                                                               <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid last name">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </span>
                                                         @error('lname')
                                                         <div class="rederror">{{ $message }}</div>
                                                         @enderror
@@ -207,6 +207,9 @@
                                                                onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required
                                                                placeholder="Email Address" name="email" minlength="4" maxlength="50"
                                                                value="{{ empty(Request::old('email')) ? Auth::user()->email : Request::old('email') }}" autocomplete="off">
+                                                               <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide a valid email address for verification">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                                         @error('email')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
@@ -244,6 +247,9 @@
                                                         <span class="infoicos" onclick="autoDetectPickup()">
                                                             <i class="fa fa-location-arrow"  aria-hidden="true"></i>
                                                         </span>
+                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                                         <input type="hidden" id="ulocationlat" name="lat"
                                                                onkeydown="limit(this, 30);" onkeyup="limit(this, 30);"
                                                                value="{{ empty(Request::old('lat')) ? Auth::user()->lat : Request::old('lat') }}">
@@ -262,10 +268,9 @@
                                                                onkeydown="limit(this, 14);" onkeyup="limit(this, 14);"
                                                                value="{{ empty(Request::old('adhaar')) ? Auth::user()->adhaar : Request::old('adhaar') }}"
                                                                 >
-                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                                                              title="Hint : Only Numbers Allowed, Minimum 12 Digits">
-                                                            <i class="fa fa-info" aria-hidden="true"></i>
-                                                        </span>
+                                                        <<span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>
                                                         @error('adhaar')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
