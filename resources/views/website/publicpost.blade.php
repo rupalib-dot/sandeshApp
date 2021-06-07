@@ -48,7 +48,7 @@
                                     placeholder="Date *" name="date" value="{{old('date',$request->date)}}" > 
                         </div> 
                     </div>
-                    <div class="col-md-3 col-sm-2 col-12 pl-0"> 
+                    <div class="col-md-3 col-sm-2 col-12"> 
                         <button style="margin-top:0px" type="submit" class="signUp1 btn createpost btn">Filter</button> 
                         <a href="{{url('/posts')}}"><button style="margin-top:0px" type="button" class="signUp1 btn createpost btn">Clear Filter</button></a>
                     </div>

@@ -47,6 +47,16 @@
                                 <strong>Success ! </strong> {{Session::get('SuccessNew')}}
                             </div>
                         @endif
+                        @if(Session::has('SuccessContct'))
+                            <div class="alert alert-success hide500">
+                                <strong>Success ! </strong> {{Session::get('SuccessContct')}}
+                            </div>
+                        @endif
+                        @if(Session::has('FailedContct'))
+                            <div class="alert alert-danger hide500">
+                                <strong>Failed ! </strong> {{Session::get('FailedContct')}}
+                            </div>
+                        @endif
                         @if (!Auth::check())
                             <form method="POST" action="{{ route('login') }}" class="formContact" data-validate>
                                 @csrf
