@@ -154,10 +154,9 @@
                                                                value="{{ old('mobile') }}"
                                                                pattern="^[0-9]\d{9}$">
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                                                              title="Hint :Do not use +91 or 0 before number">
+                                                              title="Please enter 10 digit mobile number without using (+91) or (0)">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
-                                                        </span>
-                                                        <div class="rederror" style="margin-bottom:10px;"> Please enter 10 digit mobile number without using (+91) or (0) </div>
+                                                        </span> 
 
                                                         @error('mobile')
                                                             <div class="rederror">{{ $message }}</div>
@@ -279,7 +278,7 @@
                         <p>Sandesh is an interactive online solution that allows users to put obituaries. Contrary to the existing trend of setting status & posting a story, Sandesh serves as a dedicated platform and an appropriate channel to connect and condole. </p>
                         
                         <p>Following the approval and due validation of an obituary; Sandesh ensures that the concerned people are informed of the loss. Sandesh allows people to join in sorrow and provide strength to the grieving souls through their personalized texts and tributes.</p>
-                        <hr>
+                        
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -185,8 +185,8 @@
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid first name">
-                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                </span>
+                                                            <i class="fa fa-info" aria-hidden="true"></i>
+                                                        </span>
                                                     </div>
 
                                                     <div class="form-group showind mb-2">
@@ -208,8 +208,8 @@
                                                                placeholder="Email Address" name="email" minlength="4" maxlength="50"
                                                                value="{{ empty(Request::old('email')) ? Auth::user()->email : Request::old('email') }}" autocomplete="off">
                                                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide a valid email address for verification">
-                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                </span>
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </span>
                                                         @error('email')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
@@ -230,10 +230,10 @@
                                                                onkeydown="limit(this, 10);" onkeyup="limit(this, 10);"
                                                                value="{{ empty(Request::old('mobile')) ? Auth::user()->mobile : Request::old('mobile') }}"
                                                                pattern="^[0-9]\d{9}$">
-                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
+                                                        <!-- <span class="infoicos" data-toggle="tooltip" data-placement="top"
                                                               title="Hint : Do not use +91 or 0 before number">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
-                                                        </span>
+                                                        </span> -->
                                                         @error('mobile')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
@@ -244,12 +244,10 @@
                                                                placeholder="Location" name="address" required
                                                                onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
                                                                value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}" >
-                                                        <span class="infoicos" onclick="autoDetectPickup()">
-                                                            <i class="fa fa-location-arrow"  aria-hidden="true"></i>
-                                                        </span>
-                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
-                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                </span>
+                                                               <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
+                                                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </span>
                                                         <input type="hidden" id="ulocationlat" name="lat"
                                                                onkeydown="limit(this, 30);" onkeyup="limit(this, 30);"
                                                                value="{{ empty(Request::old('lat')) ? Auth::user()->lat : Request::old('lat') }}">
@@ -266,9 +264,8 @@
                                                         <input type="text" class="form-control adharinput @error('adhaar') redborder @enderror"
                                                                placeholder="Aadhaar Number" name="adhaar" required disabled
                                                                onkeydown="limit(this, 14);" onkeyup="limit(this, 14);"
-                                                               value="{{ empty(Request::old('adhaar')) ? Auth::user()->adhaar : Request::old('adhaar') }}"
-                                                                >
-                                                        <<span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
+                                                               value="{{ empty(Request::old('adhaar')) ? Auth::user()->adhaar : Request::old('adhaar') }}" >
+                                                        <span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
                                                         @error('adhaar')
@@ -320,7 +317,7 @@
                                                                minlength="8" maxlength="16" required autocomplete="off">
                                                         <i toggle="#password-field1" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                                                              title="Hint : 8 to 16 characters which contain numeric digit, alphabet and special character">
+                                                              title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
                                                         </span>
                                                         @error('current_password')
@@ -336,7 +333,7 @@
                                                                minlength="8" maxlength="16" required autocomplete="off">
                                                         <i toggle="#password-field2" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                                                              title="Hint : 8 to 16 characters which contain numeric digit, alphabet and special character">
+                                                              title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
                                                         </span>
                                                         <!-- <div class="indicator">
@@ -357,7 +354,7 @@
                                                                minlength="8" maxlength="16" required autocomplete="off">
                                                         <i toggle="#password-field3" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                                                              title="Hint : 8 to 16 characters which contain numeric digit, alphabet and special character">
+                                                              title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                                             <i class="fa fa-info" aria-hidden="true"></i>
                                                         </span>
                                                         @error('password_confirmation')
