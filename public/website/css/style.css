@@ -1006,7 +1006,9 @@ form .text.strong{
 .h-12 {
     height: 100px;
 }
-
-
-
  
+.welcome-p{
+    background-color: #0da700;
+    padding: 20px; 
+    border-radius: 20px;
+}

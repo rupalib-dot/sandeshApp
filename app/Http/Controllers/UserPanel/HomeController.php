@@ -582,17 +582,24 @@ class HomeController extends Controller
                 ->withInput();
         }
 
-        $inquiry = ContactInqiry::create([
+        //mail to new subadmin
+        $details = array(
             'name'         => $request->name,
             'mobile' 		=> $request->usermobile,
             'email' 		=> $request->useremail, 
             'message'           => $request->message,
             'rating'          => $request->rating,
-        ]); 
+        );   
+
+        $inquiry = ContactInqiry::create($details); 
+
+         
+        \Mail::to('rupalib.i4consulting@gmail.com')->send(new \App\Mail\FeedbackMail($details));
+
         // 'openpasswordmodal' => 'true'
         if(!empty($inquiry)){
                 return redirect()->back()
-                    ->with(['SuccessContct'=> ' Inquiry sent successfully',]);
+                    ->with(['SuccessContct'=> 'Feedback submitted successfully',]);
         }else{
             return redirect()->back()
                     ->with(['FailedContct'=> 'Something went wrong',]);

@@ -31,18 +31,22 @@
                         <a class="nav-item nav-link {{Request::is('/') ? 'active' : '' }}" href="{{ route('sitehome') }}">Home</a>
                     </li>
                     <li class="nav-item {{Request::is('/#aboutUs') ? 'active' : '' }}">
-                        <a class="nav-item nav-link {{Request::is('/#aboutUs') ? 'active' : '' }}" href="{{ route('sitehome') }}#aboutUs">About</a>
+                        <a class="nav-item nav-link {{Request::is('/#aboutUs') ? 'active' : '' }}" href="{{ route('sitehome') }}#aboutUs">About Us</a>
                     </li>
                     <li class="nav-item {{Request::is('/#questionPage') ? 'active' : '' }}">
-                        <a class="nav-item nav-link {{Request::is('/#questionPage') ? 'active' : '' }}" href="{{ route('sitehome') }}#questionPage">Faq</a>
+                        <a class="nav-item nav-link {{Request::is('/#questionPage') ? 'active' : '' }}" href="{{ route('sitehome') }}#questionPage">FAQs</a>
                     </li>
                     <li class="nav-item {{Request::is('/#contactFeedback') ? 'active' : '' }}">
                         <a class="nav-item nav-link {{Request::is('/#contactFeedback') ? 'active' : '' }}" href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
                     </li>
                     <li class="nav-item {{Request::is('posts') ? 'active' : '' }}">
-                        <a class="nav-item nav-link {{Request::is('posts') ? 'active' : '' }}" href="{{ route('showpublicpost') }}">Posts</a>
+                        <a class="nav-item nav-link {{Request::is('posts') ? 'active' : '' }}" href="{{ route('showpublicpost') }}">Obituaries</a>
                     </li>
-
+                    @if (!Auth::check())
+                        <li class="nav-item {{Request::is('/') ? 'active' : '' }}">
+                            <a class="nav-item nav-link {{Request::is('/') ? 'active' : '' }}" href="{{ route('sitehome') }}">Login</a>
+                        </li>
+                    @endif
                     @auth
                         @php
                           $roles = Auth::check() ? Auth::user()->userRole->pluck('name')->toArray() : [];
@@ -79,6 +83,7 @@
                             </li>
                         @endif
                     @endauth
+                    
                 </ul>
             </div>
         </div>
@@ -99,16 +104,16 @@
                                 <a href="{{ route('sitehome') }}">Home</a>
                             </li>
                             <li>
-                                <a href="{{ route('sitehome') }}#aboutUs">About</a>
+                                <a href="{{ route('sitehome') }}#aboutUs">About Us</a>
                             </li>
                             <li>
-                                <a href="{{ route('sitehome') }}#questionPage">Faq</a>
+                                <a href="{{ route('sitehome') }}#questionPage">FAQs</a>
                             </li>
                             <li >
                                 <a href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
                             </li>
                             <li >
-                                <a href="{{ route('showpublicpost') }}">Posts</a>
+                                <a href="{{ route('showpublicpost') }}">Obituaries</a>
                             </li>
                         </ul>
                     </div>
@@ -128,7 +133,7 @@
                                 21st A Main Rd Vanganahalli; Banglore; Karnataka; India
                                 </li>
                                 <li><span class="footerContact"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <a class="phoneControl" href="mailto: connect@hmaresandesh.com">connect@hmaresandesh.com</a>
+                                    <a class="phoneControl" href="mailto: connect@hamaresandesh.com">connect@hamaresandesh.com</a>
 
                                 </li>
                             </ul>
@@ -144,7 +149,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script> -->
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 
     @auth

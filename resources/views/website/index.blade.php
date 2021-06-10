@@ -95,8 +95,8 @@
                                     <input id="password-field" type="password" class="form-control pr30px @error('password') redborder @enderror"
                                         onkeydown="limit(this, 16);" onkeyup="limit(this, 16);"
                                         placeholder="Password *"  name="password" minlength="8" maxlength="16" required autocomplete="off">
-                                    <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
-                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please put a valid alphanumeric password with at least one special">
+                                        <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
+                                    <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                     </span>
                                     @error('password')
@@ -116,7 +116,7 @@
                         @endif 
                     </div>
                 @else
-                    <div style="margin:auto"><h3 class="welcome-msg"> Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} To Sandesh</h3></div>
+                    <div style="margin:auto"><h3 class="welcome-msg"> <p  class="welcome-p">Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} To Sandesh</p></h3></div>
                 @endif
             </div>
         </div>
@@ -264,7 +264,7 @@
             })(jQuery);
         </script>
     @endif
-    <section id="aboutUs" class="aboutus" role="about">
+    <section id="aboutUs" class="aboutus" role="about" style="padding-bottom:0px">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -281,7 +281,7 @@
                         
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="max-width: 47.5%;">
                     <div class="aboutImage">
                         <img src="{{ asset('website/images/img1.png') }}" class="img-fluid" alt="">
                     </div>
@@ -294,9 +294,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="questionPara">
-                        <h2 class="customHeading">FAQ</h2>
-                        <p>Lorem ipsum dolor sit amet, labores nostrum eam te. Mel tantas alienum pertinacia id.Lorem ipsum
-                            dolor sit amet, labores nostrum eam te. Mel tantas </p>
+                        <h2 class="customHeading">FAQs</h2> 
                     </div>
 
 
@@ -566,5 +564,5 @@
             </div>
         </div>
     </section>
-    <script src="{{ asset('website/js/main.js') }}"></script>
+    <!-- <script src="{{ asset('website/js/main.js') }}"></script> -->
 @endsection
