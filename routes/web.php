@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth', 'preventBackHistory', 'userCheck']], func
     Route::get('addpost', [HomeController::class, 'viewaddmypost'])->name('addmypost');
     Route::post('addpost', [HomeController::class, 'addmypost'])->name('addmypost');
     Route::get('mypost', [HomeController::class, 'showmypost'])->name('showmypost');
+    Route::get('changePostStatus/{id}', [HomeController::class, 'changePostStatus'])->name('changePostStatus');    
     Route::get('mydraft', [HomeController::class, 'showmypost'])->name('showmydraft');
     Route::post('mypostdelete', [HomeController::class, 'mypostdelete'])->name('mypostdelete');
     Route::get('editpost/{post}', [HomeController::class, 'editmypost'])->name('editmypost');

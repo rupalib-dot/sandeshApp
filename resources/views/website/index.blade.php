@@ -231,10 +231,9 @@
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <p>Still not received OTP? </p>
-                                                        <p>
-                                                            <a href="#"class="byCall"
+                                                    <div style="text-align: right;">
+                                                        <p>Still not received OTP?  
+                                                            <a href="#"class="byCall" style=" margin-left: 8px;"
                                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
                                                                 Resend OTP
                                                             </a>

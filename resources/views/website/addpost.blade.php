@@ -159,8 +159,8 @@
                         @error('institute')
                         <div class="rederror">{{ $message }}</div>
                         @enderror
-                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Please enter details of designation/organisation/business etc with whom the deceased person was associated">
+                        <span style="word-break: break-word;" class="infoicos" data-toggle="tooltip" data-placement="top"
+                            title="Please enter details of designation/ organisation/ business etc with whom the deceased person was associated">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -199,7 +199,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="People will use POC details for any further cordinatetion/communication">
+                            title="People will use POC details for any further cordination/ communication">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -259,8 +259,8 @@
                             value="Wife">Wife</option>
                             <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Grandparent' ? 'selected' : '' }}
                             value="Grandparent">Grandparent</option>
-                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Grandchidl' ? 'selected' : '' }}
-                            value="Grandchidl">Grandchidl</option>
+                            <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Grandchild' ? 'selected' : '' }}
+                            value="Grandchild">Grandchild</option>
                             <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Uncle' ? 'selected' : '' }}
                             value="Uncle">Uncle</option>
                             <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Aunt' ? 'selected' : '' }}
@@ -472,7 +472,7 @@
                     <input value="{{isset($post->is_draft) ? $post->is_draft : Request::old('is_draft')}}" id="is_draft"
                         name="is_draft" type="hidden">
                     <button type="submit" class="signUp1 btn createpost btn postadd"
-                        style="margin-right: 10px;">{{isset($post->id) ? 'Update' : 'Create'}} Post</button>
+                        style="margin-right: 10px;">Submit Post</button>
                     <button type="submit" class="signUp1 btn draft createpost btn">Save To Draft</button>
                 </div>
             </div>

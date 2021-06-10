@@ -334,8 +334,17 @@ class HomeController extends Controller
         if($current_url == 'mydraft'){
             $draft = 1;
         }
-        $myposts = Post::where('user_id', Auth::user()->id)->where('is_draft',$draft)->latest()->paginate(10);
-        return view('website.mypost', compact('myposts','current_url'));
+        $myposts = Post::where('user_id', Auth::user()->id)->where('is_draft',$draft)
+        ->Where(function($query) use ($request) {
+            if (isset($request['address']) && !empty($request['address'])) { 
+                $query->where('address','LIKE', "%".$request["address"]."%");
+            }  
+            if (isset($request['date']) && !empty($request['date'])) { 
+                $query->whereDate('created_at',$request['date']);
+                $query->orWhere('date_of_death',$request['date']);
+            }  
+        })->latest()->paginate(10);
+        return view('website.mypost', compact('myposts','current_url','request'));
     }
 
     public function showpublicpost(Request $request) {
@@ -350,6 +359,15 @@ class HomeController extends Controller
             }  
         })->where('is_draft',0)->latest()->paginate(10);
         return view('website.publicpost', compact('publicpost','request'));
+    }
+
+    public function changePostStatus (Request $request, $id) {
+     
+        Post::where('id',$id)->update([  
+            'is_draft'             => 0,
+            'approval_status'      => config('constant.APPROVAL_STATUS.UNKNOWN'),
+        ]);  
+        return redirect()->route('showmypost')->with('Success', 'Post Updated Successfully');  
     }
 
     public function mypostdelete( Request $request) {
@@ -478,6 +496,7 @@ class HomeController extends Controller
                 'swdperson'            => $request->swdperson,
                 'death_certificate'    => $death_certificate,
                 'person_pic'           => $person_pic,
+                'approval_status'      => config('constant.APPROVAL_STATUS.UNKNOWN'),
                 'flowers'              => $flowers,
                 'template_id'          => $request->template_id,
                 'flower_type'          => $flower_type,
@@ -548,9 +567,19 @@ class HomeController extends Controller
             //     'updated_at'    => date('Y-m-d H:i:s'), 
             // ]);  
 
+            $userData = User::where('mobile',$userarray)->first();  
+             //mail to new subadmin
+            $details = array(
+                'name'         => $userData->fname.' '.$userData->lname,
+                'mobile' 		=> $userData->mobile,
+                'email' 		=> $userData->email,  
+                'msg'           => 'Your new reset password is : '.$userpassword,
+                'password'      => $userpassword,
+            );   
+            \Mail::to($userData['email'])->send(new \App\Mail\ForgotPasswordMail($details));
+            
             Session::forget(['tempnumber', 'tempotp', 'showforgotOtpModal','FailedForgotpassword','forgotpasswordmodal']);
-
-            return redirect()->back()->with('Success', 'User password reset Successfully');
+            return redirect()->back()->with('Success', 'Your new password has been sent on your email address or mobile number');
         }
 
         return redirect()->back()->with('FailedModal', 'OTP is no longer valid');
