@@ -27,6 +27,9 @@ class HomeController extends Controller
         return view('website.register');
     }
     public function registeruserform(Request $request) { 
+        $then =  strtotime(date('Y-m-d',strtotime($request['dob']))); 
+        $min = date('d-m-Y',strtotime('-19 years', $then)); 
+
         $niceNames = array(
             'fname'         => "First Name",
             'lname'         => "Surname",
@@ -35,6 +38,7 @@ class HomeController extends Controller
             'mobile'        => "Mobile Number",
             'adhaar_file'   => "Adhaar File",
             'adhaar'        => "Adhaar",
+            'address'       => "Address",
             'dob'           => "Date of Birth",
         );
 
@@ -46,7 +50,7 @@ class HomeController extends Controller
             'mobile'        => 'required|numeric|digits_between:8,11|unique:users,mobile',
             'adhaar_file'   => 'required|nullable|mimes:jpg,png,pdf|max:5120',
             'adhaar'        => 'required|numeric|digits:12|regex:/[0-9]{12}/',
-            'dob'           => 'required|before:' . now()->toDateString(),
+            'dob'           => 'required|before:'.$min,
             'address'       => "required|min:4|max:250",
         ];
 
@@ -55,8 +59,28 @@ class HomeController extends Controller
         }
 
         $validationmessages = array(
-            'adhaar_file.max' => 'The Adhaar File should not be greater than 5 MB'
+            'adhaar_file.max' => 'File size cannot exceed 5MB',
+            'adhaar.digits' => 'Please enter a valid 12 digit aadhar number.',
+            'fname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['fname']).' characters',
+            'fname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['fname']).' characters',
+            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['lname']).' characters',
+            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['lname']).' characters',
+            'password.min' => 'Please enter atleast 8 characters or more. You are currently using '.strlen($request['password']).' characters',
+            'password.max' => 'Please enter less than or equal to 16 characters . You are currently using '.strlen($request['password']).' characters',
+            'password.regex' => 'The entered password does not meet the requirement of being alphanumeric with at least one special character and length of 8-16 characters',
+            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+            'dob.before' => 'Date of birth must be before '.$min,
+            'mobile.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
         );
+
+        if($request->email) {
+            $validationmessages += array( 
+                'email.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['email']).' characters',
+                'email.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['email']).' characters',   
+                'email.regex' => 'Please enter a valid email address example name@example.com',
+            );
+        }
 
         $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
 
@@ -86,7 +110,7 @@ class HomeController extends Controller
 
             return redirect()->back();
         }else{
-            return redirect()->back()->withInput($request->all())->with('Failed', 'Please select proper address from suggestion list or pick current location');
+            return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
         }
     }
 
@@ -139,26 +163,45 @@ class HomeController extends Controller
     }
 
     public function myprofileUpdate(Request $request) {
+
         $niceNames = array(
             'fname'         => "First Name",
             'lname'         => "Surname",
             'email' 		=> "Email address",
-            // 'dob'           => "Date of Birth",
             'address'       => "Address",
         );
+
         $request['adhaar'] = str_replace(' ', '', $request->adhaar);
         $requiredvalidation = [
-            'fname'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u",
-            'lname'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u", 
-            // 'dob'           => 'required|before:' . now()->toDateString(),
+            'fname'         => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+            'lname'         => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
             'address'       => "required|min:4|max:250",
         ];
+         
 
-        if($request->email != Auth::user()->email) {
+        if($request->email) {
             $requiredvalidation += array('email' => 'required|unique:users,email|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^');
         }
 
-        $validatedData = Validator::make($request->all(), $requiredvalidation)->setAttributeNames($niceNames);
+        $validationmessages = array(
+            'fname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['fname']).' characters',
+            'fname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['fname']).' characters',
+            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['lname']).' characters',
+            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['lname']).' characters',
+            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+        );
+
+        if($request->email) {
+            $validationmessages += array( 
+                'email.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['email']).' characters',
+                'email.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['email']).' characters',   
+                'email.regex' => 'Please enter a valid email address example name@example.com',
+            );
+        }
+
+        $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
+ 
         if ($validatedData->fails()) {
             return redirect()->back()
                 ->withErrors($validatedData)
@@ -185,7 +228,7 @@ class HomeController extends Controller
                         ->with(['Failedprofile'=> 'No changes found in profile',]);
             }
         }else{
-            return redirect()->back()->with(['FailedError'=> 'Please select proper address from suggestion list or pick current location','openprofilemodal' => 'true']);
+            return redirect()->back()->with(['FailedError'=> 'Select valid/available locations from dropdown or allow GPS to fetch your location','openprofilemodal' => 'true']);
         }
     }
 
@@ -200,11 +243,20 @@ class HomeController extends Controller
             'current_password'      => 'required|min:8|max:16|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password'              => 'required|confirmed|min:8|max:16|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password_confirmation'	        => 'required|required_with:password|same:password',
+        ],[
+            'current_password.min' => 'Please enter atleast 8 characters or more. You are currently using '.strlen($request['password']).' characters',
+            'current_password.max' => 'Please enter less than or equal to 16 characters . You are currently using '.strlen($request['password']).' characters',
+            'current_password.regex' => 'The entered password does not meet the requirement of being alphanumeric with at least one special character and length of 8-16 characters',
+            'password.min' => 'Please enter atleast 8 characters or more. You are currently using '.strlen($request['password']).' characters',
+            'password.max' => 'Please enter less than or equal to 16 characters . You are currently using '.strlen($request['password']).' characters',
+            'password.regex' => 'The entered password does not meet the requirement of being alphanumeric with at least one special character and length of 8-16 characters', 
         ])->after(function ($validator) use ($user, $request) {
             if (! isset($request->current_password) || ! Hash::check($request->current_password, $user->password)) {
                 $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
             }
         });
+
+
 
         if ($validatedData->fails()) {
             return redirect()->back()
@@ -249,24 +301,42 @@ class HomeController extends Controller
         $requiredvalidation = [
             'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'relation'              => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+            'relation'              => "required",
             'description'           => "required|min:20|max:250",
             'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
-            'number'                => 'required|numeric|digits_between:8,11|unique:users,mobile',
+            'number'                => 'required|numeric|digits_between:8,11',
             'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
             'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
             'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
             'person_pic'            => 'required|mimes:jpg,png|max:5120',
-            'swd'                   => "required|min:1|max:10", 
+            'swd'                   => "required", 
             'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         $validationmessages = array(
-            'death_certificate.max' => 'The Death Certificate should not be greater than 5 MB',
-            'person_pic.max'        => 'The Person Photo should not be greater than 5 MB'
+            'death_certificate.max' => 'File size cannot excced 5MB',
+            'person_pic.max'        => 'File size cannot excced 5MB',
+            'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+            'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+            'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+            'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
+            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+            'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+            'age.date_format' => 'Please enter date in yyyy-mm-dd format',
+            'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
+            'swd.required' =>'Select one', 
+            'relation.required' =>'Select one',
+            'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
+            'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
+            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+            
         );
 
         // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
@@ -324,7 +394,7 @@ class HomeController extends Controller
                 return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
             }
         }else{
-            return redirect()->back()->withInput($request->all())->with('Failed', 'Please select proper address from suggestion list or pick current location');
+            return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
         }
     }
 
@@ -414,17 +484,17 @@ class HomeController extends Controller
         $requiredvalidation = [
             'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'relation'              => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+            'relation'              => "required",
             'description'           => "required|min:20|max:250",
             'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
-            'number'                => 'required|numeric|digits_between:8,11|unique:users,mobile',
-            'age'                   => 'date_format:Y-m-d|required|before:date_of_death',
-            'date_of_death'         => 'date_format:Y-m-d|required|before:' . Carbon::tomorrow()->toDateString(),
+            'number'                => 'required|numeric|digits_between:8,11',
+            'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
+            'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
             'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
-            'swd'                   => "required|min:1|max:10", 
+            'swd'                   => "required", 
             'swdperson'                   => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
@@ -433,8 +503,26 @@ class HomeController extends Controller
         // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
 
         $validationmessages = array(
-            'death_certificate.max' => 'The Death Certificate should not be greater than 5 MB',
-            'person_pic.max'        => 'The Person Photo should not be greater than 5 MB'
+            'death_certificate.max' => 'File size cannot excced 5MB',
+            'person_pic.max'        => 'File size cannot excced 5MB',
+            'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+            'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+            'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+            'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
+            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+            'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+            'age.date_format' => 'Please enter date in yyyy-mm-dd format',
+            'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
+            'swd.required' =>'Select one', 
+            'relation.required' =>'Select one',
+            'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
+            'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
+            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+            
         );
 
         $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
@@ -511,7 +599,7 @@ class HomeController extends Controller
  
         }
         else{
-            return redirect()->back()->withInput($request->all())->with('Failed', 'Please select proper address from suggestion list or pick current location');
+            return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
         }
     }
 
@@ -530,9 +618,13 @@ class HomeController extends Controller
  
         $requiredvalidation = [ 
             'mobile'        => 'required|numeric|digits_between:8,11', 
-        ];
+        ]; 
+        
+        $validationmessages = array(
+            'mobile.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+        );
  
-        $validatedData = Validator::make($request->all(), $requiredvalidation)->setAttributeNames($niceNames);
+        $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
 
         if ($validatedData->fails()) {
             return redirect()->back()
@@ -588,21 +680,48 @@ class HomeController extends Controller
     public function contactsubmit(Request $request) { 
         $niceNames = array(
             'name'         => "Name", 
-            // 'email' 		=> "Email address", 
-            // 'mobile'        => "Mobile Number",
+            'email' 		=> "Email address", 
+            'mobile'        => "Mobile Number",
             'message'   => "Message", 
             'rating' =>"Rating",
         );
-
-        $request['adhaar'] = str_replace(' ', '', $request->adhaar);
+ 
         $requiredvalidation = [
             'name'         => "required|min:4|max:50|regex:/^[\pL\s\']+$/u", 
-            // 'email' => 'required|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^',
-            // 'mobile'        => 'required|numeric|digits_between:8,11',
             'message'   => 'required|max:250|min:5', 
             'rating'   => 'required',
         ];
- 
+
+        if($request->email) {
+            $requiredvalidation += array('email' => 'required|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^');
+        }
+        if($request->mobile) {
+            $requiredvalidation += array('mobile' => 'required|numeric|digits_between:8,11');
+        }
+
+        $validationmessages = array(
+            'name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['name']).' characters',
+            'name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['name']).' characters',
+            'message.min' => 'Please enter atleast 5 characters or more. You are currently using '.strlen($request['message']).' characters',
+            'message.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['message']).' characters',
+        );
+
+        if($request->email) {
+            $validationmessages += array( 
+                'email.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['email']).' characters',
+                'email.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['email']).' characters',   
+                'email.regex' => 'Please enter a valid email address example name@example.com',
+            );
+        }
+        if($request->mobile) {
+            $validationmessages += array( 
+                'mobile.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+            );
+        }
+
+        $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
+
+        
         $validatedData = Validator::make($request->all(), $requiredvalidation)->setAttributeNames($niceNames);
 
         if ($validatedData->fails()) {

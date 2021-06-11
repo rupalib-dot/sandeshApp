@@ -30,7 +30,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control @error('fname') redborder @enderror"
-                                       placeholder="First Name * " name="fname" minlength="3" maxlength="50" required
+                                       placeholder="First Name * " name="fname" required
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('fname')}}">
                                 @error('fname')
@@ -43,7 +43,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control @error('lname') redborder @enderror"
-                                       placeholder="Last Name *" name="lname" minlength="3" maxlength="50" required
+                                       placeholder="Last Name *" name="lname"  required
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('lname')}}">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid last name">
@@ -55,8 +55,8 @@
                             </div>
 
                             <div class="form-group  showind mb-2">
-                                <input type="email" class="form-control @error('email') redborder @enderror"
-                                       placeholder="Email Address" name="email" minlength="4" maxlength="50"
+                                <input type="text" class="form-control @error('email') redborder @enderror"
+                                       placeholder="Email Address" name="email" 
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('email')}}" autocomplete="off">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide a valid email address for verification">
@@ -69,7 +69,7 @@
 
                             <div class="form-group showind mb-2" style="position: relative;">
                                 <input id="password-field" type="password" class="form-control pr30px @error('password') redborder @enderror"
-                                       placeholder="Password *"  name="password" minlength="8" maxlength="16" required autocomplete="off"
+                                       placeholder="Password *"  name="password" required autocomplete="off"
                                        onkeydown="limit(this, 16);" onkeyup="limit(this, 16);">
                                 <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
@@ -80,10 +80,13 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-2">
+                            <div class="form-group showind mb-2">
                                 <input class="form-control datepkr @error('dob') redborder @enderror" min="1920-01-01" type="date"
                                        placeholder="Date Of Birth" name="dob" required
-                                       value="{{Request::old('dob')}}" >
+                                       value="{{Request::old('dob')}}">
+                                       <!-- <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually in dd/mm/yyyy format or click on calendar icon to choose year-month-day">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </span>        -->
                                 @error('dob')
                                     <div class="rederror">{{ $message }}</div>
                                 @enderror

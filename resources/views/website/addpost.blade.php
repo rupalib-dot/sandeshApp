@@ -58,7 +58,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('person_name') redborder @enderror"
-                            placeholder="Name *" name="person_name" minlength="3" maxlength="50" required
+                            placeholder="Name *" name="person_name"required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->person_name) ? $post->person_name : Request::old('person_name')}}">
                         @error('person_name')
@@ -73,7 +73,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('surname') redborder @enderror"
-                            placeholder="Surname *" name="surname" minlength="3" maxlength="50" required
+                            placeholder="Surname *" name="surname" required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->surname) ? $post->surname : Request::old('surname')}}">
                         @error('surname')
@@ -136,7 +136,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('swdperson') redborder @enderror"
-                            placeholder="Name of person" name="swdperson" minlength="4" maxlength="50"
+                            placeholder="Name of person" name="swdperson" 
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required id="swdperson"
                             value="{{isset($post->swdperson) ? $post->swdperson : Request::old('swdperson')}}">
                         @error('swdperson')
@@ -153,14 +153,14 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('institute') redborder @enderror"
-                            placeholder="Known for position (Optional)" name="institute" minlength="4" maxlength="50"
+                            placeholder="Known for position (Optional)" name="institute"
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->institute) ? $post->institute : Request::old('institute')}}">
                         @error('institute')
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span style="word-break: break-word;" class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Please enter details of designation/ organisation/ business etc with whom the deceased person was associated">
+                            title="Please enter details of designation/ organisation/ business etc with whome the deceased person was associated">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -192,7 +192,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('pocontact') redborder @enderror"
-                            placeholder="First Name *" name="pocontact" minlength="3" maxlength="50" required
+                            placeholder="First Name *" name="pocontact" required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->pocontact) ? $post->pocontact : Request::old('pocontact')}}">
                         @error('pocontact')
@@ -207,7 +207,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('lname') redborder @enderror"
-                            placeholder="Last Name *" name="lname" minlength="3" maxlength="50" required
+                            placeholder="Last Name *" name="lname" required
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->lname) ? $post->lname : Request::old('lname')}}">
                         @error('lname')
@@ -325,7 +325,7 @@
                 <div class="form-group showind mb-4">
                     <textarea style="resize:none;"
                         class="form-control nofocus @error('description') redborder @enderror" name="description"
-                        minlength="20" maxlength="250" required id="description" @if(isset($post) &&
+                        required id="description" @if(isset($post) &&
                         $post->template_id != 0) Readonly  @endif
                                           onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
                                           placeholder="Enter message / description (Max 250 character allowed)">{{isset($post->description) ? $post->description : Request::old('description')}}</textarea>
