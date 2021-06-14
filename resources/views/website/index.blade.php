@@ -12,27 +12,27 @@
                     </div>
                     <div class="col-md-5">
                         @if(Session::has('SuccessContct'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('SuccessContct')}}
                             </div>
                         @endif
                         @if(Session::has('FailedContct'))
-                            <div class="alert alert-danger hide500">
+                            <div class="alert alert-danger hide800">
                                 <strong>Failed ! </strong> {{Session::get('FailedContct')}}
                             </div>
                         @endif
                         @if(Session::has('Succcessprofile'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('Succcessprofile')}}
                             </div>
                         @endif
                         @if(Session::has('Failedprofile'))
-                            <div class="alert alert-danger hide500">
+                            <div class="alert alert-danger hide800">
                                 <strong>Failed ! </strong> {{Session::get('Failedprofile')}}
                             </div>
                         @endif
                         @if(Session::has('Succcesspassword'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
                             </div>
                         @endif 
@@ -43,17 +43,17 @@
                     </div>
                     <div class="col-md-5">
                         @if(Session::has('SuccessNew'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('SuccessNew')}}
                             </div>
                         @endif
                         @if(Session::has('SuccessContct'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('SuccessContct')}}
                             </div>
                         @endif
                         @if(Session::has('FailedContct'))
-                            <div class="alert alert-danger hide500">
+                            <div class="alert alert-danger hide800">
                                 <strong>Failed ! </strong> {{Session::get('FailedContct')}}
                             </div>
                         @endif
@@ -61,19 +61,19 @@
                             <form method="POST" action="{{ route('login') }}" class="formContact" data-validate>
                                 @csrf
                                 @if ($errors->any())
-                                    <ul class="mt-1 mb-2 list-disc list-inside text-sm text-red-600 hide500">
+                                    <ul class="mt-1 mb-2 list-disc list-inside text-sm text-red-600 hide800">
                                         @foreach ($errors->all() as $error)
                                             <li class="rederror">{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
                                 @if(Session::has('Success'))
-                                    <div class="alert alert-success hide500">
+                                    <div class="alert alert-success hide800">
                                         <strong>Success ! </strong> {{Session::get('Success')}}
                                     </div>
                                 @endif
                                 @if(Session::has('Failed'))
-                                    <div class="alert alert-danger hide500">
+                                    <div class="alert alert-danger hide800">
                                         <strong>Failed ! </strong> {{Session::get('Failed')}}
                                     </div>
                                 @endif
@@ -82,26 +82,26 @@
                                 <div class="form-group showind ">
                                     <input type="text" class="form-control @error('otp') redborder @enderror"
                                         placeholder="Phone or Email address *"  onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
-                                        name="email" required value="{{Request::old('email')}}"
+                                        name="email"  value="{{Request::old('email')}}"
                                         minlength="4" maxlength="50">
                                     <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please provide your verified email address or the 10 digit mobile number">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                     </span>
-                                    @error('otp')
+                                    <!-- @error('otp')
                                         <div class="rederror">{{ $message }}</div>
-                                    @enderror
+                                    @enderror -->
                                 </div>
                                 <div class="form-group showind" style="position: relative;">
                                     <input id="password-field" type="password" class="form-control pr30px @error('password') redborder @enderror"
                                         onkeydown="limit(this, 16);" onkeyup="limit(this, 16);"
-                                        placeholder="Password *"  name="password" minlength="8" maxlength="16" required autocomplete="off">
+                                        placeholder="Password *"  name="password" minlength="8" maxlength="16" autocomplete="off">
                                         <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                     <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                     </span>
-                                    @error('password')
+                                    <!-- @error('password')
                                         <div class="rederror">{{ $message }}</div>
-                                    @enderror
+                                    @enderror -->
                                 </div>
                                 <div class="d-flex justify-content-between">
                                 <a href="#" id="showforgotpasswordmodal">Forgot Password</a>
@@ -116,7 +116,7 @@
                         @endif 
                     </div>
                 @else
-                    <div style="margin:auto"><h3 class="welcome-msg"> <p  class="welcome-p">Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} To Sandesh</p></h3></div>
+                    <div style="margin:auto"><h3 class="welcome-msg"> <p  style="opacity: .6;" class="welcome-p">Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} To Sandesh</p></h3></div>
                 @endif
             </div>
         </div>
@@ -132,12 +132,12 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             @if(Session::has('SucccessForgotpassword'))
-                                                <div class="alert alert-success hide500">
+                                                <div class="alert alert-success hide800">
                                                     <strong>Success ! </strong> {{Session::get('SucccessForgotpassword')}}
                                                 </div>
                                             @endif
                                             @if(Session::has('FailedForgotpassword'))
-                                                <div class="alert alert-danger hide500">
+                                                <div class="alert alert-danger hide800">
                                                     <strong>Failed ! </strong> {{Session::get('FailedForgotpassword')}}
                                                 </div>
                                             @endif
@@ -196,12 +196,12 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     @if(Session::has('SuccessModal'))
-                                        <div class="alert alert-success hide500">
+                                        <div class="alert alert-success hide800">
                                             <strong>Success ! </strong> {{Session::get('SuccessModal')}}
                                         </div>
                                     @endif
                                     @if(Session::has('FailedModal'))
-                                        <div class="alert alert-danger hide500">
+                                        <div class="alert alert-danger hide800">
                                             <strong>Failed ! </strong> {{Session::get('FailedModal')}}
                                         </div>
                                     @endif

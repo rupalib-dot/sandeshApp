@@ -8,27 +8,27 @@
                  background-size: cover;">
         <div class="container">
             @if(Session::has('Success'))
-                <div class="alert alert-success hide500">
+                <div class="alert alert-success hide800">
                     <strong>Success ! </strong> {{Session::get('Success')}}
                 </div>
             @endif
             @if(Session::has('Failed'))
-                <div class="alert alert-danger hide500">
+                <div class="alert alert-danger hide800">
                     <strong>Failed ! </strong> {{Session::get('Failed')}}
                 </div>
             @endif
             @if(Session::has('Succcessprofile'))
-                <div class="alert alert-success hide500">
+                <div class="alert alert-success hide800">
                     <strong>Success ! </strong> {{Session::get('Succcessprofile')}}
                 </div>
             @endif
             @if(Session::has('Failedprofile'))
-                <div class="alert alert-danger hide500">
+                <div class="alert alert-danger hide800">
                     <strong>Failed ! </strong> {{Session::get('Failedprofile')}}
                 </div>
             @endif
             @if(Session::has('Succcesspassword'))
-                <div class="alert alert-success hide500">
+                <div class="alert alert-success hide800">
                     <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
                 </div>
             @endif 
@@ -78,7 +78,7 @@
                                              margin-bottom: 30px;">
                                     </div>
                                     <div class="sandeshpara">
-                                        <div style="display: inline-flex;"><h6>{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6><h6 style="margin-left: 30px;">Age:-  @if($ageyears == 0) {{$agemonths}} Month @else {{$ageyears}} @endif</h6><h6 style="margin-left: 30px;"> {{$post->institute}}</h6></div>
+                                        <div style="display: inline-flex;"><h6 style="width: 90px;">{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6><h6 style="margin-left: 15px;width: 70px;">Age:-  @if($ageyears == 0) {{$agemonths}} Month @else {{$ageyears}} @endif</h6><h6 style="margin-left: 15px;"> {{$post->institute}}</h6></div>
                                         <div style="display: inline-flex;"><p class="text-bold">{{ $post->person_name .' '.$post->surname }}</p> <p style="margin-left: 15px;">{{strtolower($post->swd).'  '.$post->swdperson }}</p>  </div>
                                         <p class="sub-add"> @php echo nl2br($post->description) @endphp </p>
                                         <p class="sub-add">{{$post->address}} </p>

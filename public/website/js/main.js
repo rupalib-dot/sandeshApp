@@ -31,6 +31,8 @@
 
     // Hide Message of Session
     $(".hide500").delay(5000).fadeOut(800);
+    $(".hide800").delay(8000).fadeOut(800);
+    $(".hide1000").delay(10000).fadeOut(800);
 
     $('[data-toggle="tooltip"]').tooltip();
 

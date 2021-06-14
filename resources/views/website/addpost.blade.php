@@ -37,12 +37,12 @@
         </div>
 
         @if(Session::has('Success'))
-        <div class="alert alert-success hide500">
+        <div class="alert alert-success hide800">
             <strong>Success ! </strong> {{Session::get('Success')}}
         </div>
         @endif
         @if(Session::has('Failed'))
-        <div class="alert alert-danger hide500">
+        <div class="alert alert-danger hide800">
             <strong>Failed ! </strong> {{Session::get('Failed')}}
         </div>
         @endif
@@ -58,7 +58,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('person_name') redborder @enderror"
-                            placeholder="Name *" name="person_name"required
+                            placeholder="Name *" name="person_name"
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->person_name) ? $post->person_name : Request::old('person_name')}}">
                         @error('person_name')
@@ -73,7 +73,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('surname') redborder @enderror"
-                            placeholder="Surname *" name="surname" required
+                            placeholder="Surname *" name="surname"  
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->surname) ? $post->surname : Request::old('surname')}}">
                         @error('surname')
@@ -90,7 +90,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4">
                         <input class="form-control datepkr @error('age') redborder @enderror" type="text"
-                            placeholder="Date Of Birth *" min="1920-01-01" name="age" required
+                            placeholder="Date Of Birth *" min="1920-01-01" name="age"  
                             value="{{isset($post->age) ? $post->age : Request::old('age')}}"
                             onfocus="(this.type='date')" onblur="(this.type='text')">
                         @error('age')
@@ -101,7 +101,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4">
                         <input class="form-control datepkr @error('date_of_death') redborder @enderror" type="text"
-                            placeholder="Date Of Demise *" min="1920-01-01" name="date_of_death" required
+                            placeholder="Date Of Demise *" min="1920-01-01" name="date_of_death"  
                             value="{{isset($post->date_of_death) ? $post->date_of_death : Request::old('date_of_death')}}"
                             onfocus="(this.type='date')" onblur="(this.type='text')">
                         @error('date_of_death')
@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4">
-                        <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" required style="border: none; border-bottom: 1px solid #ced4da;">
+                        <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" style="border: none; border-bottom: 1px solid #ced4da;">
                             <option value="">Please choose relation option</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'S/O' ? 'selected' : '' }}
                                 value="S/O">S/O</option>
@@ -137,7 +137,7 @@
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('swdperson') redborder @enderror"
                             placeholder="Name of person" name="swdperson" 
-                            onkeydown="limit(this, 50);" onkeyup="limit(this, 50);" required id="swdperson"
+                            onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"   id="swdperson"
                             value="{{isset($post->swdperson) ? $post->swdperson : Request::old('swdperson')}}">
                         @error('swdperson')
                         <div class="rederror">{{ $message }}</div>
@@ -169,7 +169,7 @@
                     <div class="form-group mb-4 showind">
                         <input id="searchTextField" type="text"
                             class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
-                            onkeyup="limit(this, 250);" placeholder="Location *" name="address" required
+                            onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
                             value="{{isset($post->address) ? $post->address : Request::old('address')}}">
                         <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                         <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
@@ -192,7 +192,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('pocontact') redborder @enderror"
-                            placeholder="First Name *" name="pocontact" required
+                            placeholder="First Name *" name="pocontact"  
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->pocontact) ? $post->pocontact : Request::old('pocontact')}}">
                         @error('pocontact')
@@ -207,7 +207,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control @error('lname') redborder @enderror"
-                            placeholder="Last Name *" name="lname" required
+                            placeholder="Last Name *" name="lname"  
                             onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                             value="{{isset($post->lname) ? $post->lname : Request::old('lname')}}">
                         @error('lname')
@@ -224,7 +224,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
                         <input type="text" class="form-control onlydigits @error('number') redborder @enderror"
-                            placeholder="Contact Number *" name="number" required onkeydown="limit(this, 10);"
+                            placeholder="Contact Number *" name="number"   onkeydown="limit(this, 10);"
                             onkeyup="limit(this, 10);"
                             value="{{isset($post->number) ? $post->number : Request::old('number')}}"
                             pattern="^[0-9]\d{9}$">
@@ -239,7 +239,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
-                        <select name="relation" class="form-control @error('relation') redborder @enderror" required style="border: none; border-bottom: 1px solid #ced4da;">
+                        <select name="relation" class="form-control @error('relation') redborder @enderror"   style="border: none; border-bottom: 1px solid #ced4da;">
                             <option value="">Please choose relation</option>
                             <option {{ Request::old('relation', isset($post) ? $post->relation : '') == 'Father' ? 'selected' : '' }}
                                 value="Father">Father</option>
@@ -325,7 +325,7 @@
                 <div class="form-group showind mb-4">
                     <textarea style="resize:none;"
                         class="form-control nofocus @error('description') redborder @enderror" name="description"
-                        required id="description" @if(isset($post) &&
+                         id="description" @if(isset($post) &&
                         $post->template_id != 0) Readonly  @endif
                                           onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
                                           placeholder="Enter message / description (Max 250 character allowed)">{{isset($post->description) ? $post->description : Request::old('description')}}</textarea>

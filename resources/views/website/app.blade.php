@@ -172,7 +172,7 @@
                                         <div class="col-sm-12">
                                             
                                             @if(Session::has('FailedError'))
-                                                <div class="alert alert-danger hide500">
+                                                <div class="alert alert-danger hide800">
                                                     <strong>Failed ! </strong> {{Session::get('FailedError')}}
                                                 </div>
                                             @endif 
@@ -298,12 +298,12 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <!-- @if(Session::has('Succcesspassword'))
-                                                <div class="alert alert-success hide500">
+                                                <div class="alert alert-success hide800">
                                                     <strong>Success ! </strong> {{Session::get('Succcesspassword')}}
                                                 </div>
                                             @endif-->
                                             @if(Session::has('Failedpassword'))
-                                                <div class="alert alert-danger hide500">
+                                                <div class="alert alert-danger hide800">
                                                     <strong>Failed ! </strong> {{Session::get('Failedpassword')}}
                                                 </div>
                                             @endif 

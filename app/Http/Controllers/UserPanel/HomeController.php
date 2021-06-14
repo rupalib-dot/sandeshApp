@@ -180,7 +180,7 @@ class HomeController extends Controller
          
 
         if($request->email) {
-            $requiredvalidation += array('email' => 'required|unique:users,email|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^');
+            $requiredvalidation += array('email' => 'required|unique:users,email,'.Auth::user()->id.',id|min:4|max:50|regex:^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^');
         }
 
         $validationmessages = array(

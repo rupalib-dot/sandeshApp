@@ -14,12 +14,12 @@
                 <div class="col-md-5 d-flex align-items-center ">
                     <div class="registForm w-100">
                         @if(Session::has('Success'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('Success')}}
                             </div>
                         @endif
                         @if(Session::has('Failed'))
-                            <div class="alert alert-danger hide500">
+                            <div class="alert alert-danger hide800">
                                 <strong>Failed ! </strong> {{Session::get('Failed')}}
                             </div>
                         @endif
@@ -30,7 +30,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control @error('fname') redborder @enderror"
-                                       placeholder="First Name * " name="fname" required
+                                       placeholder="First Name * " name="fname" 
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('fname')}}">
                                 @error('fname')
@@ -43,7 +43,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control @error('lname') redborder @enderror"
-                                       placeholder="Last Name *" name="lname"  required
+                                       placeholder="Last Name *" name="lname"  
                                        onkeydown="limit(this, 50);" onkeyup="limit(this, 50);"
                                        value="{{Request::old('lname')}}">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter valid last name">
@@ -69,7 +69,7 @@
 
                             <div class="form-group showind mb-2" style="position: relative;">
                                 <input id="password-field" type="password" class="form-control pr30px @error('password') redborder @enderror"
-                                       placeholder="Password *"  name="password" required autocomplete="off"
+                                       placeholder="Password *"  name="password"  autocomplete="off"
                                        onkeydown="limit(this, 16);" onkeyup="limit(this, 16);">
                                 <i toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></i>
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Please enter an alphanumeric password with at least one special and length of 8-16 characters">
@@ -82,7 +82,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input class="form-control datepkr @error('dob') redborder @enderror" min="1920-01-01" type="date"
-                                       placeholder="Date Of Birth" name="dob" required
+                                       placeholder="Date Of Birth" name="dob" 
                                        value="{{Request::old('dob')}}">
                                        <!-- <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually in dd/mm/yyyy format or click on calendar icon to choose year-month-day">
                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -94,7 +94,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control onlydigits @error('mobile') redborder @enderror"
-                                       placeholder="Mobile Number *" name="mobile" required
+                                       placeholder="Mobile Number *" name="mobile" 
                                        onkeydown="limit(this, 10);" onkeyup="limit(this, 10);"
                                        value="{{Request::old('mobile')}}" pattern="^[0-9]\d{9}$">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Do not use (+91) or (0)">
@@ -107,7 +107,7 @@
 
                             <div class="form-group mb-2 showind">
                                 <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
-                                       placeholder="Location *" name="address" required value="{{Request::old('address')}}"
+                                       placeholder="Location *" name="address" value="{{Request::old('address')}}"
                                        onkeydown="limit(this, 250);" onkeyup="limit(this, 250);">
                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
@@ -125,7 +125,7 @@
 
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control adharinput   @error('adhaar') redborder @enderror"
-                                       placeholder="Aadhaar Number" name="adhaar" required
+                                       placeholder="Aadhaar Number" name="adhaar" 
                                        value="{{Request::old('adhaar')}}"
                                        onkeydown="limit(this, 14);" onkeyup="limit(this, 14);">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
@@ -162,7 +162,7 @@
                                                        accept="image/*,capture=camera"
                                                        name="adhaar_file" id="photo"
                                                        class="custom customfileinput"
-                                                       required>
+                                                       >
                                                 <label for="photo" class="@error('adhaar_file') redborder @enderror py-2 mb-0 px-3 border border-gray-300 rounded-md text-sm
                                                        leading-4 font-medium text-gray-700 hover:text-indigo-500 hover:border-indigo-300
                                                        focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50
@@ -232,12 +232,12 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     @if(Session::has('SuccessModal'))
-                                        <div class="alert alert-success hide500">
+                                        <div class="alert alert-success hide800">
                                             <strong>Success ! </strong> {{Session::get('SuccessModal')}}
                                         </div>
                                     @endif
                                     @if(Session::has('FailedModal'))
-                                        <div class="alert alert-danger hide500">
+                                        <div class="alert alert-danger hide800">
                                             <strong>Failed ! </strong> {{Session::get('FailedModal')}}
                                         </div>
                                     @endif
@@ -260,7 +260,7 @@
                                                     <div class="form-group showind ">
                                                         <input type="text" class="form-control @error('otp') redborder @enderror"
                                                                placeholder="Please enter the 6 digit OTP here to verify"
-                                                               name="otp" required value="{{Request::old('otp')}}"
+                                                               name="otp"  value="{{Request::old('otp')}}"
                                                                pattern="^[0-9]\d{5}$">
                                                         <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Hint : Only Numbers Allowed, Minimum 6 Digits">
                                                             <i class="fa fa-info" aria-hidden="true"></i>

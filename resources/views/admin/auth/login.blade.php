@@ -56,12 +56,12 @@
                             </ul>
                         @endif
                         @if(Session::has('Success'))
-                            <div class="alert alert-success hide500">
+                            <div class="alert alert-success hide800">
                                 <strong>Success ! </strong> {{Session::get('Success')}}
                             </div>
                         @endif
                         @if(Session::has('Failed'))
-                            <div class="alert alert-danger hide500">
+                            <div class="alert alert-danger hide800">
                                 <strong>Failed ! </strong> {{Session::get('Failed')}}
                             </div>
                         @endif
