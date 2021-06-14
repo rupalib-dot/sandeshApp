@@ -144,6 +144,44 @@ class UserController extends BaseController
     	}
 	}
 
+	public function update_account(Request $request)
+	{
+		$error_message = 	[
+			'fname.required' 		=> 'First name should be required',
+			'lname.required' 		=> 'Last name should be required',
+			'address.required' 		=> 'Address should be required',
+		];
+
+		$rules = [
+			'fname' 			=> 'required',
+			'lname' 			=> 'required',
+			'address' 			=> 'required',
+			'lat' 				=> 'required',
+			'long' 				=> 'required',
+			'email' 			=> 'required|unique:users,email,0,customer_id,deleted_at,NULL',
+		];
+
+		$validator = Validator::make($request->all(), $rules, $error_message);
+   
+        if($validator->fails()){
+            return $this->sendFailed($validator->errors()->all(), 200);       
+        }
+
+		try
+		{
+			\DB::beginTransaction();
+				User::findOrfail($request->user_id)->update($request->all());
+				$user_data = new Users(User::find($request->user_id));
+			\DB::commit();
+			return $this->sendSuccess($user_data, 'Profile updated successfully');
+		}
+		catch (\Throwable $e)
+    	{
+            \DB::rollback();
+    		return $this->sendFailed($e->getMessage().' on line '.$e->getLine(), 400);  
+    	}
+	}
+
 	public function login_account(Request $request)
 	{
 		$error_message = 	[
