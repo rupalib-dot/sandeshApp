@@ -415,4 +415,9 @@ class UserController extends BaseController
 			return $this->sendSuccess('', 'Post updated successfully');
 		}
 	}
+
+	public function public_post()
+	{
+		
+	}
 }
