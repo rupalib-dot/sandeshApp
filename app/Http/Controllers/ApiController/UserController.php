@@ -277,4 +277,44 @@ class UserController extends BaseController
     		return $this->sendFailed($e->getMessage().' on line '.$e->getLine(), 400);  
     	}
 	}
+
+	public function change_password(Request $request)
+	{
+		$error_message = 	[
+			'regex' 		=> 'Alphanumeric password with at least one special and length of 8-16 characters',
+			'different'		=> 'New password should not be same as old password',
+		];
+
+		$rules = [
+			'password' 				=> 'required',
+			'new_password' 			=> 'required|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/|different:login_password',
+			'confirm_password' 		=> 'required',
+		];
+
+		$validator = Validator::make($request->all(), $rules, $error_message);
+   
+        if($validator->fails()){
+            return $this->sendFailed($validator->errors()->all(), 200);       
+        }
+
+		try
+		{
+			$user_data	= User::find($request->id);
+			if(!Hash::check($request->password, $user_data->password))
+			{
+				return $this->sendFailed('Current password did not matched', 200);       
+			}
+			else
+			{
+				$request['password'] = Hash::make($request->password);
+				User::findOrfail($request->id)->update($request->only(['password']));
+				return $this->sendSuccess('', 'Password updated successfully');
+			}
+		}
+		catch (\Throwable $e)
+    	{
+            \DB::rollback();
+    		return $this->sendFailed($e->getMessage().' on line '.$e->getLine(), 400);  
+    	}
+	}
 }

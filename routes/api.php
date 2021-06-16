@@ -27,4 +27,5 @@ Route::namespace('ApiController')->group(function () {
         Route::post('login_account', [UserController::class, 'login_account']);
         Route::post('resend_otp', [UserController::class, 'resend_otp']);
         Route::post('profile', [UserController::class, 'user_profile']);
+        Route::post('change_password', [UserController::class, 'change_password']);
 });
