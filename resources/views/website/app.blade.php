@@ -242,9 +242,26 @@
                                                         @error('mobile')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
-                                                    </div>
-
-                                                    <div class="form-group mb-2 showind">
+                                                    </div> 
+                                                            <div class="form-group mb-4 showind">
+                                                                <input id="searchTextField" type="text"
+                                                                    class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
+                                                                    onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
+                                                                    value="{{isset($post->address) ? $post->address : Request::old('address')}}">
+                                                                <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
+                                                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </span>
+                                                                <input type="hidden" id="ulocationlat" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                    name="lat" value="{{isset($post->lat) ? $post->lat : Request::old('lat')}}">
+                                                                <input type="hidden" id="ulocationlong" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                    name="long" value="{{isset($post->long) ? $post->long : Request::old('long')}}">
+                                                                @error('address')
+                                                                <div class="rederror">{{ $message }}</div>
+                                                                @enderror
+                                                                <div id="map" style="height:600px;display:none;"> </div>
+                                                            </div> 
+                                                    <!-- <div class="form-group mb-2 showind">
                                                         <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
                                                                placeholder="Location" name="address" required
                                                                onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
@@ -263,7 +280,7 @@
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
                                                         <div id="map" style="height:600px;display:none;"> </div>
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="form-group showind mb-2">
                                                         <input type="text" class="form-control adharinput @error('adhaar') redborder @enderror"

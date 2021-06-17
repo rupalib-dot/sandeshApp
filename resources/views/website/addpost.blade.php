@@ -187,6 +187,7 @@
                 </div>
             </div>
             <h5> Point Of Contact</h5>
+            <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show Point Of Contact
 
             <div class="row" style="margin-top:20px">
                 <div class="col-md-6 col-sm-6 col-12">
@@ -515,12 +516,12 @@ $(".postadd").click(function() {
 function getMessage(val) {
     if (val == 0) {
         $("#description").val(" ");
-        $("#description").prop('readonly', false);
+        // $("#description").prop('readonly', false);
     } else {
         var text = $("#messagetemplate option:selected").text();
         $("#description").val(" ");
         $("#description").val(text);
-        $("#description").prop('readonly', true);
+        // $("#description").prop('readonly', true);
     }
 }
 
