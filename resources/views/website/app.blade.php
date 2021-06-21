@@ -247,7 +247,7 @@
                                                                 <input id="searchTextField" type="text"
                                                                     class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
                                                                     onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
-                                                                    value="{{isset($post->address) ? $post->address : Request::old('address')}}">
+                                                                    value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}">
                                                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                                                                     <i class="fa fa-info" aria-hidden="true"></i>

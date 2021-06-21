@@ -78,8 +78,9 @@
                                              margin-bottom: 30px;">
                                     </div>
                                     <div class="sandeshpara">
-                                        <div style="display: inline-flex;"><h6 style="width: 90px;">{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6><h6 style="margin-left: 15px;width: 70px;">Age:-  @if($ageyears == 0) {{$agemonths}} Month @else {{$ageyears}} @endif</h6><h6 style="margin-left: 15px;"> {{$post->institute}}</h6></div>
-                                        <div style="display: inline-flex;"><p class="text-bold">{{ $post->person_name .' '.$post->surname }}</p> <p style="margin-left: 15px;">{{strtolower($post->swd).'  '.$post->swdperson }}</p>  </div>
+                                        <div style="display: inline-flex;"><h6 style="width: 90px;">{{ date('d-m-Y', strtotime($post->date_of_death)) }} </h6><h6 style="margin-left: 15px;">Age:-  @if($ageyears == 0) {{$agemonths}} Month @else {{$ageyears}} Year @endif</h6></div>
+                                        @if(!empty($post->institute)) <br><div style="display: inline-flex;"><h6> {{$post->institute}}</h6></div> @endif <br>
+                                        <div style="display: inline-flex;"><p class="text-bold">{{ $post->person_name .' '.$post->surname }}</p> <p style="margin-left: 15px;" class="text-bold"><b>{{strtolower($post->swd).'  '.$post->swdperson }}</b></p>  </div>
                                         <p class="sub-add"> @php echo nl2br($post->description) @endphp </p>
                                         <p class="sub-add">{{$post->address}} </p>
                                         @if($post->show_poc == 1 && $post->show_poc != '') <div style="display: inline-flex;">POC-Contact:- <p class="" style="margin-left:10px">{{ $post->pocontact .' '.$post->lname }}</p> <p style="margin-left: 15px;">{{$post->number}}</p>  </div> @endif                           
@@ -98,8 +99,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="paginationPara">
-                        {{ $publicpost->appends($request->all())->links('website.defaultpagination')->render() }}
+                    <div class="paginationPara"> 
+                        <?php echo $publicpost->appends($request->all())->links('website.defaultpagination')->render() ?>
                         <!-- ->links('website.defaultpagination') -->
                     </div>
                 </div>
