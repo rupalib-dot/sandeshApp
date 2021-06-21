@@ -51,7 +51,7 @@
             <div class="row">
                 @if(count($myposts) >0)
                     @foreach($myposts as $post)
-                    @php $bdate     =   date('m/d/Y',strtotime($post->age));
+                    @php $bdate      =   date('m/d/Y',strtotime($post->age));
                         $ddate      =   date('m/d/Y',strtotime($post->date_of_death));
                         $ageyears   =   date_diff(date_create($bdate), date_create($ddate))->y;
                         $agemonths  =   date_diff(date_create($bdate), date_create('now'))->m;
