@@ -120,8 +120,8 @@
 
                     <div class="footerSocialIcon mt-4">
                         <ul>
-                            <li><a target="_blank" href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                            <li><a target="_blank"  href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                            <li><a target="_blank" href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank"  href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                             <!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li> -->
                         </ul>
                     </div>
@@ -129,11 +129,13 @@
                     <div class="col-sm-12">
                         <div class="cptext">
                             <ul>
-                                <li><span class="footerContact"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                21st A Main Rd Vanganahalli; Banglore; Karnataka; India
-                                </li>
+                                <a href="https://goo.gl/maps/jRCrqp9WiBq5LisFA" target="_blank">
+                                    <li><span class="footerContact"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        21 A Main Rd Vanganahalli, Banglore, Karnataka, India
+                                    </li>
+                                </a>
                                 <li><span class="footerContact"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <a class="phoneControl" href="mailto: connect@hamaresandesh.com">connect@hamaresandesh.com</a>
+                                    <a class="phoneControl" href="mailto:connect@hamaresandesh.com">connect@hamaresandesh.com</a>
 
                                 </li>
                             </ul>

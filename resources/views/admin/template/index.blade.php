@@ -96,7 +96,7 @@
                     <input type="hidden" name="id" class="modalinput" value="">
                     <div class="row" style="margin-bottom:30px">
                         <div class="col-12">
-                            <textarea  class="form-control @error('fname') redborder @enderror message" placeholder="Write a Template" name="message" minlength="4" maxlength="250" required
+                            <textarea  class="form-control @error('fname') redborder @enderror message" placeholder="Write a Template" name="message" minlength="4" maxlength="750" required
                               value="{{Request::old('fname')}}" style="height: 150px;" required></textarea>
                             @error('fname')
                             <div class="rederror">{{ $message }}</div>

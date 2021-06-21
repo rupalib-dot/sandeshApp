@@ -359,7 +359,7 @@
                             <div id="collapseOne3" class="collapse" role="tabpanel" aria-labelledby="headingOne3"
                                 data-parent="#accordionEx">
                                 <div class="card-body">
-                                Sandesh requires a copy of the death certificate or doctor’s note to be uploaded to the platform. Following which we wait for manual approval from the point of contact.
+                                Sandesh requires a copy of the death certificate or doctor’s note to be uploaded to the platform. Then, we wait for manual approval from the point of contact.
                                 </div>
                             </div>
                         </div> 
@@ -373,7 +373,7 @@
                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne4"
                                    aria-expanded="true" aria-controls="collapseOne4">
                                     <span class="number">4</span>
-                                    <h5 class="cardHeading mb-0">Who is a point of contact?<i class="fa fa-angle-down rotate-icon"></i> </h5>
+                                    <h5 class="cardHeading mb-0">Who can be a point of contact?<i class="fa fa-angle-down rotate-icon"></i> </h5>
                                 </a>
                             </div>
 
@@ -381,7 +381,7 @@
                             <div id="collapseOne4" class="collapse" role="tabpanel" aria-labelledby="headingOne4"
                                  data-parent="#accordionEx">
                                 <div class="card-body">
-                                    Anyone among the relatives or close friends can approve the obituary without hassle. 
+                                    Anyone among the relatives or close friends can be a point of contact.
                                 </div>
                             </div>
 
@@ -401,7 +401,7 @@
                             <div id="collapseOne5" class="collapse" role="tabpanel" aria-labelledby="headingOne5"
                                  data-parent="#accordionEx">
                                 <div class="card-body">
-                                    Acting as a point of contact; it is his/her duty to approve the obituary through a link sent via SMS. Following the approval his/her contact will be sent along with obituary to the people for further communication and coordination
+                                Acting as a point of contact; it is his/her duty to approve the obituary through a link sent via SMS. Following the approval; his/her contact will be sent along with obituary to the people for further communication and coordination
                                 </div>
                             </div>
                         </div>
@@ -432,7 +432,7 @@
                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne7"
                                    aria-expanded="true" aria-controls="collapseOne7">
                                     <span class="number">7</span>
-                                    <h5 class="cardHeading mb-0"> How long does the post stay on the publicly accessible page?  <i class="fa fa-angle-down rotate-icon"></i> </h5>
+                                    <h5 class="cardHeading mb-0"> How long does the post stay on the website?  <i class="fa fa-angle-down rotate-icon"></i> </h5>
                                 </a>
                             </div>
 

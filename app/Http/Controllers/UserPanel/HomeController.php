@@ -302,7 +302,7 @@ class HomeController extends Controller
             'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'relation'              => "required",
-            'description'           => "required|min:20|max:250",
+            'description'           => "required|min:20|max:750",
             'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
@@ -310,7 +310,7 @@ class HomeController extends Controller
             'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
             'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
-            'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
+            'death_certificate'     => 'required|mimes:jpg,png,pdf|max:5120',
             'person_pic'            => 'required|mimes:jpg,png|max:5120',
             'swd'                   => "required", 
             'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
@@ -485,7 +485,7 @@ class HomeController extends Controller
             'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'relation'              => "required",
-            'description'           => "required|min:20|max:250",
+            'description'           => "required|min:20|max:750",
             'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
@@ -493,9 +493,9 @@ class HomeController extends Controller
             'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
             'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
-            'death_certificate'     => 'nullable|mimes:jpg,png,pdf|max:5120',
+            'death_certificate'     => 'required|mimes:jpg,png,pdf|max:5120',
             'swd'                   => "required", 
-            'swdperson'                   => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         isset($post->person_pic) ? '' : $requiredvalidation['person_pic'] = 'required|mimes:jpg,png|max:5120';
@@ -567,7 +567,7 @@ class HomeController extends Controller
                 }
             }
 
-            Post::where('id',$post->id)->update([
+            $nRow = Post::where('id',$post->id)->update([
                 'user_id'              => Auth::user()->id,
                 'person_name'          => $request->person_name,
                 'surname'              => $request->surname,
@@ -593,7 +593,14 @@ class HomeController extends Controller
             ]); 
 
             if($request['is_draft'] == 1){
-                return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
+                if($nRow > 0)
+                {
+                    return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
+                }
+                else
+                {
+                    return redirect()->route('showmydraft')->with('Success', 'No change found');
+                }
             }else{
                 return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
             }
@@ -655,10 +662,10 @@ class HomeController extends Controller
             $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
             $userpassword = substr(str_shuffle($data), 0, 8); 
             Controller::sendSMS('+91'.$userarray,  'Your new password is : '.$userpassword,$userpassword);
-            // $user = User::where('mobile',$userarray)->update([ 
-            //     'password'      => Hash::make($userpassword),
-            //     'updated_at'    => date('Y-m-d H:i:s'), 
-            // ]);  
+            $user = User::where('mobile',$userarray)->update([ 
+                'password'      => Hash::make($userpassword),
+                'updated_at'    => date('Y-m-d H:i:s'), 
+            ]);  
 
             $userData = User::where('mobile',$userarray)->first();  
              //mail to new subadmin
