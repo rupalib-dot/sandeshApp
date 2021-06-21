@@ -50,7 +50,10 @@
                                     <td>Address</td>
                                     <td class="text-right">  {{ $post->address }}</td>
                                 </tr>
-
+                                <tr>
+                                    <td>Show Poc</td>
+                                    <td class="text-right">  @if($post->show_poc == '') No @else Yes @endif </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -93,6 +96,7 @@
                                 <td>Description</td>
                                 <td class="text-right">  {{ $post->description }}</td>
                             </tr>
+                            
                             </tbody>
                         </table>
                     </div>
