@@ -187,6 +187,7 @@
                 </div>
             </div>
             <h5> Point Of Contact</h5>
+            <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show Point Of Contact
 
             <div class="row" style="margin-top:20px">
                 <div class="col-md-6 col-sm-6 col-12">
@@ -515,12 +516,12 @@ $(".postadd").click(function() {
 function getMessage(val) {
     if (val == 0) {
         $("#description").val(" ");
-        $("#description").prop('readonly', false);
+        // $("#description").prop('readonly', false);
     } else {
         var text = $("#messagetemplate option:selected").text();
         $("#description").val(" ");
         $("#description").val(text);
-        $("#description").prop('readonly', true);
+        // $("#description").prop('readonly', true);
     }
 }
 
@@ -559,124 +560,6 @@ function imageData(url) {
         }
     };
 }
-
-function autoDetectPickup() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var lang = position.coords.longitude;
-            var geocoder = new google.maps.Geocoder();
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: lat,
-                    lng: lang
-                },
-                zoom: 13,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-            var myLatlng = new google.maps.LatLng(lat, lang);
-
-            marker = new google.maps.Marker({
-                map: map,
-                position: myLatlng,
-                draggable: true,
-                icon: '{{ asset("website / images / marker.png") }}'
-            });
-
-            geocoder.geocode({
-                'latLng': marker.getPosition()
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        $('#searchTextField').val(results[0].formatted_address);
-                        $('#ulocationlat').val(marker.getPosition().lat());
-                        $('#ulocationlong').val(marker.getPosition().lng());
-                    }
-                }
-            });
-
-            google.maps.event.addListener(marker, 'dragend', function() {
-                geocoder.geocode({
-                    'latLng': marker.getPosition()
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            $('#searchTextField').val(results[0].formatted_address);
-                            $('#ulocationlat').val(marker.getPosition().lat());
-                            $('#ulocationlong').val(marker.getPosition().lng());
-                        }
-                    }
-                });
-            });
-
-        });
-    } else {
-        var lat = 26.9124;
-        var lang = 75.7873;
-        var geocoder = new google.maps.Geocoder();
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: lat,
-                lng: lang
-            },
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
-        var myLatlng = new google.maps.LatLng(lat, lang);
-
-        marker = new google.maps.Marker({
-            map: map,
-            position: myLatlng,
-            draggable: true,
-            icon: 'https://seekho.i4dev.in/public/icons/marker.png'
-        });
-
-        google.maps.event.addListener(marker, 'dragend', function() {
-
-            geocoder.geocode({
-                'latLng': marker.getPosition()
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        $('#searchTextField').val(results[0].formatted_address);
-                        $('#ulocationlat').val(marker.getPosition().lat());
-                        $('#ulocationlong').val(marker.getPosition().lng());
-                    }
-                }
-            });
-        });
-
-    }
-}
-
-$(document).ready(function() {
-    var input = document.getElementById('searchTextField');
-    var autocomplete = new google.maps.places.Autocomplete(input);
-
-    autocomplete.addListener('place_changed', function() {
-
-        var place = autocomplete.getPlace();
-        if (!place.geometry) {
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-        }
-        var address = '';
-        if (place.address_components) {
-            address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-
-        };
-
-        var lat = place.geometry.location.lat();
-        var lng = place.geometry.location.lng();
-        $('#ulocationlat').val(lat);
-        $('#ulocationlong').val(lng);
-    });
-});
+ 
 </script>
 @endsection

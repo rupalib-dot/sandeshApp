@@ -79,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td> Approval Status </td>
-                                <td class="text-right">
+                                <td class="text-right"> 
                                     @if($post->approval_status == 409)
                                         Rejected
                                     @elseif($post->approval_status == 410)

@@ -76,7 +76,7 @@
                                         <div style="display: inline-flex;"><p class="text-bold">{{ $post->person_name .' '.$post->surname }}</p> <p style="margin-left: 15px;">{{strtolower($post->swd).'  '.$post->swdperson }}</p>  </div>
                                         <p class="sub-add"> @php echo nl2br($post->description) @endphp </p>
                                         <p class="sub-add">{{$post->address}} </p>
-                                        <div style="display: inline-flex;">POC-Contact:- <p class="" style="margin-left:10px">{{ $post->pocontact .' '.$post->lname }}</p> <p style="margin-left: 15px;">{{$post->number}}</p>  </div>                                        
+                                        @if($post->show_poc == 1 && $post->show_poc != '') <div style="display: inline-flex;">POC-Contact:- <p class="" style="margin-left:10px">{{ $post->pocontact .' '.$post->lname }}</p> <p style="margin-left: 15px;">{{$post->number}}</p>  </div>               @endif                         
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -144,7 +144,21 @@
                                         <a onclick="return confirm('Are you sure you want to send this post for approval?');" href="{{ route('changePostStatus', $post->id) }}" class="btn-primary btn">
                                              Send for Approval
                                         </a>
-                                        @if($post->approval_status != 410)
+                                        @if($post->approval_status == 409)
+                                            <span style="margin-top: 15px;">
+                                                <form class="d-inline-block" action="{{route('mypostdelete')}}" method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to Delete this post ?');">
+                                                    @csrf
+                                                    <input type="hidden" name="postid" value="{{$post->id}}">
+                                                    <button type="submit" class="btn-danger btn mr-2">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                    </button>
+                                                </form>
+                                                <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                </a>
+                                            </span>
+                                        @elseif($post->approval_status != 410)
                                             <span style="margin-top: 24px;">
                                                 <form class="d-inline-block" action="{{route('mypostdelete')}}" method="POST"
                                                     onsubmit="return confirm('Are you sure you want to Delete this post ?');">

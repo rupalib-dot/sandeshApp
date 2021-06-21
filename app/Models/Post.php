@@ -20,6 +20,7 @@ class Post extends Model
         'template_id',
         'swd',
         'swdperson',
+        'show_poc',
         'relation',
         'pocontact',
         'lname',

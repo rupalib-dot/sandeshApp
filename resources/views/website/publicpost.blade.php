@@ -82,7 +82,7 @@
                                         <div style="display: inline-flex;"><p class="text-bold">{{ $post->person_name .' '.$post->surname }}</p> <p style="margin-left: 15px;">{{strtolower($post->swd).'  '.$post->swdperson }}</p>  </div>
                                         <p class="sub-add"> @php echo nl2br($post->description) @endphp </p>
                                         <p class="sub-add">{{$post->address}} </p>
-                                        <div style="display: inline-flex;">POC-Contact:- <p class="" style="margin-left:10px">{{ $post->pocontact .' '.$post->lname }}</p> <p style="margin-left: 15px;">{{$post->number}}</p>  </div>                                        
+                                        @if($post->show_poc == 1 && $post->show_poc != '') <div style="display: inline-flex;">POC-Contact:- <p class="" style="margin-left:10px">{{ $post->pocontact .' '.$post->lname }}</p> <p style="margin-left: 15px;">{{$post->number}}</p>  </div> @endif                           
                                     </div>
                                 </div>
                             </div>

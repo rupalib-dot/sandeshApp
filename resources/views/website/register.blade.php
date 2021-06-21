@@ -7,7 +7,7 @@
 @section('title', 'Home Page')
 
 @section('content')
-
+ 
     <section id="registrationPage" class="registrationPage" role="registration">
         <div class="container-fluid">
             <div class="row">
@@ -122,12 +122,12 @@
                                 @enderror
                                 <div id="map" style="height:600px;display:none;"> </div>
                             </div>
-
+                      
                             <div class="form-group showind mb-2">
                                 <input type="text" class="form-control adharinput   @error('adhaar') redborder @enderror"
                                        placeholder="Aadhaar Number" name="adhaar" 
                                        value="{{Request::old('adhaar')}}"
-                                       onkeydown="limit(this, 14);" onkeyup="limit(this, 14);">
+                                       onkeydown="limit(this, 12);" onkeyup="limit(this, 12);">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
@@ -222,6 +222,7 @@
 @endsection
 
 @section('pagescripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.6.0/alpine.js"></script>
 
     <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -302,5 +303,5 @@
             })(jQuery);
         </script>
     @endif
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.6.0/alpine.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.6.0/alpine.js"></script> -->
 @endsection

@@ -120,8 +120,8 @@
 
                     <div class="footerSocialIcon mt-4">
                         <ul>
-                            <li><a href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                            <li><a href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                            <li><a target="_blank" href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                            <li><a target="_blank"  href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
                             <!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li> -->
                         </ul>
                     </div>
@@ -242,9 +242,26 @@
                                                         @error('mobile')
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
-                                                    </div>
-
-                                                    <div class="form-group mb-2 showind">
+                                                    </div> 
+                                                            <div class="form-group mb-4 showind">
+                                                                <input id="searchTextField" type="text"
+                                                                    class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
+                                                                    onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
+                                                                    value="{{isset($post->address) ? $post->address : Request::old('address')}}">
+                                                                <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
+                                                                <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
+                                                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                                                </span>
+                                                                <input type="hidden" id="ulocationlat" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                    name="lat" value="{{isset($post->lat) ? $post->lat : Request::old('lat')}}">
+                                                                <input type="hidden" id="ulocationlong" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                    name="long" value="{{isset($post->long) ? $post->long : Request::old('long')}}">
+                                                                @error('address')
+                                                                <div class="rederror">{{ $message }}</div>
+                                                                @enderror
+                                                                <div id="map" style="height:600px;display:none;"> </div>
+                                                            </div> 
+                                                    <!-- <div class="form-group mb-2 showind">
                                                         <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
                                                                placeholder="Location" name="address" required
                                                                onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
@@ -263,7 +280,7 @@
                                                             <div class="rederror">{{ $message }}</div>
                                                         @enderror
                                                         <div id="map" style="height:600px;display:none;"> </div>
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="form-group showind mb-2">
                                                         <input type="text" class="form-control adharinput @error('adhaar') redborder @enderror"
@@ -457,8 +474,120 @@
             }
         });
     </script>
-    <script src="{{ asset('website/js/main.js') }}"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCNdiZ-QFwFBld5GxQAs0XiDQF5G8NE0U&libraries=places" async></script>
+    <script src="{{ asset('website/js/main.js') }}"></script>
+    <script>
+function autoDetectPickup(){
+     var siteurl = window.location.origin;
+     if(navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(function(position) {
+             var lat=position.coords.latitude;
+             var lang=position.coords.longitude;
+             var geocoder = new google.maps.Geocoder();
+
+             var map = new google.maps.Map(document.getElementById('map'), {
+                 center: {lat: lat, lng: lang},
+                 zoom: 13,
+                 mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+             var myLatlng = new google.maps.LatLng(lat,lang);
+
+             marker = new google.maps.Marker({
+                 map: map,
+                 position: myLatlng,
+                 draggable: true,
+                 icon: siteurl+'/website/images/marker.png'
+         });
+
+             geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                 if (status == google.maps.GeocoderStatus.OK) {
+                     if (results[0]) {
+                         console.log(results[0]);
+                         $('#searchTextField').val(results[0].formatted_address);
+                         $('#ulocationlat').val(marker.getPosition().lat());
+                         $('#ulocationlong').val(marker.getPosition().lng());
+                     }
+                 }
+             });
+
+             google.maps.event.addListener(marker, 'dragend', function() {
+                 //console.log(marker.getPosition());
+                 geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                     if (status == google.maps.GeocoderStatus.OK) {
+                         if (results[0]) {
+                             console.log(results[0]);
+                             $('#searchTextField').val(results[0].formatted_address);
+                             $('#ulocationlat').val(marker.getPosition().lat());
+                             $('#ulocationlong').val(marker.getPosition().lng());
+                         }
+                     }
+                 });
+             });
+
+         });
+     }else{
+         var lat=26.9124;
+         var lang=75.7873;
+         var geocoder = new google.maps.Geocoder();
+
+         var map = new google.maps.Map(document.getElementById('map'), {
+             center: {lat: lat, lng: lang},
+             zoom: 13,
+             mapTypeId: google.maps.MapTypeId.ROADMAP
+         });
+         var myLatlng = new google.maps.LatLng(lat,lang);
+
+         marker = new google.maps.Marker({
+             map: map,
+             position: myLatlng,
+             draggable: true,
+             icon:'https://seekho.i4dev.in/public/icons/marker.png'
+         });
+
+         google.maps.event.addListener(marker, 'dragend', function() {
+
+             geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                 if (status == google.maps.GeocoderStatus.OK) {
+                     if (results[0]) {
+                         $('#searchTextField').val(results[0].formatted_address);
+                         $('#ulocationlat').val(marker.getPosition().lat());
+                         $('#ulocationlong').val(marker.getPosition().lng());
+                     }
+                 }
+             });
+         });
+
+     }
+ }
+ $(document).ready(function (){
+     var input = document.getElementById('searchTextField');
+     var autocomplete = new google.maps.places.Autocomplete(input);
+
+     autocomplete.addListener('place_changed', function() {
+         var place = autocomplete.getPlace();
+         if (!place.geometry) {
+             window.alert("No details available for input: '" + place.name + "'");
+             return;
+         }
+         var address = '';
+         if (place.address_components) {
+             address = [
+                 (place.address_components[0] && place.address_components[0].short_name || ''),
+                 (place.address_components[1] && place.address_components[1].short_name || ''),
+                 (place.address_components[2] && place.address_components[2].short_name || '')
+             ].join(' ');
+
+         }
+         ;
+
+         var lat= place.geometry.location.lat();
+         var lng= place.geometry.location.lng();
+         $('#ulocationlat').val(lat);
+         $('#ulocationlong').val(lng);
+     });
+ });
+</script>
     @yield('pagescripts')
 </body>
 </html>

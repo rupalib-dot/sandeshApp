@@ -33,6 +33,7 @@ class Createposttable extends Migration
             $table->string('long', 30)->nullable();
             $table->boolean('flowers')->default(false);
             $table->string('flower_type',5)->nullable();
+            $table->integer('show_poc',5)->nullable(); 
             $table->string('pocontact', 50)->nullable();
             $table->string('lname', 50)->nullable();
             $table->string('institute', 50)->nullable();

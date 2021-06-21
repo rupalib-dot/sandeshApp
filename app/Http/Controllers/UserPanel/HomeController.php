@@ -50,7 +50,7 @@ class HomeController extends Controller
             'mobile'        => 'required|numeric|digits_between:8,11|unique:users,mobile',
             'adhaar_file'   => 'required|nullable|mimes:jpg,png,pdf|max:5120',
             'adhaar'        => 'required|numeric|digits:12|regex:/[0-9]{12}/',
-            'dob'           => 'required|before:'.$min,
+            'dob'           => 'required',
             'address'       => "required|min:4|max:250",
         ];
 
@@ -589,6 +589,7 @@ class HomeController extends Controller
                 'template_id'          => $request->template_id,
                 'flower_type'          => $flower_type,
                 'is_draft'             => $request->is_draft,
+                'show_poc'             => $request->show_poc
             ]); 
 
             if($request['is_draft'] == 1){
