@@ -160,17 +160,16 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span style="word-break: break-word;" class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Please enter details of designation/ organisation/ business etc with whome the deceased person was associated">
+                            title="Please enter details of designation/ organisation/ business etc with whom the deceased person was associated">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4 showind">
-                        <input id="searchTextField" type="text"
-                            class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
-                            onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
-                            value="{{isset($post->address) ? $post->address : Request::old('address')}}">
+                        <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
+                        placeholder="Location *" name="address" value="{{Request::old('address')}}"
+                        onkeydown="clearoldAddress();" onkeyup="limit(this, 250);" onblur="checkautoClass();">
                         <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                         <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                             <i class="fa fa-info" aria-hidden="true"></i>
@@ -187,8 +186,6 @@
                 </div>
             </div>
             <h5> Point Of Contact</h5>
-            <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show Point Of Contact
-
             <div class="row" style="margin-top:20px">
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group showind mb-4">
@@ -277,10 +274,10 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <div class=" col-12">
+            <div class="ml-3 mb-2">
+                <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show Point Of Contact
+            </div>
+            <div class="col-12">
                 <div class="form-group form-check mb-4 mt-2">
                     <input id="checkgarland" onchange="flowerSelect()" type="checkbox"
                         class="form-check-input @error('flowers') redborder @enderror" name="flowers"
@@ -487,7 +484,23 @@
 @section('pagescripts')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.6.0/alpine.js"></script>
-
+<script>
+    function clearoldAddress(){
+     var ulocationlat = document.getElementById('ulocationlat').value = null;
+        var ulocationlong = document.getElementById('ulocationlong').value = null;
+    }
+    function checkautoClass(){
+        var ulocationlat = document.getElementById('ulocationlat').value;
+        var ulocationlong = document.getElementById('ulocationlong').value;
+        if(ulocationlat != '' && ulocationlong != ''){
+             return true;
+        }
+        else{
+            document.getElementById('searchTextField').value= '';
+            
+        }
+    }
+</script>
 <script>
 
 function getplaceholder(val){ 

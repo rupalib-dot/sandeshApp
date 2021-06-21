@@ -567,7 +567,7 @@ class HomeController extends Controller
                 }
             }
 
-            Post::where('id',$post->id)->update([
+            $nRow = Post::where('id',$post->id)->update([
                 'user_id'              => Auth::user()->id,
                 'person_name'          => $request->person_name,
                 'surname'              => $request->surname,
@@ -593,7 +593,14 @@ class HomeController extends Controller
             ]); 
 
             if($request['is_draft'] == 1){
-                return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
+                if($nRow > 0)
+                {
+                    return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
+                }
+                else
+                {
+                    return redirect()->route('showmydraft')->with('Success', 'No change found');
+                }
             }else{
                 return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
             }

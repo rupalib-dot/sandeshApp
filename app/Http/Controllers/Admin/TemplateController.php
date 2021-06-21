@@ -42,7 +42,7 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'message'         => "required|min:4|max:250", 
+            'message'         => "required|min:4|max:750", 
         ]); 
 
         if(isset($request['id']) && $request['id'] != ""){

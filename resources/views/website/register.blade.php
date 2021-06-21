@@ -108,7 +108,7 @@
                             <div class="form-group mb-2 showind">
                                 <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
                                        placeholder="Location *" name="address" value="{{Request::old('address')}}"
-                                       onkeydown="limit(this, 250);" onkeyup="limit(this, 250);">
+                                       onkeydown="clearoldAddress();" onkeyup="limit(this, 250);" onblur="checkautoClass();">
                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -127,7 +127,7 @@
                                 <input type="text" class="form-control adharinput   @error('adhaar') redborder @enderror"
                                        placeholder="Aadhaar Number" name="adhaar" 
                                        value="{{Request::old('adhaar')}}"
-                                       onkeydown="limit(this, 12);" onkeyup="limit(this, 12);">
+                                       onkeydown="limit(this, 250);" onkeyup="limit(this, 12);">
                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="We do not disclose your Aadhar to anyone ">
                                     <i class="fa fa-info" aria-hidden="true"></i>
                                 </span>
@@ -295,7 +295,23 @@
             </div>
         </div>
     </div>
-
+   <script>
+       function clearoldAddress(){
+        var ulocationlat = document.getElementById('ulocationlat').value = null;
+           var ulocationlong = document.getElementById('ulocationlong').value = null;
+       }
+       function checkautoClass(){
+           var ulocationlat = document.getElementById('ulocationlat').value;
+           var ulocationlong = document.getElementById('ulocationlong').value;
+           if(ulocationlat != '' && ulocationlong != ''){
+                return true;
+           }
+           else{
+               document.getElementById('searchTextField').value= '';
+               
+           }
+       }
+   </script>
     @if(Session::has('showOtpModal'))
         <script>
             (function ($) {

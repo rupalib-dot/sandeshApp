@@ -120,8 +120,8 @@
 
                     <div class="footerSocialIcon mt-4">
                         <ul>
-                            <li><a target="_blank" href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></li>
-                            <li><a target="_blank"  href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></li>
+                            <li><a target="_blank" href="https://fb.me/Hamaresandesh"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a target="_blank"  href="https://twitter.com/hamaresandesh"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                             <!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></li> -->
                         </ul>
                     </div>
@@ -129,11 +129,13 @@
                     <div class="col-sm-12">
                         <div class="cptext">
                             <ul>
-                                <li><span class="footerContact"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                21st A Main Rd Vanganahalli; Banglore; Karnataka; India
-                                </li>
+                                <a href="https://goo.gl/maps/jRCrqp9WiBq5LisFA" target="_blank">
+                                    <li><span class="footerContact"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        21 A Main Rd Vanganahalli, Banglore, Karnataka, India
+                                    </li>
+                                </a>
                                 <li><span class="footerContact"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <a class="phoneControl" href="mailto: connect@hamaresandesh.com">connect@hamaresandesh.com</a>
+                                    <a class="phoneControl" href="mailto:connect@hamaresandesh.com">connect@hamaresandesh.com</a>
 
                                 </li>
                             </ul>
@@ -247,7 +249,7 @@
                                                                 <input id="searchTextField" type="text"
                                                                     class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
                                                                     onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
-                                                                    value="{{isset($post->address) ? $post->address : Request::old('address')}}">
+                                                                    value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}">
                                                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                                                                     <i class="fa fa-info" aria-hidden="true"></i>

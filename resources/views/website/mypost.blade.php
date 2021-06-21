@@ -112,9 +112,11 @@
                                                         <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
-                                                </a>
+                                                @if($post->approval_status == 409)
+                                                    <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                    </a>
+                                                @endif
                                             </span>
                                         @elseif($post->approval_status == 411)
                                             <span style="margin-top: 24px;">
@@ -126,9 +128,11 @@
                                                         <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit
-                                                </a>
+                                                @if($post->approval_status == 409)
+                                                    <a href="{{ route('editmypost', $post->id) }}" class="btn-primary btn">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                                    </a>
+                                                @endif
                                             </span>
                                         @endif
                                     @else

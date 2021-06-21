@@ -113,40 +113,8 @@
 </div>
 @include('admin.layouts.footer')
 
-<!-- Modal -->
-<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Send Note</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body py-4">
-                <form class="form-sample js-form"  action="{{route('admin.posts.sendMessage',$post->id)}}"
-                      method="POST" onsubmit="return confirm('Are you sure you want to Send this Note to User ?');"  data-validate>
-                    @csrf
-                    <input type="hidden" name="id" class="modalinput" value="{{ $post->id }}">
-                    <div class="row">
-                        <div class="col-12">
-                            <textarea  class="form-control @error('fname') redborder @enderror" name="addnote" minlength="4" maxlength="300" required
-                              value="{{Request::old('fname')}}" style="height: 240px;" required></textarea>
-                            @error('fname')
-                            <div class="rederror">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Send Note</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     $(document).ready(function (){
-        console.log('sdsd');
         $('.openModal').on('click', function(){
             // console.log($(this).parent().parent().find('.idinput').html().trim());
             $('#noteModal .modalinput').val($(this).parent().parent().find('.idinput').html().trim());
