@@ -249,9 +249,10 @@
                                                         @enderror
                                                     </div> 
                                                             <div class="form-group mb-4 showind">
-                                                            <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
-                                                            placeholder="Location *" name="address" value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}"
-                                                            onkeydown="clearoldAddressProfile();" onkeyup="limit(this, 250);" onblur="checkautoClassProfile();">
+                                                                <input id="searchTextField2" type="text" class="form-control @error('address') redborder @enderror"
+                                                                placeholder="Location *" name="address" value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}"
+                                                                onkeydown="clearoldAddresshome();" onkeyup="limit(this, 250);" onblur="checkautoClasshome();">
+                                                            
                                                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                                                                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -446,7 +447,23 @@
             </script>
         @endif
     @endauth
-
+    <script>
+        function clearoldAddresshome(){
+         var ulocationlat = document.getElementById('ulocationlatProfile').value = null;
+            var ulocationlong = document.getElementById('ulocationlongProfile').value = null;
+        }
+        function checkautoClasshome(){
+            var ulocationlat = document.getElementById('ulocationlatProfile').value;
+            var ulocationlong = document.getElementById('ulocationlongProfile').value;
+            if(ulocationlat != '' && ulocationlong != ''){
+                 return true;
+            }
+            else{
+                document.getElementById('searchTextField2').value= '';
+                
+            }
+        }
+    </script>
             
 
     <script>
@@ -564,6 +581,34 @@ function autoDetectPickup(){
 
      }
  }
+ $(document).ready(function (){
+     var input = document.getElementById('searchTextField2');
+     var autocomplete = new google.maps.places.Autocomplete(input);
+
+     autocomplete.addListener('place_changed', function() {
+         var place = autocomplete.getPlace();
+         if (!place.geometry) {
+             window.alert("No details available for input: '" + place.name + "'");
+             return;
+         }
+         var address = '';
+         if (place.address_components) {
+             address = [
+                 (place.address_components[0] && place.address_components[0].short_name || ''),
+                 (place.address_components[1] && place.address_components[1].short_name || ''),
+                 (place.address_components[2] && place.address_components[2].short_name || '')
+             ].join(' ');
+
+         }
+         ;
+
+         var lat= place.geometry.location.lat();
+         var lng= place.geometry.location.lng();
+         $('#ulocationlatProfile').val(lat);
+         $('#ulocationlongProfile').val(lng);
+     });
+ });
+
  $(document).ready(function (){
      var input = document.getElementById('searchTextField');
      var autocomplete = new google.maps.places.Autocomplete(input);
