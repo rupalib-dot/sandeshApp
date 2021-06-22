@@ -246,17 +246,16 @@
                                                         @enderror
                                                     </div> 
                                                             <div class="form-group mb-4 showind">
-                                                                <input id="searchTextField" type="text"
-                                                                    class="form-control @error('address') redborder @enderror" onkeydown="limit(this, 250);"
-                                                                    onkeyup="limit(this, 250);" placeholder="Location *" name="address"  
-                                                                    value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}">
+                                                            <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
+                                                            placeholder="Location *" name="address" value="{{ empty(Request::old('address')) ? Auth::user()->address : Request::old('address') }}"
+                                                            onkeydown="clearoldAddressProfile();" onkeyup="limit(this, 250);" onblur="checkautoClassProfile();">
                                                                 <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                                                                 <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
                                                                     <i class="fa fa-info" aria-hidden="true"></i>
                                                                 </span>
-                                                                <input type="hidden" id="ulocationlat" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                <input type="hidden" id="ulocationlatProfile" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
                                                                     name="lat" value="{{isset($post->lat) ? $post->lat : Request::old('lat')}}">
-                                                                <input type="hidden" id="ulocationlong" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
+                                                                <input type="hidden" id="ulocationlongProfile" onkeydown="limit(this, 30);" onkeyup="limit(this, 10);"
                                                                     name="long" value="{{isset($post->long) ? $post->long : Request::old('long')}}">
                                                                 @error('address')
                                                                 <div class="rederror">{{ $message }}</div>
@@ -589,6 +588,22 @@ function autoDetectPickup(){
          $('#ulocationlong').val(lng);
      });
  });
+
+ function clearoldAddressProfile(){
+        var ulocationlat = document.getElementById('ulocationlatProfile').value = null;
+        var ulocationlong = document.getElementById('ulocationlongProfile').value = null;
+    }
+    function checkautoClassProfile(){
+        var ulocationlat = document.getElementById('ulocationlatProfile').value;
+        var ulocationlong = document.getElementById('ulocationlongProfile').value;
+        if(ulocationlat != '' && ulocationlong != ''){
+             return true;
+        }
+        else{
+            document.getElementById('searchTextField').value= '';
+            
+        }
+    }
 </script>
     @yield('pagescripts')
 </body>

@@ -281,12 +281,13 @@ class HomeController extends Controller
     public function addmypost(Request $request) { 
         $niceNames = array(
             'person_name'       => "First Name",
-            'surname'       => "Surname",
+            'surname'           => "Surname",
             'relation'          => "Relation",
             'description'       => "Description",
             'pocontact'         => "Point of Contact First Name",
-            'lname'         => "Point of Contact Last Name",
+            'lname'             => "Point of Contact Last Name",
             'institute'         => "Institute",
+            'death_cause'       => "Cause of death",
             'number'            => "Mobile Number",
             'age'               => "Age",
             'date_of_death'     => "Date of Demise",
@@ -306,6 +307,7 @@ class HomeController extends Controller
             'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
             'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
+            'death_cause'           => "nullable|max:100",
             'number'                => 'required|numeric|digits_between:8,11',
             'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
             'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
@@ -319,6 +321,7 @@ class HomeController extends Controller
         $validationmessages = array(
             'death_certificate.max' => 'File size cannot excced 5MB',
             'person_pic.max'        => 'File size cannot excced 5MB',
+            'date_of_death.max'     => 'Maximum 100 characters allowed',
             'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
             'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
             'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',

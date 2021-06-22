@@ -54,6 +54,10 @@
                                     <td>Show Poc</td>
                                     <td class="text-right">  @if($post->show_poc == '') No @else Yes @endif </td>
                                 </tr>
+                                <tr>
+                                    <td>Cause of death</td>
+                                    <td class="text-right">  {{$post->date_of_death}} </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

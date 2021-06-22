@@ -168,7 +168,7 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <div class="form-group mb-4 showind">
                         <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
-                        placeholder="Location *" name="address" value="{{Request::old('address')}}"
+                        placeholder="Location *" name="address" value="{{isset($post->address) ? $post->address : Request::old('address')}}"
                         onkeydown="clearoldAddress();" onkeyup="limit(this, 250);" onblur="checkautoClass();">
                         <span class="infoicos" onclick="autoDetectPickup()"><i class="fa fa-location-arrow field-icon" style="top:3px;" aria-hidden="true"></i></span>
                         <span class="infoicos" data-toggle="tooltip" data-placement="top" title="Enter manually or allow GPS to fetch your location">
@@ -182,6 +182,23 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <div id="map" style="height:600px;display:none;"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12">
+                    <div class="form-group showind mb-4">
+                        <input type="text" class="form-control @error('death_cause') redborder @enderror"
+                            placeholder="Cause of death" name="death_cause"
+                            onkeydown="limit(this, 100);" onkeyup="limit(this, 100);"
+                            value="{{isset($post->death_cause) ? $post->death_cause : Request::old('death_cause')}}">
+                        @error('death_cause')
+                        <div class="rederror">{{ $message }}</div>
+                        @enderror
+                        <span style="word-break: break-word;" class="infoicos" data-toggle="tooltip" data-placement="top"
+                            title="Death reason">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -325,8 +342,8 @@
                         class="form-control nofocus @error('description') redborder @enderror" name="description"
                          id="description" @if(isset($post) &&
                         $post->template_id != 0) Readonly  @endif
-                                          onkeydown="limit(this, 250);" onkeyup="limit(this, 250);"
-                                          placeholder="Enter message / description (Max 250 character allowed)">{{isset($post->description) ? $post->description : Request::old('description')}}</textarea>
+                                          onkeydown="limit(this, 750);" onkeyup="limit(this, 750);"
+                                          placeholder="Enter message / description (Max 750 character allowed)">{{isset($post->description) ? $post->description : Request::old('description')}}</textarea>
                     @error('description')
                     <div class="rederror">{{ $message }}</div>
                     @enderror
