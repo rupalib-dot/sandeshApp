@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('website/font/flaticon.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('website/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('website/css/style.css') }}?v={{date('His')}}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
