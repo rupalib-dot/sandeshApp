@@ -479,7 +479,7 @@
                             <div id="collapseOne9" class="collapse" role="tabpanel" aria-labelledby="headingOne5"
                                  data-parent="#accordionEx">
                                 <div class="card-body">
-                                    Anyone can report the abuse of Sandesh. Use email and other communication channels mentioned on our contacts page.Further; users can also report abuse via links sent to them in SMS and Whatsapp channels.Sandesh ensures that strict legal action will be taken against violators of guidelines.     
+                                    Anyone can report the abuse of Sandesh. Use email and other communication channels mentioned on our contacts page.Further; users can also report abuse via links sent to them in SMS and Whatsapp channels.Sandesh ensures that strict legal action will be taken against violators of <a href="">guidelines</a>.     
                                 </div>
                             </div>
                         </div>

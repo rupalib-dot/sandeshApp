@@ -115,6 +115,9 @@
                             <li >
                                 <a href="{{ route('showpublicpost') }}">Obituaries</a>
                             </li>
+                            <li >
+                                <a href="#">Guidelines</a>
+                            </li>
                         </ul>
                     </div>
 

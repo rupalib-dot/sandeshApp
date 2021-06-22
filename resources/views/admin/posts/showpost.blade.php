@@ -56,7 +56,7 @@
                                 </tr>
                                 <tr>
                                     <td>Cause of death</td>
-                                    <td class="text-right">  {{$post->date_of_death}} </td>
+                                    <td class="text-right">  {{$post->death_cause}} </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -319,6 +319,8 @@ class HomeController extends Controller
         ];
 
         $validationmessages = array(
+            'person_pic.required'   => 'Please upload an image of deceased person',
+            'death_certificate.required'   => 'Please upload an image of death certificate',
             'death_certificate.max' => 'File size cannot excced 5MB',
             'person_pic.max'        => 'File size cannot excced 5MB',
             'date_of_death.max'     => 'Maximum 100 characters allowed',
@@ -496,12 +498,12 @@ class HomeController extends Controller
             'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
             'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
             'address'               => "required|min:4|max:250",
-            'death_certificate'     => 'required|mimes:jpg,png,pdf|max:5120',
             'swd'                   => "required", 
             'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
         ];
 
         isset($post->person_pic) ? '' : $requiredvalidation['person_pic'] = 'required|mimes:jpg,png|max:5120';
+        isset($post->death_certificate) ? '' : $requiredvalidation['death_certificate'] = 'required|mimes:jpg,png|max:5120';
 
         // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
 
@@ -587,6 +589,7 @@ class HomeController extends Controller
                 'swdperson'            => $request->swdperson,
                 'death_certificate'    => $death_certificate,
                 'person_pic'           => $person_pic,
+                'death_cause'          => $request->death_cause,
                 'approval_status'      => config('constant.APPROVAL_STATUS.UNKNOWN'),
                 'flowers'              => $flowers,
                 'template_id'          => $request->template_id,
@@ -594,7 +597,6 @@ class HomeController extends Controller
                 'is_draft'             => $request->is_draft,
                 'show_poc'             => $request->show_poc
             ]); 
-
             if($request['is_draft'] == 1){
                 if($nRow > 0)
                 {
