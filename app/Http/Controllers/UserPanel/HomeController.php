@@ -240,7 +240,7 @@ class HomeController extends Controller
                 'Failedpassword' => 'Current Password cannot be same as New Password !']);
         }
         $validatedData = Validator::make($request->all(), [
-            'current_password'      => 'required|min:8|max:16|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'current_password'      => 'required|min:8|max:16',
             'password'              => 'required|confirmed|min:8|max:16|regex:/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password_confirmation'	        => 'required|required_with:password|same:password',
         ],[
@@ -664,8 +664,17 @@ class HomeController extends Controller
         if($request->otp == Session::get('tempotp')) {
             $userarray = Session::get('tempnumber'); 
 
-            $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
-            $userpassword = substr(str_shuffle($data), 0, 8); 
+            $digits    = array_flip(range('0', '9'));
+            $lowercase = array_flip(range('a', 'z'));
+            $uppercase = array_flip(range('A', 'Z')); 
+            $special   = array_flip(str_split('!@#$%^&*()_+=-}{[}]\|;:<>?/'));
+            $combined  = array_merge($digits, $lowercase, $uppercase, $special);
+
+            $userpassword  = str_shuffle(array_rand($digits) .
+                                    array_rand($lowercase) .
+                                    array_rand($uppercase) . 
+                                    array_rand($special) . 
+                                    implode(array_rand($combined, rand(4, 8))));
             Controller::sendSMS('+91'.$userarray,  'Your new password is : '.$userpassword,$userpassword);
             $user = User::where('mobile',$userarray)->update([ 
                 'password'      => Hash::make($userpassword),

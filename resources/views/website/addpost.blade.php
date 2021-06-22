@@ -214,7 +214,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="People will use POC details for any further cordination/ communication">
+                            title="People will use POC details for any further coordination / communication">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -244,7 +244,7 @@
                             value="{{isset($post->number) ? $post->number : Request::old('number')}}"
                             pattern="^[0-9]\d{9}$">
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="People will use POC details for any further cordinatetion/communication, Do not use +91 or 0 before number">
+                            title="People will use POC details for any further coordination / communication, Do not use +91 or 0 before number">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                         @error('number')
