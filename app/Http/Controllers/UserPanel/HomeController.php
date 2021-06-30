@@ -693,7 +693,7 @@ class HomeController extends Controller
                         return redirect()->route('showmydraft')->with('Success', 'No change found');
                     }
                 }else{
-                    return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
+                    return redirect()->route('showmypost')->with('Success', 'Post sent for approval Successfully');
                 }
     
             }
