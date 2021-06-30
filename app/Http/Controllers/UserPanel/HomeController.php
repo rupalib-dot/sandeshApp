@@ -21,12 +21,12 @@ use DB;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(){ 
         if(!empty(Auth::user())){
             $postPendingCount = Post::where('approval_status', 411)->where('user_id',Auth::user()->id)->where('is_draft',0)->get()->count();
         }else{
             $postPendingCount = 0;
-        } 
+        }  
         return view('website.index',compact('postPendingCount'));
     }
     public function register(){
