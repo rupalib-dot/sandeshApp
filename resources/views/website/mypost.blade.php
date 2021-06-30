@@ -159,8 +159,8 @@
                                             @else
                                                 Approval Pending
                                             @endif 
-                                        </span> -->  
-                                        @if($post->description != "" && $post->relation != "" && $post->number != "" && $post->address != "" && $post->death_certificate != "" && $post->person_pic != "" && $post->pocontact != "" && $post->poc && $post->lname != "" && $post->swd != "" && $post->swdperson != "" )
+                                        </span> --> 
+                                        @if($post->description != "" && $post->relation != "" && $post->number != "" && $post->address != "" && $post->death_certificate != "" && $post->person_pic != "" && $post->pocontact != "" && $post->lname != "" && $post->swd != "" && $post->swdperson != "" )
                                             <a onclick="return confirm('Are you sure you want to send this post for approval?');" href="{{ route('changePostStatus', $post->id) }}" class="btn-primary btn">
                                                 Send for Approval
                                             </a>

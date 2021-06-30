@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Models\Template;
+use Schema;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -21,7 +22,11 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        $postPendingCount = Post::where('approval_status', 411)->where('is_draft',0)->get()->count(); 
+        if(!empty(Auth::user())){
+            $postPendingCount = Post::where('approval_status', 411)->where('user_id',Auth::user()->id)->where('is_draft',0)->get()->count();
+        }else{
+            $postPendingCount = 0;
+        } 
         return view('website.index',compact('postPendingCount'));
     }
     public function register(){
@@ -479,6 +484,7 @@ class HomeController extends Controller
         if($current_url == 'mydraft'){
             $draft = 1;
         }
+        $counts = count(Schema::getColumnListing('posts')); 
         $myposts = Post::where('user_id', Auth::user()->id)->where('is_draft',$draft)
         ->Where(function($query) use ($request) {
             if (isset($request['address']) && !empty($request['address'])) { 
@@ -693,7 +699,7 @@ class HomeController extends Controller
                         return redirect()->route('showmydraft')->with('Success', 'No change found');
                     }
                 }else{
-                    return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
+                    return redirect()->route('showmypost')->with('Success', 'Post sent for approval Successfully');
                 }
     
             }
