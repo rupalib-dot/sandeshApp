@@ -507,7 +507,7 @@
                 <div class="col-md-6">
                     <div class="feedbackPara">
                         <h2 class="customHeading">Give Us Feedback</h2>
-                        <p>How satisfied update blog posts and spccial offers in your inbox</p>
+                        <p>Share your experience with Sandesh</p>
                         <form class="form-sample js-form formContactregi px-0"
                               method="post" action="{{route('contactsubmit')}}" >
                             @csrf

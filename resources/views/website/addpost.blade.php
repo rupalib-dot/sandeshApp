@@ -116,17 +116,17 @@
                         <select name="swd" onchange="getplaceholder(this.value)" class="form-control @error('swd') redborder @enderror" style="border: none; border-bottom: 1px solid #ced4da;">
                             <option value="">Please choose relation option</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'S/O' ? 'selected' : '' }}
-                                value="S/O">S/O</option>
+                                value="S/O">S/O (Son Of)</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'W/O' ? 'selected' : '' }}
-                                value="W/O">W/O</option>
+                                value="W/O">W/O (Wife Of)</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'D/O' ? 'selected' : '' }}
-                                value="D/O">D/O</option>
+                                value="D/O">D/O (Daughter Of)</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'M/O' ? 'selected' : '' }}
-                                value="M/O">M/O</option>
+                                value="M/O">M/O (Mother Of)</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'F/O' ? 'selected' : '' }}
-                                value="F/O">F/O</option>
+                                value="F/O">F/O (Father Of)</option>
                             <option {{ Request::old('swd', isset($post) ? $post->swd : '') == 'H/O' ? 'selected' : '' }}
-                                value="H/O">H/O</option>
+                                value="H/O">H/O (Husband Of)</option>
                         </select>
                         @error('swd')
                         <div class="rederror">{{ $message }}</div>
@@ -196,7 +196,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span style="word-break: break-word;" class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="Death reason">
+                            title="We do not disclose cause of death">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -214,7 +214,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="People will use POC details for any further coordination / communication">
+                            title="Details of person for further communication and coordination">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -229,7 +229,7 @@
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                         <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                            title="People will use POC details for any further cordinatetion/communication">
+                            title="Details of person for further communication and coordination">
                             <i class="fa fa-info" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -292,56 +292,13 @@
                 </div>
             </div>
             <div class="ml-3 mb-2">
-                <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show Point Of Contact
+                <input type="checkbox" {{ Request::old('show_poc', isset($post) ? $post->show_poc : '') == 1 ? 'checked' : '' }} value="1" name="show_poc"> Show point of contact in public post
             </div>
-            <div class="col-12">
-                <div class="form-group form-check mb-4 mt-2">
-                    <input id="checkgarland" onchange="flowerSelect()" type="checkbox"
-                        class="form-check-input @error('flowers') redborder @enderror" name="flowers"
-                        @if(isset($post->flowers) && $post->flowers == 1 || Request::old('flowers')) checked @endif
-                    value="1">
-                    <label class="form-check-label" for="checkgarland">Do You Want to Customise Image With Garland
-                        ?</label>
-                    <span class="infoicos" data-toggle="tooltip" data-placement="top"
-                        title="Leave empty to proceed without customization">
-                        <i class="fa fa-info" aria-hidden="true"></i>
-                    </span>
-                    @error('flowers')
-                    <div class="rederror">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-12" id="flower_type" @if(isset($post->flowers) && $post->flowers == 1 ||
-                Request::old('flowers')) @else style="display:none" @endif>
-                <div class="form-group mb-4">
-                    <select name="flower_type" id="flowerTypeSelect"
-                        class="form-control @error('flower_type') redborder @enderror" @if(isset($post->flowers) &&
-                        $post->flowers == 1 || Request::old('flowers')) required @endif  style="border: none; border-bottom: 1px solid #ced4da;">
-                        <option value="">Select anyone Garland</option>
-                        <option
-                            {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'y' ? 'selected' : '' }}
-                            value="y">Yellow Garland</option>
-                        <option
-                            {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'w' ? 'selected' : '' }}
-                            value="w">White Garland</option>
-                        <option
-                            {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'p' ? 'selected' : '' }}
-                            value="p">Pink Garland</option>
-                    </select>
-                    @error('flower_type')
-                    <div class="rederror">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-
-
             <div class=" col-12">
                 <div class="form-group showind mb-4">
                     <textarea style="resize:none;"
                         class="form-control nofocus @error('description') redborder @enderror" name="description"
-                         id="description" @if(isset($post) &&
-                        $post->template_id != 0) Readonly  @endif
+                         id="description"
                                           onkeydown="limit(this, 750);" onkeyup="limit(this, 750);"
                                           placeholder="Enter message / description (Max 750 character allowed)">{{isset($post->description) ? $post->description : Request::old('description')}}</textarea>
                     @error('description')
@@ -479,6 +436,46 @@
                             </div>
                         </div>
                         @error('person_pic')
+                        <div class="rederror">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group form-check mb-4 mt-2">
+                        <input id="checkgarland" onchange="flowerSelect()" type="checkbox"
+                            class="form-check-input @error('flowers') redborder @enderror" name="flowers"
+                            @if(isset($post->flowers) && $post->flowers == 1 || Request::old('flowers')) checked @endif
+                        value="1">
+                        <label class="form-check-label" for="checkgarland">Do You Want to Customise Image With Garland
+                            ?</label>
+                        <span class="infoicos" data-toggle="tooltip" data-placement="top"
+                            title="Do you want to customise image with garland ?">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </span>
+                        @error('flowers')
+                        <div class="rederror">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-12" id="flower_type" @if(isset($post->flowers) && $post->flowers == 1 ||
+                    Request::old('flowers')) @else style="display:none" @endif>
+                    <div class="form-group mb-4">
+                        <select name="flower_type" id="flowerTypeSelect"
+                            class="form-control @error('flower_type') redborder @enderror" @if(isset($post->flowers) &&
+                            $post->flowers == 1 || Request::old('flowers')) required @endif  style="border: none; border-bottom: 1px solid #ced4da;">
+                            <option value="">Select anyone Garland</option>
+                            <option
+                                {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'y' ? 'selected' : '' }}
+                                value="y">Yellow Garland</option>
+                            <option
+                                {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'w' ? 'selected' : '' }}
+                                value="w">White Garland</option>
+                            <option
+                                {{ Request::old('flower_type', isset($post) ? $post->flower_type : '') == 'p' ? 'selected' : '' }}
+                                value="p">Pink Garland</option>
+                        </select>
+                        @error('flower_type')
                         <div class="rederror">{{ $message }}</div>
                         @enderror
                     </div>

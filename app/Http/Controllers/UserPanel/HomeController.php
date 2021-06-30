@@ -320,7 +320,7 @@ class HomeController extends Controller
 
         $validationmessages = array(
             'person_pic.required'   => 'Please upload an image of deceased person',
-            'death_certificate.required'   => 'Please upload an image of death certificate',
+            'death_certificate.required'   => 'Please upload an image of death certificate OR doctor note',
             'death_certificate.max' => 'File size cannot excced 5MB',
             'person_pic.max'        => 'File size cannot excced 5MB',
             'date_of_death.max'     => 'Maximum 100 characters allowed',
@@ -396,7 +396,7 @@ class HomeController extends Controller
             if($request['is_draft'] == 1){
                 return redirect()->route('showmydraft')->with('Success', 'Post Added To Draft Successfully');
             }else{
-                return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
+                return redirect()->route('showmypost')->with('Success', 'Post sent for approval');
             }
         }else{
             return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
@@ -414,9 +414,8 @@ class HomeController extends Controller
             if (isset($request['address']) && !empty($request['address'])) { 
                 $query->where('address','LIKE', "%".$request["address"]."%");
             }  
-            if (isset($request['date']) && !empty($request['date'])) { 
-                $query->whereDate('created_at',$request['date']);
-                $query->orWhere('date_of_death',$request['date']);
+            if (isset($request['date']) && !empty($request['date']) && isset($request['to_date']) && !empty($request['to_date'])) { 
+                $query->wherebetween('created_at',[$request['date'],$request['to_date']])->orWhereBetween('date_of_death',[$request['date'],$request['to_date']]);
             }  
         })->latest()->paginate(10);
         return view('website.mypost', compact('myposts','current_url','request'));
@@ -428,9 +427,8 @@ class HomeController extends Controller
             if (isset($request['address']) && !empty($request['address'])) { 
                 $query->where('address','LIKE', "%".$request["address"]."%");
             }  
-            if (isset($request['date']) && !empty($request['date'])) { 
-                $query->whereDate('created_at',$request['date']);
-                $query->orWhere('date_of_death',$request['date']);
+            if (isset($request['date']) && !empty($request['date']) && isset($request['to_date']) && !empty($request['to_date'])) { 
+                $query->wherebetween('created_at',[$request['date'],$request['to_date']])->orWhereBetween('date_of_death',[$request['date'],$request['to_date']]);
             }  
         })->where('is_draft',0)->latest()->paginate(10);
         return view('website.publicpost', compact('publicpost','request'));
@@ -764,7 +762,7 @@ class HomeController extends Controller
         $inquiry = ContactInqiry::create($details); 
 
          
-        \Mail::to('rupalib.i4consulting@gmail.com')->send(new \App\Mail\FeedbackMail($details));
+        \Mail::to('mailrkjindal@gmail.com')->send(new \App\Mail\FeedbackMail($details));
 
         // 'openpasswordmodal' => 'true'
         if(!empty($inquiry)){
