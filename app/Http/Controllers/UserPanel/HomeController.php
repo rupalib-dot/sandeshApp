@@ -21,7 +21,7 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        $postPendingCount = Post::where('approval_status', 411)->where('is_draft',0)->get()->count(); 
+        $postPendingCount = Post::where('approval_status', 411)->where('user_id',Auth::user()->id)->where('is_draft',0)->get()->count(); 
         return view('website.index',compact('postPendingCount'));
     }
     public function register(){
