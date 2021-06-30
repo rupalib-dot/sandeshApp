@@ -116,7 +116,7 @@
                         @endif 
                     </div>
                 @else
-                    <div style="margin:auto"><h3 class="welcome-msg"> <p  style="opacity: .6;" class="welcome-p">Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} To Sandesh</p></h3></div>
+                    <div style="margin:auto"><h3 class="welcome-msg"> <p  style="opacity: .6;" class="welcome-p">Welcome {{Auth::user()->fname. ' '. Auth::user()->lname}} @if($postPendingCount >0) {{$postPendingCount}} Post Pending For Approval @endif</p></h3></div>
                 @endif
             </div>
         </div>

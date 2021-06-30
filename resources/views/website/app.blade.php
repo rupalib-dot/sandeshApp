@@ -39,8 +39,13 @@
                     <li class="nav-item {{Request::is('/#contactFeedback') ? 'active' : '' }}">
                         <a class="nav-item nav-link {{Request::is('/#contactFeedback') ? 'active' : '' }}" href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
                     </li>
+                    <?php if (Auth::check()){
+                            $address = Auth::user()->address;
+                        }else{
+                            $address = "";
+                        }?>
                     <li class="nav-item {{Request::is('posts') ? 'active' : '' }}">
-                        <a class="nav-item nav-link {{Request::is('posts') ? 'active' : '' }}" href="{{ route('showpublicpost') }}">Obituaries</a>
+                        <a class="nav-item nav-link {{Request::is('posts') ? 'active' : '' }}" href="{{ route('showpublicpost',['address'=>$address]) }}">Obituaries</a>
                     </li>
                     @if (!Auth::check())
                         <li class="nav-item {{Request::is('/') ? 'active' : '' }}">

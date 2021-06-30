@@ -21,7 +21,8 @@ use DB;
 class HomeController extends Controller
 {
     public function index(){
-        return view('website.index');
+        $postPendingCount = Post::where('approval_status', 411)->where('is_draft',0)->get()->count(); 
+        return view('website.index',compact('postPendingCount'));
     }
     public function register(){
         return view('website.register');
@@ -279,71 +280,89 @@ class HomeController extends Controller
         return view('website.addpost',compact('templates'));
     }
     public function addmypost(Request $request) { 
-        $niceNames = array(
-            'person_name'       => "First Name",
-            'surname'           => "Surname",
-            'relation'          => "Relation",
-            'description'       => "Description",
-            'pocontact'         => "Point of Contact First Name",
-            'lname'             => "Point of Contact Last Name",
-            'institute'         => "Institute",
-            'death_cause'       => "Cause of death",
-            'number'            => "Mobile Number",
-            'age'               => "Age",
-            'date_of_death'     => "Date of Demise",
-            'address'           => "Location",
-            'death_certificate' => "Death Certificate",
-            'person_pic'        => "Person Photo",
-            'swd'               => "S/O W/O D/O M/O F/O H/O", 
-            'swdperson'         => "Relative Name",
-            'flower_type'       => "Garland Type",
-        );
+        if($request['is_draft'] == 1 ){
+            $niceNames = array(
+                'person_name'       => "First Name",
+                'surname'           => "Surname", 
+            );
 
-        $requiredvalidation = [
-            'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'relation'              => "required",
-            'description'           => "required|min:20|max:750",
-            'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
-            'death_cause'           => "nullable|max:100",
-            'number'                => 'required|numeric|digits_between:8,11',
-            'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
-            'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
-            'address'               => "required|min:4|max:250",
-            'death_certificate'     => 'required|mimes:jpg,png,pdf|max:5120',
-            'person_pic'            => 'required|mimes:jpg,png|max:5120',
-            'swd'                   => "required", 
-            'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
-        ];
+            $requiredvalidation = [
+                'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            ];
 
-        $validationmessages = array(
-            'person_pic.required'   => 'Please upload an image of deceased person',
-            'death_certificate.required'   => 'Please upload an image of death certificate OR doctor note',
-            'death_certificate.max' => 'File size cannot excced 5MB',
-            'person_pic.max'        => 'File size cannot excced 5MB',
-            'date_of_death.max'     => 'Maximum 100 characters allowed',
-            'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
-            'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
-            'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
-            'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
-            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
-            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
-            'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
-            'age.date_format' => 'Please enter date in yyyy-mm-dd format',
-            'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
-            'swd.required' =>'Select one', 
-            'relation.required' =>'Select one',
-            'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
-            'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
-            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
-            
-        );
+            $validationmessages = array( 
+                'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+                'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+                'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters', 
+            );
+        }else{
+            $niceNames = array(
+                'person_name'       => "First Name",
+                'surname'           => "Surname",
+                'relation'          => "Relation",
+                'description'       => "Description",
+                'pocontact'         => "Point of Contact First Name",
+                'lname'             => "Point of Contact Last Name",
+                'institute'         => "Institute",
+                'death_cause'       => "Cause of death",
+                'number'            => "Mobile Number",
+                'age'               => "Age",
+                'date_of_death'     => "Date of Demise",
+                'address'           => "Location",
+                'death_certificate' => "Death Certificate",
+                'person_pic'        => "Person Photo",
+                'swd'               => "S/O W/O D/O M/O F/O H/O", 
+                'swdperson'         => "Relative Name",
+                'flower_type'       => "Garland Type",
+            );
 
+            $requiredvalidation = [
+                'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'relation'              => "required",
+                'description'           => "required|min:20|max:750",
+                'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
+                'death_cause'           => "nullable|max:100",
+                'number'                => 'required|numeric|digits_between:8,11',
+                'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
+                'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
+                'address'               => "required|min:4|max:250",
+                'death_certificate'     => 'required|mimes:jpg,png,pdf|max:5120',
+                'person_pic'            => 'required|mimes:jpg,png|max:5120',
+                'swd'                   => "required", 
+                'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            ];
+
+            $validationmessages = array(
+                'person_pic.required'   => 'Please upload an image of deceased person',
+                'death_certificate.required'   => 'Please upload an image of death certificate OR doctor note',
+                'death_certificate.max' => 'File size cannot excced 5MB',
+                'person_pic.max'        => 'File size cannot excced 5MB',
+                'date_of_death.max'     => 'Maximum 100 characters allowed',
+                'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+                'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+                'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+                'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
+                'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+                'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+                'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+                'age.date_format' => 'Please enter date in yyyy-mm-dd format',
+                'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
+                'swd.required' =>'Select one', 
+                'relation.required' =>'Select one',
+                'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
+                'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
+                'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+                
+            );
+        }
         // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
 
         $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
@@ -353,9 +372,10 @@ class HomeController extends Controller
                 ->withErrors($validatedData)
                 ->withInput();
         }
-
-        $addressExist = Controller::getLatLong($request->address); 
-        if($addressExist != ""){
+ 
+        if(isset($request->address) && $request->address != ""){
+            $addressExist = Controller::getLatLong($request->address); 
+            if($addressExist != ""){ 
                 //        dd($request);
 
                 $death_certificate = null;
@@ -386,20 +406,70 @@ class HomeController extends Controller
                 }
                 $request['flower_type'] = $flower_type;
 
+                $request = $request->toArray();
+                $request['death_certificate'] = $death_certificate;
+                $request['person_pic'] = $person_pic;
+                
+
+                $posts = Post::create($request);
+
+                if(!empty($posts)){
+                    if($request['is_draft'] == 1){
+                        return redirect()->route('showmydraft')->with('Success', 'Post Added To Draft Successfully');
+                    }else{
+                        return redirect()->route('showmypost')->with('Success', 'Post sent for approval');
+                    }
+                }else{
+                    return redirect()->back()->withInput($request->all())->with('Failed', 'Something went wrong. Please try after some time');
+                }
+            }else{
+                return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
+            }
+        }else{
+            $death_certificate = null;
+            if($request->file('death_certificate')) {
+                $death_certificate = time().'_'.rand(1111,9999).'.'.$request->file('death_certificate')->getClientOriginalExtension();
+                //$death_certificate = time().'_'.$request->file('death_certificate')->getClientOriginalName();
+                $request->file('death_certificate')->storeAs('uploads', $death_certificate, 'public');
+            }
+
+            $person_pic = null;
+            if($request->file('person_pic')) {
+                $person_pic = time().'_'.rand(1111,9999).'.'.$request->file('person_pic')->getClientOriginalExtension();
+                //$person_pic = time().'_'.$request->file('person_pic')->getClientOriginalName();
+                $request->file('person_pic')->storeAs('uploads', $person_pic, 'public');
+            }
+
+            $request['user_id'] = Auth::user()->id;
+            $request['age'] = date('Y-m-d',strtotime($request->age));
+            $request['date_of_death'] = date('Y-m-d',strtotime($request->date_of_death));
+
+            $flower_type = Null;
+            if(isset($request->flowers)){
+                if($request->flower_type == 'y' || $request->flower_type == 'w' || $request->flower_type == 'p'){
+                    $flower_type = $request->flower_type;
+                }else{
+                    $flower_type = 'y';
+                }
+            }
+            $request['flower_type'] = $flower_type;
+
             $request = $request->toArray();
             $request['death_certificate'] = $death_certificate;
             $request['person_pic'] = $person_pic;
             
 
-            Post::create($request);
+            $posts = Post::create($request);
 
-            if($request['is_draft'] == 1){
-                return redirect()->route('showmydraft')->with('Success', 'Post Added To Draft Successfully');
+            if(!empty($posts)){
+                if($request['is_draft'] == 1){
+                    return redirect()->route('showmydraft')->with('Success', 'Post Added To Draft Successfully');
+                }else{
+                    return redirect()->route('showmypost')->with('Success', 'Post sent for approval');
+                }
             }else{
-                return redirect()->route('showmypost')->with('Success', 'Post sent for approval');
+                return redirect()->back()->withInput($request->all())->with('Failed', 'Something went wrong. Please try after some time');
             }
-        }else{
-            return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
         }
     }
 
@@ -421,7 +491,7 @@ class HomeController extends Controller
         return view('website.mypost', compact('myposts','current_url','request'));
     }
 
-    public function showpublicpost(Request $request) {
+    public function showpublicpost(Request $request) { 
         $publicpost = Post::where('approval_status', 410)
         ->Where(function($query) use ($request) {
             if (isset($request['address']) && !empty($request['address'])) { 
@@ -434,8 +504,7 @@ class HomeController extends Controller
         return view('website.publicpost', compact('publicpost','request'));
     }
 
-    public function changePostStatus (Request $request, $id) {
-     
+    public function changePostStatus (Request $request, $id) { 
         Post::where('id',$id)->update([  
             'is_draft'             => 0,
             'approval_status'      => config('constant.APPROVAL_STATUS.UNKNOWN'),
@@ -466,67 +535,86 @@ class HomeController extends Controller
     }
     public function updatemypost (Request $request, Post $post) {
 
-        $niceNames = array(
-            'person_name'       => "First Name",
-            'surname'       => "Surname",
-            'relation'          => "Relation",
-            'description'       => "Description",
-            'pocontact'         => "Point of Contact First Name",
-            'lname'         => "Point of Contact Last Name",
-            'institute'         => "Institute",
-            'number'            => "Mobile Number",
-            'age'               => "Age",
-            'date_of_death'     => "Date of Demise",
-            'address'           => "Location",
-            'death_certificate' => "Death Certificate",
-            'swd'                   => "required|min:1|max:10",
-            'flower_type'       => "Garland Type",
-            'swdperson'         => "Relative Name",
-        ); 
- 
-        $requiredvalidation = [
-            'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'relation'              => "required",
-            'description'           => "required|min:20|max:750",
-            'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
-            'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
-            'number'                => 'required|numeric|digits_between:8,11',
-            'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
-            'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
-            'address'               => "required|min:4|max:250",
-            'swd'                   => "required", 
-            'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
-        ];
+        if( $request->is_draft == 1 ){
+            $niceNames = array(
+                'person_name'       => "First Name",
+                'surname'           => "Surname", 
+            );
 
-        isset($post->person_pic) ? '' : $requiredvalidation['person_pic'] = 'required|mimes:jpg,png|max:5120';
-        isset($post->death_certificate) ? '' : $requiredvalidation['death_certificate'] = 'required|mimes:jpg,png|max:5120';
+            $requiredvalidation = [
+                'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            ];
 
-        // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
+            $validationmessages = array( 
+                'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+                'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+                'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters', 
+            );
+        }else{
+            $niceNames = array(
+                'person_name'       => "First Name",
+                'surname'       => "Surname",
+                'relation'          => "Relation",
+                'description'       => "Description",
+                'pocontact'         => "Point of Contact First Name",
+                'lname'         => "Point of Contact Last Name",
+                'institute'         => "Institute",
+                'number'            => "Mobile Number",
+                'age'               => "Age",
+                'date_of_death'     => "Date of Demise",
+                'address'           => "Location",
+                'death_certificate' => "Death Certificate",
+                'swd'                   => "required|min:1|max:10",
+                'flower_type'       => "Garland Type",
+                'swdperson'         => "Relative Name",
+            ); 
+    
+            $requiredvalidation = [
+                'person_name'           => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'surname'               => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'relation'              => "required",
+                'description'           => "required|min:20|max:750",
+                'pocontact'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'lname'                 => "required|min:3|max:50|regex:/^[\pL\s\']+$/u",
+                'institute'             => "nullable|max:50|regex:/^[\pL\s\']+$/u",
+                'number'                => 'required|numeric|digits_between:8,11',
+                'age'                   => 'date_format:Y-m-d|required|after:1920-01-01|before:date_of_death',
+                'date_of_death'         => 'date_format:Y-m-d|required|after:1920-01-01|before:' . Carbon::tomorrow()->toDateString(),
+                'address'               => "required|min:4|max:250",
+                'swd'                   => "required", 
+                'swdperson'             => "required|min:3|max:50|regex:/^[\pL\s\']+$/u", 
+            ];
 
-        $validationmessages = array(
-            'death_certificate.max' => 'File size cannot excced 5MB',
-            'person_pic.max'        => 'File size cannot excced 5MB',
-            'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
-            'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
-            'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
-            'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
-            'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
-            'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
-            'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
-            'age.date_format' => 'Please enter date in yyyy-mm-dd format',
-            'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
-            'swd.required' =>'Select one', 
-            'relation.required' =>'Select one',
-            'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
-            'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
-            'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
-            'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
-            
-        );
+            isset($post->person_pic) ? '' : $requiredvalidation['person_pic'] = 'required|mimes:jpg,png|max:5120';
+            isset($post->death_certificate) ? '' : $requiredvalidation['death_certificate'] = 'required|mimes:jpg,png|max:5120';
+
+            // isset($request->flowers) ? '' : $requiredvalidation['flower_type'] = 'required';
+
+            $validationmessages = array(
+                'death_certificate.max' => 'File size cannot excced 5MB',
+                'person_pic.max'        => 'File size cannot excced 5MB',
+                'person_name.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['person_name']).' characters',
+                'person_name.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['person_name']).' characters',
+                'surname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'surname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+                'description.min' => 'Please enter atleast 20 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'description.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['surname']).' characters',
+                'address.min' => 'Please enter atleast 4 characters or more. You are currently using '.strlen($request['address']).' characters',
+                'address.max' => 'Please enter less than or equal to 250 characters . You are currently using '.strlen($request['address']).' characters',
+                'number.digits_between' => 'Please enter complete 10 digit mobile number without using (+91) or (0)',
+                'age.date_format' => 'Please enter date in yyyy-mm-dd format',
+                'date_of_death.date_format' => 'Please enter date in yyyy-mm-dd format',
+                'swd.required' =>'Select one', 
+                'relation.required' =>'Select one',
+                'pocontact.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['pocontact']).' characters',
+                'pocontact.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['pocontact']).' characters',
+                'lname.min' => 'Please enter atleast 3 characters or more. You are currently using '.strlen($request['surname']).' characters',
+                'lname.max' => 'Please enter less than or equal to 50 characters . You are currently using '.strlen($request['surname']).' characters',
+                
+            );
+        }
 
         $validatedData = Validator::make($request->all(), $requiredvalidation, $validationmessages)->setAttributeNames($niceNames);
 
@@ -535,9 +623,84 @@ class HomeController extends Controller
                 ->withErrors($validatedData)
                 ->withInput();
         }
+        if(isset($request->address) && $request->address != ""){
+            $addressExist = Controller::getLatLong($request->address); 
+            if($addressExist != ""){
+                $death_certificate = isset($request->death_certificate) ? $request->death_certificate : $post->death_certificate;
+                if($request->file('death_certificate')) {
+                //            $death_certificate = time().'_'.$request->file('death_certificate')->getClientOriginalName();
+                    $death_certificate = time().'_'.rand(1111,9999).'.'.$request->file('death_certificate')->getClientOriginalExtension();
+                    $request->file('death_certificate')->storeAs('uploads', $death_certificate, 'public');
+                    if(Storage::disk('public')->exists('uploads/'.$post->death_certificate))
+                    {
+                        Storage::disk('public')->delete('uploads/'.$post->death_certificate);
+                    }
+                }
 
-        $addressExist = Controller::getLatLong($request->address); 
-        if($addressExist != ""){
+                $person_pic = isset($request->person_pic) ? $request->person_pic : $post->person_pic;
+                if($request->file('person_pic')) {
+                    $person_pic = time().'_'.rand(1111,9999).'.'.$request->file('person_pic')->getClientOriginalExtension();
+                //            $person_pic = time().'_'.$request->file('person_pic')->getClientOriginalName();
+                    $request->file('person_pic')->storeAs('uploads', $person_pic, 'public');
+                    if(Storage::disk('public')->exists('uploads/'.$post->person_pic))
+                    {
+                        Storage::disk('public')->delete('uploads/'.$post->person_pic);
+                    }
+                }
+
+                $flowers = isset($request->flowers) ? $request->flowers : 0;
+                $flower_type = Null;
+                if(isset($request->flowers)){
+                    if($request->flower_type == 'y' || $request->flower_type == 'w' || $request->flower_type == 'p'){
+                        $flower_type = $request->flower_type;
+                    }else{
+                        $flower_type = 'y';
+                    }
+                }
+
+                $nRow = Post::where('id',$post->id)->update([
+                    'user_id'              => Auth::user()->id,
+                    'person_name'          => $request->person_name,
+                    'surname'              => $request->surname,
+                    'relation'             => $request->relation,
+                    'description'          => $request->description,
+                    'pocontact'            => $request->pocontact,
+                    'lname'                => $request->lname,
+                    'institute'            => $request->institute,
+                    'number'               => $request->number,
+                    'age'                  => date('Y-m-d',strtotime($request->age)),
+                    'date_of_death'        => date('Y-m-d',strtotime($request->date_of_death)),
+                    'address'              => $request->address,
+                    'swd'                  => $request->swd, 
+                    'swdperson'            => $request->swdperson,
+                    'death_certificate'    => $death_certificate,
+                    'person_pic'           => $person_pic,
+                    'death_cause'          => $request->death_cause,
+                    'approval_status'      => config('constant.APPROVAL_STATUS.UNKNOWN'),
+                    'flowers'              => $flowers,
+                    'template_id'          => $request->template_id,
+                    'flower_type'          => $flower_type,
+                    'is_draft'             => $request->is_draft,
+                    'show_poc'             => $request->show_poc
+                ]); 
+                if($request['is_draft'] == 1){
+                    if($nRow > 0)
+                    {
+                        return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
+                    }
+                    else
+                    {
+                        return redirect()->route('showmydraft')->with('Success', 'No change found');
+                    }
+                }else{
+                    return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
+                }
+    
+            }
+            else{
+                return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
+            }
+        }else{ 
             $death_certificate = isset($request->death_certificate) ? $request->death_certificate : $post->death_certificate;
             if($request->file('death_certificate')) {
             //            $death_certificate = time().'_'.$request->file('death_certificate')->getClientOriginalName();
@@ -570,7 +733,7 @@ class HomeController extends Controller
                 }
             }
 
-            $nRow = Post::where('id',$post->id)->update([
+            $nRow = DB::table('posts')->where('id',$post->id)->update([
                 'user_id'              => Auth::user()->id,
                 'person_name'          => $request->person_name,
                 'surname'              => $request->surname,
@@ -594,23 +757,22 @@ class HomeController extends Controller
                 'flower_type'          => $flower_type,
                 'is_draft'             => $request->is_draft,
                 'show_poc'             => $request->show_poc
-            ]); 
+            ]);  
             if($request['is_draft'] == 1){
                 if($nRow > 0)
                 {
-                    return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully');
-                }
-                else
-                {
-                    return redirect()->route('showmydraft')->with('Success', 'No change found');
+                    return redirect()->route('showmydraft')->with('Success', 'Post Updated Successfully'); 
+                }else{
+                    return redirect()->route('showmydraft')->with('Failed', 'No change found');
                 }
             }else{
-                return redirect()->route('showmypost')->with('Success', 'Post Added Successfully');
-            }
- 
-        }
-        else{
-            return redirect()->back()->withInput($request->all())->with('Failed', 'Select valid/available locations from dropdown or allow GPS to fetch your location');
+                if($nRow > 0)
+                {
+                    return redirect()->route('showmypost')->with('Success', 'Post Updated Successfully'); 
+                }else{
+                    return redirect()->route('showmypost')->with('Failed', 'No change found');
+                } 
+            } 
         }
     }
 
