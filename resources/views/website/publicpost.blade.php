@@ -33,7 +33,7 @@
                 </div>
             @endif 
             <form action="{{route('showpublicpost')}}" method="get">
-                <div class="row">
+                <div class="row" >
                     <div class="col-md-5 col-sm-6 col-12">
                         <div class="form-group mb-4 showind">
                             <input id="searchTextField" type="text" class="form-control @error('address') redborder @enderror"
@@ -68,7 +68,7 @@
                     </div>
                 </div> 
             </form> 
-            <div class="row">
+            <div class="row" data-masonry='{"percentPosition": true }'>
                 @if(count($publicpost) >0)
                     @foreach($publicpost as $post)
                     @php $bdate      =   date('m/d/Y',strtotime($post->age));

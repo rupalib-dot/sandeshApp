@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('website/font/flaticon.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('website/css/style.css') }}?v={{date('His')}}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -118,7 +120,7 @@
                                 <a href="{{ route('sitehome') }}#contactFeedback">Contact Us</a>
                             </li>
                             <li >
-                                <a href="{{ route('showpublicpost') }}">Obituaries</a>
+                                <a href="{{ route('showpublicpost',['address'=>$address]) }}">Obituaries</a>
                             </li>
                             <li >
                                 <a href="#">Guidelines</a>
